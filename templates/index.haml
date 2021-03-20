@@ -18,13 +18,52 @@
           LocHub
         %div(style="float:left")
           &nbsp;&nbsp;&nbsp;&nbsp;
-        %h5(style="float:left")
-          私たちは、日本の地方公共団体（<span style="font-weight:bold">Local</span>Goverment）で利用されている情報システムの評価を<br>データ化し、集約（<span style="font-weight:bold">Hub</span>）するサービスを開発しました。<br><span style="font-weight:bold">LocHub（ロクハブ）</span>で、真に優れた行政システムがどれなのか決めようじゃないか。
+        %h4(style="float:left")
+          日本の地方公共団体（<span style="font-weight:bold">Local</span>Goverment）で利用されている情報システム<br>の評価をデータ化し、集約（<span style="font-weight:bold">Hub</span>）するサービスを開発しました。
         %div(style="float:left")
           &nbsp;&nbsp;&nbsp;&nbsp;
         %a.btn.btn-warning.btn-lg(type="button" data-toggle="modal" data-target="#modalQuestion" style="float:left")
           アンケートに回答する
 
+
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
 
     %div.row
       %div.col-md-12
@@ -96,45 +135,6 @@
           %tbody
 
 
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-
     <!-- 基本設定モーダル -->
     %div.modal.fade#modalQuestion(tabindex="-1")
       %div.modal-dialog.modal-lg
@@ -179,7 +179,7 @@
                     %div.input-group
                       %span.input-group-addon.custom_msize
                         システムの名前は？
-                      %input.form-control.custom_msize (type="text" class="form-control" placeholder="フェニックス会計")
+                      %input#txtSystemNm.form-control.custom_msize (type="text" class="form-control" placeholder="フェニックス会計")
                       
                       %span.input-group-btn.btn-warning
                         %button.btn.btn-default.dropdown-toggle.custom_msize (type="button" data-toggle="dropdown" aria-expanded="false")
@@ -239,7 +239,7 @@
                   %div.col-md-12
                     %div.input-group
                       %span.input-group-addon.custom_msize
-                        評価コメントをください
+                        具体的に<br>教えてください
                       %textarea#txtereaComment1.form-control.custom_msize (type="text" class="form-control" placeholder="・使いやすいシステムだと思う&#13;・保守サポートが悪い")
               %div.col-md-2
 
@@ -248,8 +248,8 @@
               %div.col-md-8.text-left
                 このサービスは、公益に資することを目的としています。著しく名誉を棄損する表現や個人を特定した誹謗中傷は、<br>運営側にて削除させていただく場合があります。
               %div.col-md-4
-                %button.btn.btn-default(type="button" data-dismiss="modal")
-                  閉じる
+                %a#btnAnswer.btn.btn-primary.btn-lg(type="button")
+                  登録する
 
     <!-- データ抽出モーダル -->
     %div.modal.fade#modalKatuyo(tabindex="-1")

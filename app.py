@@ -697,6 +697,19 @@ def export_list_csv(export_list, csv_dir):
     writer = csv.writer(f, lineterminator='\n')
     writer.writerows(export_list)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 @app.route('/updateCustomer/<customerid>/<param>')
 @login_required
 def dbUpdate_updCustomer(customerid, param):

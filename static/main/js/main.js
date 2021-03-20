@@ -359,7 +359,7 @@ $('#btnSeikyuDeleteKobetu').on('click', function() {
   /*
   || 顧客情報　新規登録
   */
-$('#btnNewCustomerToroku').on('click', function() {
+$('#aaaaaa').on('click', function() {
     $('.nav-tabs a[href="#tab1primary"]').tab('show')
 
     //行選択を解除
@@ -390,15 +390,31 @@ $('#btnNewCustomerToroku').on('click', function() {
 });
 
 /*
-|| 顧客情報更新
+|| 
 */
-$('#btnUpdateCustomer').on('click', function() {
-  var customerid = toNumber($(".row_selected.customer").find("td:eq(0)").text());
-  if($('#txtCustomerName').val().trim()==""){
-      $("#mainUpdCustomerMessageArea").append("<p style='color:red'>氏名を入力してください。</p>");
-      setTimeout('$("#mainUpdCustomerMessageArea")[0].innerText="";', 3000);
-      return;
+$('#btnAnswer').on('click', function() {
+    if($('#txtVendorNm').val().trim()==""){
+        var placeholder =  $("#txtVendorNm").attr("placeholder");
+        $('#txtVendorNm').focus()
+        $("#txtVendorNm").css("background-color","#ffeff7");
+        $("#txtVendorNm").attr("placeholder","入力してください");
+        setTimeout('$("#txtVendorNm").attr("placeholder","' + placeholder + '");$("#txtVendorNm").css("background-color","");', 3000);
   }
+  
+  if($('#txtSystemNm').val().trim()==""){
+    $("#mainUpdCustomerMessageArea").append("<p style='color:red'>氏名を入力してください。</p>");
+    setTimeout('$("#mainUpdCustomerMessageArea")[0].innerText="";', 3000);
+    return;
+  }
+  var str1 = $('input:radio[name="rdRank1"]:checked').val();
+  alert(str1);
+  
+  if($('#txtereaComment1').val().trim()==""){
+    $("#mainUpdCustomerMessageArea").append("<p style='color:red'>氏名を入力してください。</p>");
+    setTimeout('$("#mainUpdCustomerMessageArea")[0].innerText="";', 3000);
+    return;
+  }
+
   var param = $('#txtCustomerName').val() + DELIMIT + 
               $('#txtCustomerKana').val() + DELIMIT + 
               $('#txtAddress1').val() + DELIMIT + 
