@@ -1,0 +1,317 @@
+{% extends 'common.html' %}
+ 
+{% block title %}自治体職員のあなたに質問です{% endblock %}
+
+{% block content %}
+  %div.container-fluid(style="background-image:url('../static/image/main_image.png'); background-size:cover; background-repeat:no-repeat")
+
+    %div.row
+      %div.col-md-12
+        %img.img-responsive(src="../static/image/logo_small.png" style="float:left")
+        %div(style="float:left")
+          &nbsp;&nbsp;&nbsp;&nbsp;
+        %h5(style="padding:10px 0px 0px 0px; margin:0px 0px 0px 0px;")
+          日本の地方公共団体の、すべての職員へ &nbsp;&nbsp;© HaYu, 2021
+        %div(style="float:left")
+          &nbsp;&nbsp;&nbsp;&nbsp;
+        %h1(style="padding:0px 0px 0px 0px; margin:0px 0px 0px 0px; font-size:62px; font-weight:bold;float:left; top:-50px")
+          LocHub
+        %div(style="float:left")
+          &nbsp;&nbsp;&nbsp;&nbsp;
+        %h5(style="float:left")
+          これは、日本の地方公共団体（<span style="font-weight:bold">Local</span>Goverment）で利用されている<br>情報システムの評価を集約（<span style="font-weight:bold">Hub</span>）するサービス、その名を<span style="font-weight:bold">ロクハブ</span>。<br>そろそろ本当に良い行政システムがどれなのか決めようじゃないか。
+        %div(style="float:left")
+          &nbsp;&nbsp;&nbsp;&nbsp;
+        %a.btn.btn-warning.btn-lg(type="button" data-toggle="modal" data-target="#modalQuestion" style="float:left")
+          アンケートに回答する
+
+
+    %div.row
+      %div.col-md-12
+        %div.row
+          %div.col-md-3
+            %div.input-group
+              %span.input-group-addon
+                操作年月
+              %div.form-group
+                  %select.form-control.input-sm#selNentuki
+          %div.col-md-2
+            %div.input-group
+              %button.btn.btn-primary.btn-sm(type="button" data-toggle="modal" data-target="#modalSeikyuKanri")
+                請求データ管理
+          %div.col-md-2
+            %div.input-group
+              %button.btn.btn-primary.btn-sm(type="button" data-toggle="modal" data-target="#modalKatuyo")
+                データ抽出
+          %div.col-md-2
+            %div.input-group
+              %button.btn.btn-primary.btn-sm#btnNewCustomerToroku(type="button")
+                新規顧客登録
+          %div.col-md-2
+            %div.input-group
+              %button.btn.btn-primary.btn-sm(type="button" data-toggle="modal" data-target="#modalQuestion")
+                基本設定
+          %div.col-md-1
+            %div.input-group.pull-right
+              %a.btn.btn-warning(href="/logout/" role="button")
+                サインアウト
+                
+            
+    %div.row
+      %div.col-md-2
+        %div.input-group
+          %span.input-group-addon
+            グループ
+          %div.form-group
+              %select.form-control.input-sm#selGroupKb
+      %div.col-md-6
+        %div.row
+          %div.col-md-2
+            %div.form-group
+              %input#chkYuko(type="checkbox" value="checkboxA" checked)
+              &nbsp;
+              %label(for="chkYuko")
+                有効
+          %div.col-md-2
+            %div.form-group
+              %input#chkMuko(type="checkbox" value="checkboxB")
+              &nbsp;
+              %label(for="chkMuko")
+                無効
+        
+      
+    %div.row
+      %div.col-md-3
+        %table.table-bordered.row.hover#tableCustomer
+          %thead
+            %tr
+              %th 
+                ID
+              %th
+                経路
+              %th
+                氏名
+              %th
+                &nbsp;
+          %tbody
+
+
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+
+    <!-- 基本設定モーダル -->
+    %div.modal.fade#modalQuestion(tabindex="-1")
+      %div.modal-dialog.modal-lg
+        %div.modal-content
+          %div.modal-header
+            %button.close(type="button" data-dismiss="modal")
+              %span
+                ×
+            %h4.modal-title#subFtitle
+              地方自治体の職員である あなたに質問です。<br>
+              あなたが職場で利用しているシステムのことを教えてください。
+          %div.modal-body
+            %div.row
+              %div.col-md-10
+                %div.row
+                  %div.col-md-12
+                    %div.input-group
+                      %span.input-group-addon.custom_msize
+                        開発した会社は？
+                      %input#txtVendorNm.form-control.custom_msize (type="text" class="form-control" placeholder="日本システム株式会社")
+                      
+                      %span.input-group-btn.btn-warning
+                        %button.btn.btn-default.dropdown-toggle.custom_msize (type="button" data-toggle="dropdown" aria-expanded="false")
+                          他者の回答から選ぶ
+                          %span.caret
+                        %ul.dropdown-menu(role="menu")
+                          %li
+                            %a(href="#")
+                              リンクのリスト１
+                          %li
+                            %a(href="#")
+                              リンクのリスト２
+                %div.row
+                  &nbsp;
+                %div.row
+                  &nbsp;
+                %div.row
+                  &nbsp;
+
+                %div.row
+                  %div.col-md-12
+                    %div.input-group
+                      %span.input-group-addon.custom_msize
+                        システムの名前は？
+                      %input.form-control.custom_msize (type="text" class="form-control" placeholder="フェニックス")
+                      
+                      %span.input-group-btn.btn-warning
+                        %button.btn.btn-default.dropdown-toggle.custom_msize (type="button" data-toggle="dropdown" aria-expanded="false")
+                          他者の回答から選ぶ
+                          %span.caret
+                        %ul.dropdown-menu(role="menu")
+                          %li
+                            %a(href="#")
+                              リンクのリスト１
+                          %li
+                            %a(href="#")
+                              リンクのリスト２
+
+                %div.row
+                  &nbsp;
+                %div.row
+                  &nbsp;
+                %div.row
+                  &nbsp;
+
+                %div.row
+                  %div.col-md-12
+                    %div.input-group
+                      %span.input-group-addon.custom_msize
+                        満足度を５段階評価
+                      %span.input-group-addon.custom_msize style="background-color:white; border-left:1px solid #ccc; width:310px; height:42px"
+                        %span.label.label-success
+                          良い
+                        %span
+                          &nbsp;&nbsp;&nbsp;&nbsp;
+                        %input#rdRankA(type="radio" name="rdRank1")
+                        %label(style="font-size:14px;font-weight:normal;" for="rdRankA")
+                          &nbsp;５&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        %input#rdRankB(type="radio" name="rdRank1")
+                        %label(style="font-size:14px;font-weight:normal;" for="rdRankB")
+                          &nbsp;４&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        %input#rdRankC(type="radio" name="rdRank1")
+                        %label(style="font-size:14px;font-weight:normal;" for="rdRankC")
+                          &nbsp;３&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        %input#rdRankD(type="radio" name="rdRank1")
+                        %label(style="font-size:14px;font-weight:normal;" for="rdRankD")
+                          &nbsp;２&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        %input#rdRankE(type="radio" name="rdRank1")
+                        %label(style="font-size:14px;font-weight:normal;" for="rdRankE")
+                          &nbsp;１&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        %span.label.label-default
+                          悪い
+
+                %div.row
+                  &nbsp;
+                %div.row
+                  &nbsp;
+                %div.row
+                  &nbsp;
+
+                %div.row
+                  %div.col-md-12
+                    %div.input-group
+                      %span.input-group-addon.custom_msize
+                        評価コメントをください
+                      %textarea#txtereaComment1.form-control.custom_msize (type="text" class="form-control" placeholder="・使いやすいシステムだと思う&#13;・保守サポートが悪い")
+
+          %div.modal-footer#modalQuestionFooter
+            %div.row
+              %div.col-md-2
+              %div.col-md-2
+              %div.col-md-7
+              %div.col-md-1
+                %button.btn.btn-default(type="button" data-dismiss="modal")
+                  閉じる
+
+    <!-- データ抽出モーダル -->
+    %div.modal.fade#modalKatuyo(tabindex="-1")
+      %div.modal-dialog.modal-lg
+        %div.modal-content
+          %div.modal-header
+            %button.close(type="button" data-dismiss="modal")
+              %span
+                ×
+            %h4.modal-title#subGtitle
+              データをCSV出力します。
+          %div.modal-body
+            %div.row
+              %div.col-md-3
+                %table.table-bordered.row.hover#tableKatuyo
+                  %thead
+                    %tr
+                      %th 
+                        出力ファイル種別
+                  %tbody
+              %div.col-md-9
+                %div.row
+                  &nbsp;
+                %div.row
+                  %div.col-md-4
+                    %div.input-group
+                      %span.input-group-addon
+                        年月
+                      %div.form-group
+                          %select.form-control.input-sm#selCsvNentuki
+                %div.row
+                  &nbsp;
+                %div.row
+                  %div.col-md-4
+                    %div.input-group
+                      %span.input-group-addon
+                        分類
+                      %div.form-group
+                          %select.form-control.input-sm#selCsvGroupKb
+                %div.row
+                  &nbsp;
+                %div.row
+                  %div.col-md-4
+                    %div.input-group
+                      %span.input-group-addon
+                        担当
+                      %div.form-group
+                          %select.form-control.input-sm#selCsvTanto
+
+          %div.modal-footer#modalKatuyoFooter
+            %div.row
+              %div.col-md-2
+              %div.col-md-2
+              %div.col-md-7
+              %div.col-md-1
+                %button.btn.btn-default(type="button" data-dismiss="modal")
+                  閉じる
+
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="../static/main/js/main.js"></script>
+{% endblock  %}
+
