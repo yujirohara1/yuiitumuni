@@ -44,7 +44,7 @@
               %th
                 回答数
               %th
-                総合評価(5点満点)
+                総合評価<br>(5点満点)
           %tbody
 
 
@@ -254,7 +254,7 @@
                 %a#btnAnswer.btn.btn-primary.btn-lg(type="button")
                   登録する
 
-    <!-- データ抽出モーダル -->
+    <!-- ロクハブの理念 -->
     %div.modal.fade#modalAboutUs(tabindex="-1")
       %div.modal-dialog.modal-lg
         %div.modal-content
@@ -262,7 +262,7 @@
             %button.close(type="button" data-dismiss="modal")
               %span#(style="color:white")
                 ×
-            %h4.modal-title#subGtitle
+            %h4.modal-title#subGtitle(style="font-weight:bold")
               LocHub（ロクハブ）が掲げる理念
           %div.modal-body(style="background-image:url('../static/image/logo_rinen.png'); background-size:cover; background-repeat:no-repeat")
             %div.row
