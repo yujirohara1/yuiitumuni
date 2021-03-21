@@ -1,9 +1,9 @@
 {% extends 'common.html' %}
  
-{% block title %}自治体職員のあなたに質問です{% endblock %}
+{% block title %}LocHub ロクハブ{% endblock %}
 
 {% block content %}
-  %div.container-fluid(style="background-image:url('../static/image/main_image.png'); background-size:cover; background-repeat:no-repeat")
+  %div.container-fluid(style="background-image:url('../static/image/xxxxx.png'); background-size:cover; background-repeat:no-repeat")
 
     %div.row
       %div.col-md-12
@@ -19,11 +19,33 @@
         %div(style="float:left")
           &nbsp;&nbsp;&nbsp;&nbsp;
         %h4(style="float:left")
-          日本の地方公共団体（<span style="font-weight:bold">Local</span>Goverment）で利用されている情報システム<br>の評価をデータ化し、集約（<span style="font-weight:bold">Hub</span>）するサービスを開発しました。
+          日本の地方公共団体（<span style="font-weight:bold">Local</span>Goverment）で利用されている情報システム<br>の評価をデータ化し、集約（<span style="font-weight:bold">Hub</span>）するサービス、<span style="font-weight:bold">ロクハブ</span>へようこそ。
         %div(style="float:left")
           &nbsp;&nbsp;&nbsp;&nbsp;
         %a.btn.btn-warning.btn-lg(type="button" data-toggle="modal" data-target="#modalQuestion" style="float:left")
           アンケートに回答する
+        %div(style="float:left")
+          &nbsp;&nbsp;&nbsp;&nbsp;
+        %a(data-toggle="modal" data-target="#modalAboutUs" href="")
+          LocHubって何？
+
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+
+    %div.row
+      %div.col-md-4
+        %table.table-bordered.row.hover#tableToko
+          %thead
+            %tr
+              %th 
+                企業名
+              %th
+                回答数
+              %th
+                総合評価(5点満点)
+          %tbody
 
 
     %div.row
@@ -79,9 +101,6 @@
               %button.btn.btn-primary.btn-sm(type="button" data-toggle="modal" data-target="#modalSeikyuKanri")
                 請求データ管理
           %div.col-md-2
-            %div.input-group
-              %button.btn.btn-primary.btn-sm(type="button" data-toggle="modal" data-target="#modalKatuyo")
-                データ抽出
           %div.col-md-2
             %div.input-group
               %button.btn.btn-primary.btn-sm#btnNewCustomerToroku(type="button")
@@ -119,22 +138,6 @@
                 無効
         
       
-    %div.row
-      %div.col-md-3
-        %table.table-bordered.row.hover#tableCustomer
-          %thead
-            %tr
-              %th 
-                ID
-              %th
-                経路
-              %th
-                氏名
-              %th
-                &nbsp;
-          %tbody
-
-
     <!-- 基本設定モーダル -->
     %div.modal.fade#modalQuestion(tabindex="-1")
       %div.modal-dialog.modal-lg
@@ -205,24 +208,24 @@
                     %div.input-group
                       %span.input-group-addon.custom_msize
                         満足度を５段階評価
-                      %span.input-group-addon.custom_msize style="background-color:white; border-left:1px solid #ccc; width:310px; height:42px"
+                      %span#rdRank1Area.input-group-addon.custom_msize style="background-color:white; border-left:1px solid #ccc; width:310px; height:42px"
                         %span.label.label-success
                           良い
                         %span
                           &nbsp;&nbsp;&nbsp;&nbsp;
-                        %input#rdRankA(type="radio" name="rdRank1")
+                        %input#rdRankA(type="radio" name="rdRank1" value="5")
                         %label(style="font-size:14px;font-weight:normal;" for="rdRankA")
                           &nbsp;５&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        %input#rdRankB(type="radio" name="rdRank1")
+                        %input#rdRankB(type="radio" name="rdRank1" value="4")
                         %label(style="font-size:14px;font-weight:normal;" for="rdRankB")
                           &nbsp;４&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        %input#rdRankC(type="radio" name="rdRank1")
+                        %input#rdRankC(type="radio" name="rdRank1" value="3")
                         %label(style="font-size:14px;font-weight:normal;" for="rdRankC")
                           &nbsp;３&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        %input#rdRankD(type="radio" name="rdRank1")
+                        %input#rdRankD(type="radio" name="rdRank1" value="2")
                         %label(style="font-size:14px;font-weight:normal;" for="rdRankD")
                           &nbsp;２&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        %input#rdRankE(type="radio" name="rdRank1")
+                        %input#rdRankE(type="radio" name="rdRank1" value="1")
                         %label(style="font-size:14px;font-weight:normal;" for="rdRankE")
                           &nbsp;１&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         %span.label.label-default
@@ -252,54 +255,39 @@
                   登録する
 
     <!-- データ抽出モーダル -->
-    %div.modal.fade#modalKatuyo(tabindex="-1")
+    %div.modal.fade#modalAboutUs(tabindex="-1")
       %div.modal-dialog.modal-lg
         %div.modal-content
-          %div.modal-header
+          %div.modal-header(style="background-color:black; color:white;")
             %button.close(type="button" data-dismiss="modal")
-              %span
+              %span#(style="color:white")
                 ×
             %h4.modal-title#subGtitle
-              データをCSV出力します。
-          %div.modal-body
+              LocHub（ロクハブ）が掲げる理念
+          %div.modal-body(style="background-image:url('../static/image/logo_rinen.png'); background-size:cover; background-repeat:no-repeat")
             %div.row
-              %div.col-md-3
-                %table.table-bordered.row.hover#tableKatuyo
-                  %thead
-                    %tr
-                      %th 
-                        出力ファイル種別
-                  %tbody
-              %div.col-md-9
-                %div.row
-                  &nbsp;
-                %div.row
-                  %div.col-md-4
-                    %div.input-group
-                      %span.input-group-addon
-                        年月
-                      %div.form-group
-                          %select.form-control.input-sm#selCsvNentuki
-                %div.row
-                  &nbsp;
-                %div.row
-                  %div.col-md-4
-                    %div.input-group
-                      %span.input-group-addon
-                        分類
-                      %div.form-group
-                          %select.form-control.input-sm#selCsvGroupKb
-                %div.row
-                  &nbsp;
-                %div.row
-                  %div.col-md-4
-                    %div.input-group
-                      %span.input-group-addon
-                        担当
-                      %div.form-group
-                          %select.form-control.input-sm#selCsvTanto
+              %div.col-md-12
+                %span(style="font-size:18px;font-weight:bold; color:#000000cc")
+                  私たちは、地方公共団体のシステム構築が失敗する姿を幾度となく見てきました。<br>
+                  税金を主な運転資金とする地方公共団体において、数千万円～数十億円の歳出案件であるシステム構築の多くが失敗しているとすれば、これは社会問題と言えるでしょう。<br>
+                  <br>
+                  公共事業は参入障壁が高く、開発能力があっても小さなスタートアップ企業がおいそれと参入できるマーケットではありません。<br>
+                  また、その調達プロセスは複雑で一般の人にはわかりづらく、ブラックボックス化しています。<br>
+                  <br>
+                  多様な住民サービスや複雑な事務作業を必要とする自治体運営には、高度で柔軟なシステムが必要なのは言うまでもありませんが、<br>
+                  「仕様書」という名の字面で表現されただけの資料をもってして「良い製品かどうか」を判断して選定・購入するものです。<br>
+                  <br>
+                  ところで皆さんは、買い物をするときに、『企業の宣伝』 と 『amazonレビュー』のどちらを信用しますか？<br>
+                  または、ランチのお店を選ぶときに、『店構えの立派さ』 と 『食べログ評価』 のどちらを信用しますか？<br>
+                  <br>
+                  ロクハブの理念は、ここにあります。<br>
+                  公共事業のシステム調達において、ロクハブの評価点だけが唯一信頼できる情報であり続けること。<br>
+                  <br>
+                  良質な製品が浮き上がってきて、粗悪品は沈んでいく。情報の非対称性を解消し、市場では自然と価格調整メカニズムが起きる。<br>
+                  私たちは、このサービスが社会問題の１つを解決し、公益に資するものであることを、ここに誓います。
 
-          %div.modal-footer#modalKatuyoFooter
+
+          %div.modal-footer#modalAboutUsFooter
             %div.row
               %div.col-md-2
               %div.col-md-2

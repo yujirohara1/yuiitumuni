@@ -21,7 +21,7 @@ from models.customer import Customer, CustomerSchema, CustomerNentuki, CustomerN
 from models.mstsetting import MstSetting, MstSettingSchema
 from models.daicho import Daicho, DaichoSchema, VDaichoA, VDaichoASchema
 from models.seikyu import Seikyu, SeikyuSchema, VSeikyuA, VSeikyuASchema, VSeikyuB, VSeikyuBSchema, VSeikyuC, VSeikyuCSchema
-from models.toko import Toko, TokoSchema
+from models.toko import Toko, TokoSchema, VTokoGroupbyVendor, VTokoGroupbyVendorSchema
 from sqlalchemy.sql import text
 from sqlalchemy import distinct
 import json
@@ -704,48 +704,27 @@ def export_list_csv(export_list, csv_dir):
 
 
 
-
-
-
-
-
-
-@app.route('/updateCustomer/<customerid>/<param>')
+@app.route('/getTokoList')
 @login_required
-def dbUpdate_updCustomer(customerid, param):
-  vals = param.split(DELIMIT)
-  
-  if int(customerid) == 0 :
-    customer = Customer()
-    customer.name1 = vals[0]
-    customer.name2 = vals[1]
-    customer.address1 = vals[2]
-    customer.tel1 = vals[3]
-    customer.harai_kb = vals[4]
-    customer.group_id = vals[5]
-    customer.biko2 = vals[6]
-    customer.biko1 = vals[7]
-    customer.list = None
-    customer.del_flg = 0
-    customer.tenant_id = current_user.tenant_id
-    db.session.add(customer)
+def resJson_getTokoList():
+    tokolist = VTokoGroupbyVendor.query.all()
+    tokolist_schema = VTokoGroupbyVendorSchema(many=True)
+    return jsonify({'data': tokolist_schema.dumps(tokolist, ensure_ascii=False)})
 
-  else :
-    customer = Customer.query.filter(Customer.id==customerid, Customer.tenant_id==current_user.tenant_id).first()
-    customer.name1 = vals[0]
-    customer.name2 = vals[1]
-    customer.address1 = vals[2]
-    customer.tel1 = vals[3]
-    customer.harai_kb = vals[4]
-    customer.group_id = vals[5]
-    customer.biko2 = vals[6]
-    customer.biko1 = vals[7]
-    customer.list = vals[8]
-    customer.tenant_id = current_user.tenant_id
 
-  # データを確定
+
+@app.route('/insertToko/<vendornm>/<systemnm>/<rank1>/<comment1>')
+def insertToko(vendornm, systemnm, rank1, comment1):
+  toko = Toko()
+  toko.vendor_nm = vendornm
+  toko.system_nm = systemnm
+  toko.rank1 = rank1
+  toko.comment1 = comment1
+  toko.ymdt = datetime.datetime.now()
+  db.session.add(toko)
   db.session.commit()
-  return param
+  return "1"
+
 
 # ログインしないと表示されないパス
 @app.route('/protected/')

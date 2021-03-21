@@ -106,13 +106,10 @@ $(document).ready(function() {
   //  createSeikyuTables_Main(0,NowNenTuki());
   //});
 
+  createTokoTables_Main();
   
+
   return;
-  
-   
-  
-  
-  
   //var domTableCustomer = $('#tableCustomer').DataTable();
 
 
@@ -387,56 +384,6 @@ $('#aaaaaa').on('click', function() {
 
     $('#txtCustomerName').focus();
 
-});
-
-/*
-|| 
-*/
-$('#btnAnswer').on('click', function() {
-    if($('#txtVendorNm').val().trim()==""){
-        var placeholder =  $("#txtVendorNm").attr("placeholder");
-        $('#txtVendorNm').focus()
-        $("#txtVendorNm").css("background-color","#ffeff7");
-        $("#txtVendorNm").attr("placeholder","入力してください");
-        setTimeout('$("#txtVendorNm").attr("placeholder","' + placeholder + '");$("#txtVendorNm").css("background-color","");', 3000);
-  }
-  
-  if($('#txtSystemNm').val().trim()==""){
-    $("#mainUpdCustomerMessageArea").append("<p style='color:red'>氏名を入力してください。</p>");
-    setTimeout('$("#mainUpdCustomerMessageArea")[0].innerText="";', 3000);
-    return;
-  }
-  var str1 = $('input:radio[name="rdRank1"]:checked').val();
-  alert(str1);
-  
-  if($('#txtereaComment1').val().trim()==""){
-    $("#mainUpdCustomerMessageArea").append("<p style='color:red'>氏名を入力してください。</p>");
-    setTimeout('$("#mainUpdCustomerMessageArea")[0].innerText="";', 3000);
-    return;
-  }
-
-  var param = $('#txtCustomerName').val() + DELIMIT + 
-              $('#txtCustomerKana').val() + DELIMIT + 
-              $('#txtAddress1').val() + DELIMIT + 
-              $('#txtTel1').val() + DELIMIT + 
-              $('#selHaraiKb').val() + DELIMIT + 
-              $('#selCustomerGroupKb').val() + DELIMIT + 
-              $('#selCustomerZeiKb').val() + DELIMIT + 
-              $('#selTantoName').val() + DELIMIT + 
-              $('#txtList').val();
-  //alert(param);
-  
-  $.ajax({
-      type: "GET",
-      url: "/updateCustomer/" + customerid + "/" + param + ""
-    }).done(function(data) {
-        $("#mainUpdCustomerMessageArea").append("<p style='color:red'>更新しました。</p>");
-        setTimeout('$("#mainUpdCustomerMessageArea")[0].innerText="";', 3000);
-          createCustomerTables_Main();
-    }).fail(function(data) {
-          alert("エラー：" + data.statusText);
-    }).always(function(data) {
-  });
 });
 
 // $.ajax({
@@ -2515,19 +2462,6 @@ function fncUpdateSeikyuQuantity(customerid, itemid, nen, tuki, niti, price, pri
   
     
 
-
-$('#modalQuestion').on("shown.bs.modal", function (e) {
-    createKihonSetteiTable_Main();
-    createKihonSetteiTable_Shosai("a");
-    //alert($('#txtereaComment1')[0].parentElement);
-    //$('#txtereaComment1')[0].parentElement.clientWidth;
-    var commentAreaWdith = toNumber($('#txtVendorNm')[0].clientWidth);
-    if(commentAreaWdith!=0){
-        $("#txtereaComment1").css("width",commentAreaWdith + "px");
-        $("#txtereaComment1").css("height","100px");
-    }
-});
-
 $('#modalKatuyo').on("shown.bs.modal", function (e) {
     createKatuyoTable_Main();
     //createKihonSetteiTable_Shosai("a");
@@ -2891,3 +2825,141 @@ $("#tableSeikyuKanriCustomer tbody").on('click',function(event) {
     $(event.target.parentNode).addClass('row_selected seikyuKanri2');
     
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function IsNyuryokuOk(selectorkey){
+    if($('#'+selectorkey).val().trim()==""){
+        var placeholder =  $('#'+selectorkey).attr("placeholder");
+        $('#'+selectorkey).focus()
+        $('#'+selectorkey).css("background-color","#ffeff7");
+        $('#'+selectorkey).attr("placeholder","入力してください");
+        setTimeout('$("#'+selectorkey+'").attr("placeholder","' + placeholder + '"); $("#'+ selectorkey+'").css("background-color","");', 1500);
+        return false;
+    }
+    return true;
+}
+
+/*
+|| 
+*/
+$('#btnAnswer').on('click', function() {
+  
+    if(IsNyuryokuOk("txtVendorNm")==false){
+        return false;
+    }
+    
+    if(IsNyuryokuOk("txtSystemNm")==false){
+        return false;
+    }
+    
+    var rdrank = $('input:radio[name="rdRank1"]:checked').val();
+    if(rdrank==undefined){
+        $('#rdRank1Area').css("background-color","#ffeff7");
+        $("#rdRank1Area").append("<p id='tmpP' style='color:red; font-size:12px'>5～1のいずれかを選択してください。</p>");
+        setTimeout('$("#tmpP").remove(); $("#rdRank1Area").css("background-color","white");', 1500);
+        return false;
+    }
+
+    $.ajax({
+        type: "GET",
+        url: "/insertToko/" + $('#txtVendorNm').val() + "/" + $('#txtSystemNm').val() + "/" + rdrank + "/" + $('#txtereaComment1').val()
+    }).done(function(data) {
+        alert(data);
+    }).fail(function(data) {
+        alert("エラー：" + data.statusText);
+    }).always(function(data) {
+        alert(data);
+  });
+});
+
+
+$('#modalQuestion').on("shown.bs.modal", function (e) {
+    $('#txtVendorNm').val("");
+    $('#txtSystemNm').val("");
+    $('input:radio[name="rdRank1"]').each(function(){
+        $(this).prop('checked', false);
+    });
+    $('#txtereaComment1').val("");
+
+    var commentAreaWdith = toNumber($('#txtVendorNm')[0].clientWidth);
+    if(commentAreaWdith!=0){
+        $("#txtereaComment1").css("width",commentAreaWdith + "px");
+        $("#txtereaComment1").css("height","100px");
+    }
+});
+
+
+$("#tableToko tbody").on('click',function(event) {
+    $("#tableToko").removeClass('row_selected tableToko');        
+    $("#tableToko tbody tr").removeClass('row_selected tableToko');        
+    $("#tableToko tbody td").removeClass('row_selected tableToko');        
+    $(event.target.parentNode).addClass('row_selected tableToko');
+    
+});
+
+/*
+|| 
+*/
+function createTokoTables_Main(){
+    
+    $('#tableToko').DataTable({
+        bInfo: false,
+        bSort: true,
+        destroy: true,
+        "processing": true,
+        ajax: {
+            url: "/getTokoList",
+            dataType: "json",
+            dataSrc: function ( json ) {
+                return JSON.parse(json.data);
+            },
+            contentType:"application/json; charset=utf-8",
+            complete: function () {
+                return; 
+            }
+        },
+        columns: [
+            { data: 'vendor_nm'     ,width: '55%' ,  className: 'dt-body-left'},
+            { data: 'kensu'         ,width: '20%' ,  className: 'dt-body-center'},
+            { data: 'rank1_avg'     ,width: '25%' ,  className: 'dt-body-center', render: 
+            function (data, type, row) { 
+                return data.toFixed(2);
+            } }
+        ],
+        aoColumnDefs: [
+            { 'bSortable': false, 'aTargets': [ 0 ] }
+         ],
+        language: {
+           url: "../static/main/js/japanese.json"
+        },
+        "scrollY":        $(window).height() * 35 / 100,
+        searching: false,
+        "pageLength": 1000,
+        paging:false,
+        "order": [ 1, "desc" ],
+        "lengthMenu": [100, 300, 500, 1000],
+        dom:"<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-6'l><'col-sm-6'f>>"+
+            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+      "preDrawCallback": function (settings) {
+        return;
+      },
+      "drawCallback": function (settings) {
+          //$('div.dataTables_scrollBody').scrollTop(pageScrollPos);
+          //$('#tableToko')[0].parentElement.scrollTop = pageScrollPos;
+          return;
+      }
+    });
+  }
