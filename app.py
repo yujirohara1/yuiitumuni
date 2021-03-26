@@ -112,8 +112,8 @@ def SendMail_AccountToroku():
 def load_user(user_id):
   return users.get(int(user_id))
 
-db_uri = "postgresql://postgres:yjrhr1102@localhost:5432/deliba_db" #開発用
-# db_uri = os.environ.get('DATABASE_URL') #本番用
+# db_uri = "postgresql://postgres:yjrhr1102@localhost:5432/deliba_db" #開発用
+db_uri = os.environ.get('DATABASE_URL') #本番用
 app.config['SQLALCHEMY_DATABASE_URI'] = db_uri 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -705,7 +705,6 @@ def export_list_csv(export_list, csv_dir):
 
 
 @app.route('/getTokoList')
-@login_required
 def resJson_getTokoList():
     tokolist = VTokoGroupbyVendor.query.all()
     tokolist_schema = VTokoGroupbyVendorSchema(many=True)

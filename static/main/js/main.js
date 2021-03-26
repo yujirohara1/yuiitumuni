@@ -2944,7 +2944,7 @@ function createTokoTables_Main(){
         language: {
            url: "../static/main/js/japanese.json"
         },
-        "scrollY":        $(window).height() * 35 / 100,
+        "scrollY":        $(window).height() * 50 / 100,
         searching: false,
         "pageLength": 1000,
         paging:false,
