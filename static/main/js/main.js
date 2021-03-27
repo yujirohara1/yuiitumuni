@@ -2889,15 +2889,18 @@ $('#btnAnswer').on('click', function() {
         return false;
     }
 
+    //var comment = $('#txtareaComment1').val() == "" ? "a" : $('#txtareaComment1').val();
     $.ajax({
         type: "GET",
-        url: "/insertToko/" + $('#txtVendorNm').val() + "/" + $('#txtSystemNm').val() + "/" + rdrank + "/" + $('#txtereaComment1').val()
+        url: "/insertToko/" + $('#txtVendorNm').val() + "/" + $('#txtSystemNm').val() + "/" + rdrank + "/" + $('#txtareaComment1').val()
     }).done(function(data) {
-        alert(data);
+        //alert(data);
     }).fail(function(data) {
         alert("エラー：" + data.statusText);
     }).always(function(data) {
-        alert(data);
+        //alert(data);
+        $('#modalQuestion').modal("hide");
+        createTokoTables_Main();
   });
 });
 
@@ -2908,12 +2911,12 @@ $('#modalQuestion').on("shown.bs.modal", function (e) {
     $('input:radio[name="rdRank1"]').each(function(){
         $(this).prop('checked', false);
     });
-    $('#txtereaComment1').val("");
+    $('#txtareaComment1').val("");
 
     var commentAreaWdith = toNumber($('#txtVendorNm')[0].clientWidth);
     if(commentAreaWdith!=0){
-        $("#txtereaComment1").css("width",commentAreaWdith + "px");
-        $("#txtereaComment1").css("height","100px");
+        $("#txtareaComment1").css("width",commentAreaWdith + "px");
+        $("#txtareaComment1").css("height","100px");
     }
 });
 
