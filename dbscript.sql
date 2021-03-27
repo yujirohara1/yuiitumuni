@@ -64,3 +64,21 @@ group by
 ;
 
 select * from v_toko_groupby_vendor;
+
+
+
+
+
+drop view v_toko_groupby_system cascade;
+CREATE VIEW v_toko_groupby_system AS
+select
+    system_nm,
+    count(1) kensu,
+    round(avg(rank1),2) rank1_avg
+from
+    toko
+group by
+    system_nm
+;
+
+select * from v_toko_groupby_system;

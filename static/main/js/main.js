@@ -2,6 +2,23 @@ var DELIMIT = "@|@|@";
 
 $(document).ready(function() {
     
+  
+  $.getJSON("/getVendorNmList", function(json) {
+    list = JSON.parse(json.data);
+    $.each(list, function(i, item) {
+        $('#selVendorNm .dropdown-menu').append('<li><a onclick=$("#txtVendorNm").val("' + item.vendor_nm + '");>'+item.vendor_nm);
+        
+    });
+  });
+  
+  $.getJSON("/getSystemNmList", function(json) {
+    list = JSON.parse(json.data);
+    $.each(list, function(i, item) {
+        $('#selSystemNm .dropdown-menu').append('<li><a onclick=$("#txtSystemNm").val("' + item.system_nm + '");>'+item.system_nm);
+
+    });
+  });
+  
 
   //$.getJSON("/getMstSetting_Main/GROUP_KB", function(json) {
   //  list = JSON.parse(json.data);

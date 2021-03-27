@@ -21,7 +21,7 @@ from models.customer import Customer, CustomerSchema, CustomerNentuki, CustomerN
 from models.mstsetting import MstSetting, MstSettingSchema
 from models.daicho import Daicho, DaichoSchema, VDaichoA, VDaichoASchema
 from models.seikyu import Seikyu, SeikyuSchema, VSeikyuA, VSeikyuASchema, VSeikyuB, VSeikyuBSchema, VSeikyuC, VSeikyuCSchema
-from models.toko import Toko, TokoSchema, VTokoGroupbyVendor, VTokoGroupbyVendorSchema
+from models.toko import Toko, TokoSchema, VTokoGroupbyVendor, VTokoGroupbyVendorSchema, VTokoGroupbySystem, VTokoGroupbySystemSchema
 from sqlalchemy.sql import text
 from sqlalchemy import distinct
 import json
@@ -449,13 +449,6 @@ def print_pdfMergeSeikyusho():
 #   return send_file("tmp/" + "file" + timestampStr + ".pdf", as_attachment=True)
 
 
-@app.route('/getMstSetting_Main/<param_id>')
-@login_required
-def resJson_getMstSetting_Main(param_id):
-  setting = MstSetting.query.filter(MstSetting.param_id==param_id, MstSetting.tenant_id==current_user.tenant_id).all() #変更
-  setting_schema = MstSettingSchema(many=True)
-  return jsonify({'data': setting_schema.dumps(setting, ensure_ascii=False)})
-
 
 @app.route('/getMstSetting_Full')
 @login_required
@@ -700,9 +693,17 @@ def export_list_csv(export_list, csv_dir):
 
 
 
+@app.route('/getVendorNmList')
+def resJson_getVendorNmList():
+    tokolist = VTokoGroupbyVendor.query.all()
+    tokolist_schema = VTokoGroupbyVendorSchema(many=True)
+    return jsonify({'data': tokolist_schema.dumps(tokolist, ensure_ascii=False)})
 
-
-
+@app.route('/getSystemNmList')
+def resJson_getSystemNmList():
+    tokolist = VTokoGroupbySystem.query.all()
+    tokolist_schema = VTokoGroupbySystemSchema(many=True)
+    return jsonify({'data': tokolist_schema.dumps(tokolist, ensure_ascii=False)})
 
 @app.route('/getTokoList')
 def resJson_getTokoList():
