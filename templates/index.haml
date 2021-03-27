@@ -35,18 +35,28 @@
       &nbsp;
 
     %div.row
-      %div.col-md-4
-        %table.table-bordered.row.hover#tableToko
-          %thead
-            %tr
-              %th 
-                企業名
-              %th
-                回答数
-              %th
-                総合評価<br>(5点満点)
-          %tbody
+      %div.col-md-3
+        %div.row
+          %div.col-md-12
+            %table.table-bordered.row.hover#tableToko
+              %thead
+                %tr
+                  %th 
+                    企業名
+                  %th
+                    回答数
+                  %th
+                    満足度<br>(5段階)
+              %tbody
 
+      %div.col-md-4
+        %div.row
+          %div.col-md-12
+            %canvas#myChart(style="border-right:0.5px solid #999;border-left:1px solid #999; ")
+        %div.row
+          %div.col-md-12.text-center
+            %a.btn.btn-primary.btn-sm(type="button")
+              あなたの評価も下さい
 
     %div.row
       &nbsp;

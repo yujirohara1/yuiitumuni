@@ -19,7 +19,39 @@ $(document).ready(function() {
     });
   });
   
-
+  Chart.defaults.global.defaultFontColor = '#333';
+  Chart.defaults.global.defaultFontStyle = 'Bold';
+  Chart.defaults.global.elements.rectangle.borderWidth = 2;
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+      type: 'radar',
+      data: {
+          labels: ['知名度の高さ', '機能の使いやすさ', '価格は適正か', 'サポートは十分か', '提案が魅力的か', '担当SEを信頼できるか', 'サブシステムは豊富か'],
+          datasets: [{
+              label: 'apples',
+              backgroundColor: "rgba(179,11,198,.2)",
+              borderColor: "rgba(179,11,198,1)",
+              data: [12, 19, 3, 17, 6, 3, 7],
+              borderWidth: 1
+            }, {
+                label: 'oranges',
+                backgroundColor: "rgba(255,153,0,0.4)",
+                borderColor: "rgba(255,153,0,1)",
+                data: [2, 29, 5, 5, 2, 3, 10],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            layout: {
+                padding: {
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 0
+                }
+            }
+        }
+    });
   //$.getJSON("/getMstSetting_Main/GROUP_KB", function(json) {
   //  list = JSON.parse(json.data);
   //  $.each(list, function(i, item) {
@@ -2951,9 +2983,9 @@ function createTokoTables_Main(){
             }
         },
         columns: [
-            { data: 'vendor_nm'     ,width: '55%' ,  className: 'dt-body-left'},
-            { data: 'kensu'         ,width: '20%' ,  className: 'dt-body-center'},
-            { data: 'rank1_avg'     ,width: '25%' ,  className: 'dt-body-center', render: 
+            { data: 'vendor_nm'     ,width: '45%' ,  className: 'dt-body-left'},
+            { data: 'kensu'         ,width: '25%' ,  className: 'dt-body-center'},
+            { data: 'rank1_avg'     ,width: '30%' ,  className: 'dt-body-center', render: 
             function (data, type, row) { 
                 return data.toFixed(2);
             } }
@@ -2964,7 +2996,6 @@ function createTokoTables_Main(){
         language: {
            url: "../static/main/js/japanese.json"
         },
-        "scrollY":        $(window).height() * 50 / 100,
         searching: false,
         "pageLength": 1000,
         paging:false,
