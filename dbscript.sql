@@ -181,7 +181,7 @@ select
     b.kensu,
     b.ryaku_nm
 from
-    (select distinct vendor_nm from toko) a,
+    (select distinct vendor_nm from toko union select '左の表から企業名を選択してください。') a,
     (select  1 bunya_cd,'住民基本台帳'   bunya_nm , trunc(random()*25) kensu , '住基' ryaku_nm union all 
      select  2 bunya_cd,'選挙人名簿管理' bunya_nm , trunc(random()*10) kensu , '選挙' ryaku_nm union all 
      select  3 bunya_cd,'固定資産税'     bunya_nm , trunc(random()*25) kensu , '固定' ryaku_nm union all 
