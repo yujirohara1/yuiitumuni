@@ -3166,7 +3166,7 @@ function createBunyaMap(){
             var customstyle="";
             var disprank = ""
             if(item.kensu == 0){
-                customstyle = 'style= "background:linear-gradient(to right, gold 0%, white 0%)"';
+                customstyle = 'style= "background:linear-gradient(to right, #e6e6e6 0%, white 100%); color:#808080"';
                 //background: linear-gradient(to left, #333, #333 50%, #eee 75%, #333 75%);
                 disprank = "-";
             } else if(item.kensu <= 3){
