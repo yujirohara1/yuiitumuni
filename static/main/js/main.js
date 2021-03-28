@@ -2961,12 +2961,6 @@ $('#btnNanajikuAnswer').on('click', function() {
   });
 });
 
-$('#btnNanajikuQuestion').on('click', function() {
-    if($('#btnNanajikuQuestion').attr("disabled")=="disabled"){
-        return false;
-    }
-});
-
 $('#modalNanajikuHyoka').on("shown.bs.modal", function (e) {
     $('#spanNanajikuHyokaTitle').text(selectRowData.vendor_nm + "について教えてください。");
     $('#txtChimeido').val("");
@@ -3000,6 +2994,7 @@ $("#tableToko tbody").on('click','tr', function(event) {
 
     //レーダーチャート回答用のボタンからdisabledを削除して使えるようにする
     $('#btnNanajikuQuestion').removeAttr("disabled");
+    $('#selVendorNmHikaku').removeAttr("disabled");
 
     CreateRadarChart();
 });
@@ -3023,13 +3018,7 @@ function CreateRadarChart(){
         type: 'radar',
         data: {
             labels: ['1.知名度の高さ', '2.機能の使いやすさ', '3.価格は適正か', '4.サポートは十分か', '5.提案は魅力的か', '6.担当SEを信頼できるか', '7.サブシステムは豊富か'],
-            datasets: [{
-                label: 'apples',
-                backgroundColor: "rgba(179,11,198,.2)",
-                borderColor: "rgba(179,11,198,1)",
-                data: [],
-                borderWidth: 1
-            }]
+            datasets: []
         },
         options: {
             layout: {
@@ -3052,45 +3041,94 @@ function CreateRadarChart(){
         }
     };
 
+    getRadarChartData(chartData, selectVendor);
+}
+
+function getRadarChartData(chartData, selectVendor){
+    var idx = chartData.data.datasets.length;
     $.ajax({
         type: "GET",
         url: "/getNanajikuAverage/" + selectVendor + ""
     }).done(function(json) {
-        chartData.data.datasets[0].label = selectVendor;
+        chartData.data.datasets.push({
+            label: '',
+            backgroundColor: BgColor_RadarChart[idx],
+            borderColor: BdrColor_RadarChart[idx],
+            data: [],
+            borderWidth: 1
+        });
+
+        chartData.data.datasets[idx].label = selectVendor;//(idx == 0 ? selectVendor : selectVendor.substring(0,2));
         list = JSON.parse(json.data);
         if(list.length > 0){
             $.each(list, function(i, item) {
-                chartData.data.datasets[0].data.push(item.shubetu1_avg);
-                chartData.data.datasets[0].data.push(item.shubetu2_avg);
-                chartData.data.datasets[0].data.push(item.shubetu3_avg);
-                chartData.data.datasets[0].data.push(item.shubetu4_avg);
-                chartData.data.datasets[0].data.push(item.shubetu5_avg);
-                chartData.data.datasets[0].data.push(item.shubetu6_avg);
-                chartData.data.datasets[0].data.push(item.shubetu7_avg);
+                chartData.data.datasets[idx].data.push(item.shubetu1_avg);
+                chartData.data.datasets[idx].data.push(item.shubetu2_avg);
+                chartData.data.datasets[idx].data.push(item.shubetu3_avg);
+                chartData.data.datasets[idx].data.push(item.shubetu4_avg);
+                chartData.data.datasets[idx].data.push(item.shubetu5_avg);
+                chartData.data.datasets[idx].data.push(item.shubetu6_avg);
+                chartData.data.datasets[idx].data.push(item.shubetu7_avg);
             });
         }
-        // chartData.data.datasets[0].data.push(19);
-        // chartData.data.datasets[0].data.push(3);
-        // chartData.data.datasets[0].data.push(17);
-        // chartData.data.datasets[0].data.push(6);
-        // chartData.data.datasets[0].data.push(3);
-        // chartData.data.datasets[0].data.push(7);
-        //chartData.data.datasets[1].data.push(2);
-        //chartData.data.datasets[1].data.push(29);
-        //chartData.data.datasets[1].data.push(5);
-        //chartData.data.datasets[1].data.push(5);
-        //chartData.data.datasets[1].data.push(2);
-        //chartData.data.datasets[1].data.push(3);
-        //chartData.data.datasets[1].data.push(10);
-        //chartData.data.datasets[0].data.push([12, 19, 3, 17, 6, 3, 7]);
-        //chartData.data.datasets[1].data.push([2, 29, 5, 5, 2, 3, 10]);
-        //var myLineChart = new Chart(ctx).Radar(data);
     }).fail(function(data) {
         alert("エラー：" + data.statusText);
-    }).always(function(data) {
+    }).always(function(json) {
+        list = JSON.parse(json.data);
+        if(idx==0){
+            if(list.length>0){
+                //比較選択に使うプルダウンを作る
+                $.getJSON("/getVendorNmList", function(json) {
+                    list = JSON.parse(json.data);
+                    $('#selVendorNmHikaku .dropdown-menu').empty();
+                    $.each(list, function(i, item) {
+                        $('#selVendorNmHikaku .dropdown-menu').append('<li><a onclick=funcRadarHikaku("' + item.vendor_nm + '");>' + item.vendor_nm);
+                    });
+                    $('#selVendorNmHikaku .btn').removeAttr("disabled");
+                });
+            } else {
+                $('#selVendorNmHikaku .btn').attr("disabled","disabled");
+            }
+        }
         var ctx = $("#myChart").get(0).getContext("2d");
-        var myNewChart = new Chart(ctx, chartData);
-        //何もしない
+        if(idx==0){
+            nanajikuRadarChart = new Chart(ctx, chartData);
+        }else{
+            nanajikuRadarChart.update();
+        }
     });
-
 }
+
+var nanajikuRadarChart;
+
+function funcRadarHikaku(vendornm){
+    if(nanajikuRadarChart.data.datasets.length > 4){
+        alert("これ以上比較対象を追加できません。");
+        return false;
+    }
+    var add = true;
+    $.each(nanajikuRadarChart.data.datasets, function(i, item) {
+        if(item.label==vendornm){
+            add = false;
+        }
+    });
+    
+    if(add){
+        getRadarChartData(nanajikuRadarChart, vendornm);
+    }
+}
+
+const BgColor_RadarChart =  ["rgba(2,35,199,.2)", "rgba(199,2,2,.2)", "rgba(42,199,2,.2)", "rgba(153,2,199,.2)", "rgba(199,120,2,.2)"];
+const BdrColor_RadarChart = ["rgba(2,35,199,1)",  "rgba(199,2,2,1)",  "rgba(42,199,2,1)",  "rgba(153,2,199,1)",  "rgba(199,120,2,1)"];
+
+$('#selVendorNmHikaku .btn').on('click', function() {
+    if($(this).attr("disabled")=="disabled"){
+        return false;
+    }
+});
+
+$('#btnNanajikuQuestion').on('click', function() {
+    if($(this).attr("disabled")=="disabled"){
+        return false;
+    }
+});

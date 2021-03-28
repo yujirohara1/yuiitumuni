@@ -51,9 +51,17 @@
           %div.col-md-12
             %canvas#myChart(style="border-right:0.5px solid #d3d3d3;border-left:1px solid #d3d3d3; ")
         %div.row
-          %div.col-md-12.text-center
+          &nbsp;
+        %div.row
+          %div.col-md-6.text-center
             %a.btn.btn-warning.btn-sm#btnNanajikuQuestion(type="button" data-toggle="modal" data-target="#modalNanajikuHyoka")
               あなたの評価も下さい
+          %div.col-md-6.text-center
+            %div.dropdown#selVendorNmHikaku
+              %a.btn.btn-default(href="#" data-toggle="dropdown" role="button" aria-expanded="false")
+                他社と比較する
+                %span.caret
+              %ul.dropdown-menu(role="menu")
 
     %div.row
       &nbsp;
