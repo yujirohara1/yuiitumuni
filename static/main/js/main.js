@@ -3179,7 +3179,7 @@ function createBunyaMap(){
                 customstyle = 'style= "background:linear-gradient(to right, gold 0%, #ffa280 70%, white 80%)"';
                 disprank = "B";
             } else if(item.kensu <= 15){
-                customstyle = 'style= "background:linear-gradient(to right, gold 0%, #ff7f50 100%)"';
+                customstyle = 'style= "background:linear-gradient(to right, gold 0%, #ff8f66 100%)"';
                 disprank = "A";
             } else {
                 customstyle = 'style= "background:linear-gradient(to right, gold 0%, red 120%); font-weight:bold"';

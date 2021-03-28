@@ -39,6 +39,7 @@ table.dataTable thead tr {
     border:0.1px solid #ccc;
     color : #333;
     padding:1px 4px 1px 4px ;
+    opacity: 0.8;
 }
 
 .tdBunyaKensu{
