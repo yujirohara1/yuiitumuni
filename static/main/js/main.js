@@ -2780,10 +2780,11 @@ $('#btnAnswer').on('click', function() {
         return false;
     }
 
-    //var comment = $('#txtareaComment1').val() == "" ? "a" : $('#txtareaComment1').val();
+    var comment = $('#txtareaComment1').val() == "" ? "　" : $('#txtareaComment1').val();
+
     $.ajax({
         type: "GET",
-        url: "/insertToko/" + $('#txtVendorNm').val() + "/" + $('#txtSystemNm').val() + "/" + rdrank + "/" + $('#txtareaComment1').val()
+        url: "/insertToko/" + $('#txtVendorNm').val() + "/" + $('#txtSystemNm').val() + "/" + rdrank + "/" + comment
     }).done(function(data) {
         alert("ご協力ありがとうございました。");
     }).fail(function(data) {

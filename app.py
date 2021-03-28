@@ -731,7 +731,7 @@ def resJson_getBunyaMap(vendornm):
 
 
 
-@app.route('/insertToko/<vendornm>/<systemnm>/<rank1>/<any:comment1>')
+@app.route('/insertToko/<vendornm>/<systemnm>/<rank1>/<comment1>')
 def insertToko(vendornm, systemnm, rank1, comment1):
   toko = Toko()
   toko.vendor_nm = vendornm
