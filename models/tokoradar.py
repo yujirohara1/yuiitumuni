@@ -16,3 +16,21 @@ class TokoRadarSchema(ma.SQLAlchemyAutoSchema):
             model = TokoRadar
             load_instance = True
 
+
+#v_tokoradar_groupby_vendor
+class VTokoRadarGroupByVendor(db.Model): 
+    __tablename__ = "v_tokoradar_groupby_vendor"
+    vendor_nm = db.Column(db.String(), primary_key=True) 
+    shubetu1_avg = db.Column(db.Float , primary_key=True) 
+    shubetu2_avg = db.Column(db.Float , primary_key=True) 
+    shubetu3_avg = db.Column(db.Float , primary_key=True) 
+    shubetu4_avg = db.Column(db.Float , primary_key=True) 
+    shubetu5_avg = db.Column(db.Float , primary_key=True) 
+    shubetu6_avg = db.Column(db.Float , primary_key=True) 
+    shubetu7_avg = db.Column(db.Float , primary_key=True) 
+
+class VTokoRadarGroupByVendorSchema(ma.SQLAlchemyAutoSchema):
+      class Meta:
+            model = VTokoRadarGroupByVendor
+            load_instance = True
+

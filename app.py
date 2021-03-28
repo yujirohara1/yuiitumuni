@@ -22,7 +22,7 @@ from models.mstsetting import MstSetting, MstSettingSchema
 from models.daicho import Daicho, DaichoSchema, VDaichoA, VDaichoASchema
 from models.seikyu import Seikyu, SeikyuSchema, VSeikyuA, VSeikyuASchema, VSeikyuB, VSeikyuBSchema, VSeikyuC, VSeikyuCSchema
 from models.toko import Toko, TokoSchema, VTokoGroupbyVendor, VTokoGroupbyVendorSchema, VTokoGroupbySystem, VTokoGroupbySystemSchema
-from models.tokoradar import TokoRadar, TokoRadarSchema
+from models.tokoradar import TokoRadar, TokoRadarSchema, VTokoRadarGroupByVendor, VTokoRadarGroupByVendorSchema
 from sqlalchemy.sql import text
 from sqlalchemy import distinct
 import json
@@ -711,6 +711,13 @@ def resJson_getTokoList():
     tokolist = VTokoGroupbyVendor.query.all()
     tokolist_schema = VTokoGroupbyVendorSchema(many=True)
     return jsonify({'data': tokolist_schema.dumps(tokolist, ensure_ascii=False)})
+
+
+@app.route('/getNanajikuAverage/<vendornm>')
+def resJson_getNanajikuAverage(vendornm):
+    nanaave = VTokoRadarGroupByVendor.query.filter(VTokoRadarGroupByVendor.vendor_nm==vendornm).all()
+    nanaave_schema = VTokoRadarGroupByVendorSchema(many=True)
+    return jsonify({'data': nanaave_schema.dumps(nanaave, ensure_ascii=False)})
 
 
 

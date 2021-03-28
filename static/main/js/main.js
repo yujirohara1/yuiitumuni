@@ -18,6 +18,7 @@ $(document).ready(function() {
     });
   
     createTokoTables_Main();
+    CreateRadarChart() //行選択していないが空白のレーダーチャートを作っておく。
     return;
 });
 
@@ -2956,7 +2957,7 @@ $('#btnNanajikuAnswer').on('click', function() {
     }).always(function(data) {
         //alert(data);
         $('#modalNanajikuHyoka').modal("hide");
-        //createTokoTables_Main();
+        CreateRadarChart(); //レーダーチャートを再構築
   });
 });
 
@@ -3010,6 +3011,8 @@ $("#tableToko tbody").on('click','tr', function(event) {
 //
 
 function CreateRadarChart(){
+    var dummy = "左の表から企業名を選択してください。"
+    var selectVendor = selectRowData == undefined ? dummy : selectRowData.vendor_nm;
     Chart.defaults.global.defaultFontColor = '#333';
     Chart.defaults.global.defaultFontStyle = 'Bold';
     Chart.defaults.global.defaultFontStyle = '600';
@@ -3048,24 +3051,46 @@ function CreateRadarChart(){
             }
         }
     };
-    var ctx = $("#myChart").get(0).getContext("2d");
-    chartData.data.datasets[0].label = selectRowData.vendor_nm;
-    chartData.data.datasets[0].data.push(12);
-    chartData.data.datasets[0].data.push(19);
-    chartData.data.datasets[0].data.push(3);
-    chartData.data.datasets[0].data.push(17);
-    chartData.data.datasets[0].data.push(6);
-    chartData.data.datasets[0].data.push(3);
-    chartData.data.datasets[0].data.push(7);
-    //chartData.data.datasets[1].data.push(2);
-    //chartData.data.datasets[1].data.push(29);
-    //chartData.data.datasets[1].data.push(5);
-    //chartData.data.datasets[1].data.push(5);
-    //chartData.data.datasets[1].data.push(2);
-    //chartData.data.datasets[1].data.push(3);
-    //chartData.data.datasets[1].data.push(10);
-    //chartData.data.datasets[0].data.push([12, 19, 3, 17, 6, 3, 7]);
-    //chartData.data.datasets[1].data.push([2, 29, 5, 5, 2, 3, 10]);
-    var myNewChart = new Chart(ctx, chartData);
-    //var myLineChart = new Chart(ctx).Radar(data);
+
+    $.ajax({
+        type: "GET",
+        url: "/getNanajikuAverage/" + selectVendor + ""
+    }).done(function(json) {
+        chartData.data.datasets[0].label = selectVendor;
+        list = JSON.parse(json.data);
+        if(list.length > 0){
+            $.each(list, function(i, item) {
+                chartData.data.datasets[0].data.push(item.shubetu1_avg);
+                chartData.data.datasets[0].data.push(item.shubetu2_avg);
+                chartData.data.datasets[0].data.push(item.shubetu3_avg);
+                chartData.data.datasets[0].data.push(item.shubetu4_avg);
+                chartData.data.datasets[0].data.push(item.shubetu5_avg);
+                chartData.data.datasets[0].data.push(item.shubetu6_avg);
+                chartData.data.datasets[0].data.push(item.shubetu7_avg);
+            });
+        }
+        // chartData.data.datasets[0].data.push(19);
+        // chartData.data.datasets[0].data.push(3);
+        // chartData.data.datasets[0].data.push(17);
+        // chartData.data.datasets[0].data.push(6);
+        // chartData.data.datasets[0].data.push(3);
+        // chartData.data.datasets[0].data.push(7);
+        //chartData.data.datasets[1].data.push(2);
+        //chartData.data.datasets[1].data.push(29);
+        //chartData.data.datasets[1].data.push(5);
+        //chartData.data.datasets[1].data.push(5);
+        //chartData.data.datasets[1].data.push(2);
+        //chartData.data.datasets[1].data.push(3);
+        //chartData.data.datasets[1].data.push(10);
+        //chartData.data.datasets[0].data.push([12, 19, 3, 17, 6, 3, 7]);
+        //chartData.data.datasets[1].data.push([2, 29, 5, 5, 2, 3, 10]);
+        //var myLineChart = new Chart(ctx).Radar(data);
+    }).fail(function(data) {
+        alert("エラー：" + data.statusText);
+    }).always(function(data) {
+        var ctx = $("#myChart").get(0).getContext("2d");
+        var myNewChart = new Chart(ctx, chartData);
+        //何もしない
+    });
+
 }
