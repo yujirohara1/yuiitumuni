@@ -23,8 +23,11 @@ from models.daicho import Daicho, DaichoSchema, VDaichoA, VDaichoASchema
 from models.seikyu import Seikyu, SeikyuSchema, VSeikyuA, VSeikyuASchema, VSeikyuB, VSeikyuBSchema, VSeikyuC, VSeikyuCSchema
 from models.toko import Toko, TokoSchema, VTokoGroupbyVendor, VTokoGroupbyVendorSchema, VTokoGroupbySystem, VTokoGroupbySystemSchema
 from models.tokoradar import TokoRadar, TokoRadarSchema, VTokoRadarGroupByVendor, VTokoRadarGroupByVendorSchema
+from models.bunya import Bunya, BunyaSchema, VBunyaMapGroupbyVendor, VBunyaMapGroupbyVendorSchema
 from sqlalchemy.sql import text
 from sqlalchemy import distinct
+from sqlalchemy import desc
+from sqlalchemy import asc
 import json
 # from rq import Queue
 # from worker import conn
@@ -718,6 +721,13 @@ def resJson_getNanajikuAverage(vendornm):
     nanaave = VTokoRadarGroupByVendor.query.filter(VTokoRadarGroupByVendor.vendor_nm==vendornm).all()
     nanaave_schema = VTokoRadarGroupByVendorSchema(many=True)
     return jsonify({'data': nanaave_schema.dumps(nanaave, ensure_ascii=False)})
+
+
+@app.route('/getBunyaMap/<vendornm>')
+def resJson_getBunyaMap(vendornm):
+    bunyamap = VBunyaMapGroupbyVendor.query.filter(VBunyaMapGroupbyVendor.vendor_nm==vendornm).order_by(asc(VBunyaMapGroupbyVendor.bunya_cd)).all()
+    bunyamap_schema = VBunyaMapGroupbyVendorSchema(many=True)
+    return jsonify({'data': bunyamap_schema.dumps(bunyamap, ensure_ascii=False)})
 
 
 

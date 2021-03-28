@@ -19,6 +19,7 @@ $(document).ready(function() {
   
     createTokoTables_Main();
     CreateRadarChart() //行選択していないが空白のレーダーチャートを作っておく。
+    createBunyaMap();
     return;
 });
 
@@ -2997,6 +2998,7 @@ $("#tableToko tbody").on('click','tr', function(event) {
     $('#selVendorNmHikaku').removeAttr("disabled");
 
     CreateRadarChart();
+    createBunyaMap();
 });
 //
 //ableToko tbody').on( 'click', 'tr', function () {
@@ -3007,7 +3009,7 @@ $("#tableToko tbody").on('click','tr', function(event) {
 
 function CreateRadarChart(){
     var dummy = "左の表から企業名を選択してください。"
-    var selectVendor = selectRowData == undefined ? dummy : selectRowData.vendor_nm;
+    var selectVendor = (selectRowData == undefined ? dummy : selectRowData.vendor_nm);
     Chart.defaults.global.defaultFontColor = '#333';
     Chart.defaults.global.defaultFontStyle = 'Bold';
     Chart.defaults.global.defaultFontStyle = '600';
@@ -3044,8 +3046,16 @@ function CreateRadarChart(){
     getRadarChartData(chartData, selectVendor);
 }
 
+var nanajikuRadarChart=null;
+
 function getRadarChartData(chartData, selectVendor){
     var idx = chartData.data.datasets.length;
+    if(idx==0){
+        //var ctx = $("#myChart").get(0).getContext("2d");
+        if(nanajikuRadarChart!=null){
+            nanajikuRadarChart.destroy();// = new Chart(ctx, null);
+        }
+    }
     $.ajax({
         type: "GET",
         url: "/getNanajikuAverage/" + selectVendor + ""
@@ -3099,7 +3109,6 @@ function getRadarChartData(chartData, selectVendor){
     });
 }
 
-var nanajikuRadarChart;
 
 function funcRadarHikaku(vendornm){
     if(nanajikuRadarChart.data.datasets.length > 4){
@@ -3132,3 +3141,62 @@ $('#btnNanajikuQuestion').on('click', function() {
         return false;
     }
 });
+
+
+
+function createBunyaMap(){
+    //$.each(SystemBunya, function(i, bunya) {
+    //    $("#tableBunyaMap").append("<tr><td>" + bunya);
+    //});
+
+    var dummy = "左の表から企業名を選択してください。"
+    var selectVendor = (selectRowData == undefined ? dummy : selectRowData.vendor_nm);
+    $.ajax({
+        type: "GET",
+        url: "/getBunyaMap/" + selectVendor + ""
+    }).done(function(json) {
+        list = JSON.parse(json.data);
+        var trid;
+        $('#tableBunyaMap').empty();
+        $.each(list, function(i, item) {
+            if((item.bunya_cd%9)==1){
+                $("#tableBunyaMap").append('<tr id="trBunya_' + item.bunya_cd + '">');
+                trid = "trBunya_" + item.bunya_cd;
+            }
+            var customstyle="";
+            var disprank = ""
+            if(item.kensu == 0){
+                customstyle = 'style= "background:linear-gradient(to right, gold 0%, white 0%)"';
+                //background: linear-gradient(to left, #333, #333 50%, #eee 75%, #333 75%);
+                disprank = "-";
+            } else if(item.kensu <= 3){
+                customstyle = 'style= "background:linear-gradient(to right, #ffec80 0%, white 30%)"';
+                disprank = "D";
+            } else if(item.kensu <= 7){
+                customstyle = 'style= "background:linear-gradient(to right, gold 0%, white 70%)"';
+                disprank = "C";
+            } else if(item.kensu <= 10){
+                customstyle = 'style= "background:linear-gradient(to right, gold 0%, #ffa280 70%, white 80%)"';
+                disprank = "B";
+            } else if(item.kensu <= 15){
+                customstyle = 'style= "background:linear-gradient(to right, gold 0%, #ff7f50 100%)"';
+                disprank = "A";
+            } else {
+                customstyle = 'style= "background:linear-gradient(to right, gold 0%, red 120%); font-weight:bold"';
+                disprank = "S";
+            }
+            $("#tableBunyaMap #" + trid).append('<td class="tdBunyaNm" ' + customstyle + ' aria-label="' + item.bunya_nm + "　構築実績：" + item.kensu + "件" + '" data-balloon-pos="left"  >' + item.ryaku_nm + "　" + disprank);
+            
+            
+            //$('#selVendorNm .dropdown-menu').append('<li><a onclick=$("#txtVendorNm").val("' + item.vendor_nm + '");>'+item.vendor_nm);
+        });
+    }).fail(function(data) {
+        alert("エラー：" + data.statusText);
+    }).always(function(data) {
+        //何もしない
+    });
+    //$("#tableBunyaMap").append("<tr><td>b");
+    //$("#tableBunyaMap").append("<tr><td>c");
+    //$("#tableBunyaMap tr")[$("#tableBunyaMap tr").length-1]
+    //var b = "aaa";
+}

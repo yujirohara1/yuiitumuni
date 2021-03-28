@@ -35,6 +35,18 @@ table.dataTable thead tr {
     font-size: 18px;
 }
 
+.tdBunyaNm{
+    border:0.1px solid #ccc;
+    color : #333;
+    padding:1px 4px 1px 4px ;
+}
+
+.tdBunyaKensu{
+    border:1px solid #ccc;
+    color : #333;
+    border-left: 0px;
+    padding:1px 4px 1px 4px ;
+}
 
 .kaitei{
     font-size:14px;

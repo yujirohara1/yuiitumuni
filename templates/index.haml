@@ -29,10 +29,14 @@
         %a(data-toggle="modal" data-target="#modalAboutUs" href="")
           LocHubって何？
 
-    %hr(style="margin:10px 0px 10px 0px")
+    %hr(style="margin:10px 0px 10px 0px;border-top:0.5px solid #d3d3d3;")
 
     %div.row
-      %div.col-md-3
+      %div.col-md-3(style="border-right:0.5px solid #d3d3d3;")
+        %div.row
+          %div.col-md-12
+            %span
+              企業名を選択してください。
         %div.row
           %div.col-md-12
             %table.table-bordered.row.hover#tableToko
@@ -46,10 +50,14 @@
                     満足度<br>(5段階)
               %tbody
 
-      %div.col-md-4
+      %div.col-md-4(style="border-right:0.5px solid #d3d3d3;")
         %div.row
           %div.col-md-12
-            %canvas#myChart(style="border-right:0.5px solid #d3d3d3;border-left:1px solid #d3d3d3; ")
+            %span
+              評価レーダー
+        %div.row
+          %div.col-md-12
+            %canvas#myChart
         %div.row
           &nbsp;
         %div.row
@@ -63,95 +71,46 @@
                 %span.caret
               %ul.dropdown-menu(role="menu")
 
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
+      %div.col-md-5(style="border-right:0.5px solid #d3d3d3;")
+        %div.row
+          %div.col-md-12
+            %span
+              得意分野マップ&nbsp;
+              &nbsp;（ランク：D  <  C  <  B  <  A  <  S ）&nbsp;
+        %div.row
+          %div.col-md-12
+            %table#tableBunyaMap
+
+    %hr(style="margin:10px 0px 10px 0px;border-top:0.5px solid #d3d3d3;")
 
     %div.row
-      %div.col-md-12
-        %div.row
-          %div.col-md-3
-            %div.input-group
-              %span.input-group-addon
-                操作年月
-              %div.form-group
-                  %select.form-control.input-sm#selNentuki
-          %div.col-md-2
-            %div.input-group
-              %button.btn.btn-primary.btn-sm(type="button" data-toggle="modal" data-target="#modalSeikyuKanri")
-                請求データ管理
-          %div.col-md-2
-          %div.col-md-2
-            %div.input-group
-              %button.btn.btn-primary.btn-sm#btnNewCustomerToroku(type="button")
-                新規顧客登録
-          %div.col-md-2
-            %div.input-group
-              %button.btn.btn-primary.btn-sm(type="button" data-toggle="modal" data-target="#modalQuestion")
-                基本設定
-          %div.col-md-1
-            %div.input-group.pull-right
-              %a.btn.btn-warning(href="/logout/" role="button")
-                サインアウト
-                
-            
+      &nbsp;
     %div.row
-      %div.col-md-2
-        %div.input-group
-          %span.input-group-addon
-            グループ
-          %div.form-group
-              %select.form-control.input-sm#selGroupKb
-      %div.col-md-6
-        %div.row
-          %div.col-md-2
-            %div.form-group
-              %input#chkYuko(type="checkbox" value="checkboxA" checked)
-              &nbsp;
-              %label(for="chkYuko")
-                有効
-          %div.col-md-2
-            %div.form-group
-              %input#chkMuko(type="checkbox" value="checkboxB")
-              &nbsp;
-              %label(for="chkMuko")
-                無効
-        
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      &nbsp;
+    %div.row
+      %div.col-md-10
+      %div.col-md-2.text-right
+        %a(data-toggle="modal" data-target="#modalSakujoIrai" href="")
+          削除依頼はこちら
+
       
     <!-- 基本アンケート -->
     %div.modal.fade#modalQuestion(tabindex="-1")
