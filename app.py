@@ -726,14 +726,13 @@ def insertToko(vendornm, systemnm, rank1, comment1):
   db.session.commit()
   return "1"
 
-@app.route('/insertNanajikuHyoka/<vals>')
-def insertNanajikuHyoka(vals):
+@app.route('/insertNanajikuHyoka/<vendornm>/<vals>')
+def insertNanajikuHyoka(vendornm, vals):
   vals = vals.split(",")
   for idx in range(0, 7): #0,1,2,3,4,5,6
     if vals[idx].isdecimal():
       tokoradar = TokoRadar()
-      tokoradar.vendor_nm = "test"
-      tokoradar.system_nm = "test"
+      tokoradar.vendor_nm = vendornm
       tokoradar.hyoka_shubetu = idx+1
       tokoradar.hyoka_value = vals[idx]
       tokoradar.ymdt = datetime.datetime.now()

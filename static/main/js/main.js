@@ -17,40 +17,6 @@ $(document).ready(function() {
         });
     });
   
-    Chart.defaults.global.defaultFontColor = '#333';
-    Chart.defaults.global.defaultFontStyle = 'Bold';
-    Chart.defaults.global.defaultFontStyle = '600';
-    Chart.defaults.global.elements.rectangle.borderWidth = 2;
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'radar',
-        data: {
-            labels: ['1.知名度の高さ', '2.機能の使いやすさ', '3.価格は適正か', '4.サポートは十分か', '5.提案は魅力的か', '6.担当SEを信頼できるか', '7.サブシステムは豊富か'],
-            datasets: [{
-                label: 'apples',
-                backgroundColor: "rgba(179,11,198,.2)",
-                borderColor: "rgba(179,11,198,1)",
-                data: [12, 19, 3, 17, 6, 3, 7],
-                borderWidth: 1
-            }, {
-                label: 'oranges',
-                backgroundColor: "rgba(255,153,0,0.4)",
-                borderColor: "rgba(255,153,0,1)",
-                data: [2, 29, 5, 5, 2, 3, 10],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            layout: {
-                padding: {
-                    left: 0,
-                    right: 0,
-                    top: 0,
-                    bottom: 0
-                }
-            }
-        }
-    });
     createTokoTables_Main();
     return;
 });
@@ -2982,7 +2948,7 @@ $('#btnNanajikuAnswer').on('click', function() {
     vals = vals + $('#txtSubsystemhohu').val();
     $.ajax({
         type: "GET",
-        url: "/insertNanajikuHyoka/" + vals
+        url: "/insertNanajikuHyoka/" + selectRowData.vendor_nm + "/" + vals
     }).done(function(data) {
         alert("ご協力ありがとうございました。");
     }).fail(function(data) {
@@ -3022,13 +2988,19 @@ $('#modalNanajikuHyoka').on("shown.bs.modal", function (e) {
 var selectRowData;
 
 $("#tableToko tbody").on('click','tr', function(event) {
+    //選択した行を保持。selectRowDataはグローバルスコープ。
     selectRowData = $('#tableToko').DataTable().row(this).data();
+
+    //選択した行を青くする。
     $("#tableToko").removeClass('row_selected tableToko');        
     $("#tableToko tbody tr").removeClass('row_selected tableToko');        
     $("#tableToko tbody td").removeClass('row_selected tableToko');        
     $(event.target.parentNode).addClass('row_selected tableToko');
 
+    //レーダーチャート回答用のボタンからdisabledを削除して使えるようにする
     $('#btnNanajikuQuestion').removeAttr("disabled");
+
+    CreateRadarChart();
 });
 //
 //ableToko tbody').on( 'click', 'tr', function () {
@@ -3036,3 +3008,64 @@ $("#tableToko tbody").on('click','tr', function(event) {
 //ar rowData =   $('#tableSeikyuKanri').DataTable().row( this ).data();
 //
 //
+
+function CreateRadarChart(){
+    Chart.defaults.global.defaultFontColor = '#333';
+    Chart.defaults.global.defaultFontStyle = 'Bold';
+    Chart.defaults.global.defaultFontStyle = '600';
+    Chart.defaults.global.elements.rectangle.borderWidth = 2;
+    Chart.defaults.global.elements.point.radius=2;
+    //var ctx = document.getElementById('myChart').getContext('2d');
+    var chartData = {
+        type: 'radar',
+        data: {
+            labels: ['1.知名度の高さ', '2.機能の使いやすさ', '3.価格は適正か', '4.サポートは十分か', '5.提案は魅力的か', '6.担当SEを信頼できるか', '7.サブシステムは豊富か'],
+            datasets: [{
+                label: 'apples',
+                backgroundColor: "rgba(179,11,198,.2)",
+                borderColor: "rgba(179,11,198,1)",
+                data: [],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            layout: {
+                padding: {
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 0
+                }
+            },
+            scale: {
+                angleLines: {
+                    display: true
+                },
+                ticks: {
+                    min: 1,
+                    max: 10
+                }
+            }
+        }
+    };
+    var ctx = $("#myChart").get(0).getContext("2d");
+    chartData.data.datasets[0].label = selectRowData.vendor_nm;
+    chartData.data.datasets[0].data.push(12);
+    chartData.data.datasets[0].data.push(19);
+    chartData.data.datasets[0].data.push(3);
+    chartData.data.datasets[0].data.push(17);
+    chartData.data.datasets[0].data.push(6);
+    chartData.data.datasets[0].data.push(3);
+    chartData.data.datasets[0].data.push(7);
+    //chartData.data.datasets[1].data.push(2);
+    //chartData.data.datasets[1].data.push(29);
+    //chartData.data.datasets[1].data.push(5);
+    //chartData.data.datasets[1].data.push(5);
+    //chartData.data.datasets[1].data.push(2);
+    //chartData.data.datasets[1].data.push(3);
+    //chartData.data.datasets[1].data.push(10);
+    //chartData.data.datasets[0].data.push([12, 19, 3, 17, 6, 3, 7]);
+    //chartData.data.datasets[1].data.push([2, 29, 5, 5, 2, 3, 10]);
+    var myNewChart = new Chart(ctx, chartData);
+    //var myLineChart = new Chart(ctx).Radar(data);
+}
