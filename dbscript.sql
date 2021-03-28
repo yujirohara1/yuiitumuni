@@ -10,6 +10,17 @@ CREATE TABLE toko (
     ymdt timestamp without time zone 
 );
 
+CREATE TABLE toko_radar (
+    vendor_nm character varying(100) ,
+    system_nm character varying(100) ,
+    dantai_nm character varying(100) ,
+    tokosha_nm character varying(100),
+    hyoka_shubetu integer,
+    hyoka_value integer,
+    ymdt timestamp without time zone 
+);
+
+
 /*
 || デモデータ作成
 */

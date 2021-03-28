@@ -29,10 +29,7 @@
         %a(data-toggle="modal" data-target="#modalAboutUs" href="")
           LocHubって何？
 
-    %div.row
-      &nbsp;
-    %div.row
-      &nbsp;
+    %hr(style="margin:10px 0px 10px 0px")
 
     %div.row
       %div.col-md-3
@@ -52,10 +49,10 @@
       %div.col-md-4
         %div.row
           %div.col-md-12
-            %canvas#myChart(style="border-right:0.5px solid #999;border-left:1px solid #999; ")
+            %canvas#myChart(style="border-right:0.5px solid #d3d3d3;border-left:1px solid #d3d3d3; ")
         %div.row
           %div.col-md-12.text-center
-            %a.btn.btn-primary.btn-sm(type="button")
+            %a.btn.btn-primary.btn-sm#btnNanajikuQuestion(type="button" data-toggle="modal" data-target="#modalNanajikuHyoka")
               あなたの評価も下さい
 
     %div.row
@@ -148,7 +145,7 @@
                 無効
         
       
-    <!-- 基本設定モーダル -->
+    <!-- 基本アンケート -->
     %div.modal.fade#modalQuestion(tabindex="-1")
       %div.modal-dialog.modal-lg
         %div.modal-content
@@ -270,7 +267,7 @@
                   私たちは、地方公共団体のシステム構築が失敗する姿を幾度となく見てきました。<br>
                   税金を主な運転資金とする地方公共団体において、数千万円～数十億円の歳出案件であるシステム構築の多くが失敗しているとすれば、これは社会問題と言えます。<br>
                   <br>
-                  公共事業は参入障壁が高く、開発能力があっても小さなスタートアップ企業がおいそれと参入できるマーケットではありません。<br>
+                  公共事業は参入障壁が高ため、仮に開発能力があったとしても簡単に参入できる市場ではなく、古くから大企業が独占しています。<br>
                   また、その調達プロセスは複雑で一般の人にはわかりづらく、ブラックボックス化しています。<br>
                   <br>
                   多様な住民サービスや複雑な事務作業を必要とする自治体運営には、高度で柔軟なシステムが必要なのは言うまでもありませんが、<br>
@@ -280,7 +277,7 @@
                   または、ランチのお店を選ぶときに、『店構えの立派さ』 と 『食べログ評価』 のどちらを信用しますか？<br>
                   <br>
                   ロクハブの理念は、ここにあります。<br>
-                  公共事業のシステム調達において、ロクハブの評価点だけが唯一信頼できる情報であり続けること。<br>
+                  公共事業のシステム調達において、ロクハブの評価点だけがもっとも信頼できる情報であり続けること。<br>
                   <br>
                   良質な製品が浮き上がってきて、粗悪品は沈んでいく。情報の非対称性を解消し、市場では自然と価格調整メカニズムが起きる。<br>
                   私たちは、このサービスが社会問題の１つを解決し、公益に資するものであることを、ここに誓います。
@@ -294,6 +291,111 @@
               %div.col-md-1
                 %button.btn.btn-default(type="button" data-dismiss="modal")
                   閉じる
+
+    <!-- 七軸評価 -->
+    %div.modal.fade#modalNanajikuHyoka(tabindex="-1")
+      %div.modal-dialog.modal-md
+        %div.modal-content
+          %div.modal-header
+            %button.close(type="button" data-dismiss="modal")
+              %span
+                ×
+            %h4.modal-title#subFtitle
+              %div.row
+                %div.col-md-12
+                  %span#spanNanajikuHyokaTitle
+                    次の７項目について、10段階評価をしてください。
+          %div.modal-body
+            %div.row
+              %div.col-md-6
+              %div.col-md-1
+                %span.label.label-default(style="font-weight:normal")
+                  悪い
+              %div.col-md-4
+              %div.col-md-1
+                %span.label.label-success(style="font-weight:normal")
+                  良い
+            %div.row
+              %div.col-md-4.text-middle(style="top:3px")
+                %p(style="font-size:12px")
+                  1.知名度の高さ
+              %div.col-md-2
+                %input.form-control#txtChimeido(type="text", maxlength="2" onchange="fncNumOnlyMax10();" onblur="$(event.srcElement).val(Comma(value));" style="text-align:center")
+              %div.col-md-6(style="top:5px")
+                %input#sliderChimeido(type="range" step="1" name="speed" min="1" max="10" style="float:left")
+
+            %hr(style="margin:5px 0px 10px 0px")
+
+            %div.row
+              %div.col-md-4.text-middle(style="top:3px")
+                %p(style="font-size:12px")
+                  2.機能の使いやすさ
+              %div.col-md-2
+                %input.form-control#txtTukaiyasusa(type="text", maxlength="2" onchange="fncNumOnlyMax10();" onblur="$(event.srcElement).val(Comma(value));" style="text-align:center")
+              %div.col-md-6(style="top:5px")
+                %input#sliderTukaiyasusa(type="range" step="1" name="speed" min="1" max="10" style="float:left")
+
+            %hr(style="margin:5px 0px 10px 0px")
+
+            %div.row
+              %div.col-md-4.text-middle(style="top:3px")
+                %p(style="font-size:12px")
+                  3.価格は適正か
+              %div.col-md-2
+                %input.form-control#txtKakakutekisei(type="text", maxlength="2" onchange="fncNumOnlyMax10();" onblur="$(event.srcElement).val(Comma(value));" style="text-align:center")
+              %div.col-md-6(style="top:5px")
+                %input#sliderKakakutekisei(type="range" step="1" name="speed" min="1" max="10" style="float:left")
+
+            %hr(style="margin:5px 0px 10px 0px")
+
+            %div.row
+              %div.col-md-4.text-middle(style="top:3px")
+                %p(style="font-size:12px")
+                  4.サポートは十分か
+              %div.col-md-2
+                %input.form-control#txtSupportjubun(type="text", maxlength="2" onchange="fncNumOnlyMax10();" onblur="$(event.srcElement).val(Comma(value));" style="text-align:center")
+              %div.col-md-6(style="top:5px")
+                %input#sliderSupportjubun(type="range" step="1" name="speed" min="1" max="10" style="float:left")
+
+            %hr(style="margin:5px 0px 10px 0px")
+            
+            %div.row
+              %div.col-md-4.text-middle(style="top:3px")
+                %p(style="font-size:12px")
+                  5.提案は魅力的か
+              %div.col-md-2
+                %input.form-control#txtTeianmiryoku(type="text", maxlength="2" onchange="fncNumOnlyMax10();" onblur="$(event.srcElement).val(Comma(value));" style="text-align:center")
+              %div.col-md-6(style="top:5px")
+                %input#sliderTeianmiryoku(type="range" step="1" name="speed" min="1" max="10" style="float:left")
+
+            %hr(style="margin:5px 0px 10px 0px")
+            
+            %div.row
+              %div.col-md-4.text-middle(style="top:3px")
+                %p(style="font-size:12px")
+                  6.SEは信頼できるか
+              %div.col-md-2
+                %input.form-control#txtSehenoSinrai(type="text", maxlength="2" onchange="fncNumOnlyMax10();" onblur="$(event.srcElement).val(Comma(value));" style="text-align:center")
+              %div.col-md-6(style="top:5px")
+                %input#sliderSehenoSinrai(type="range" step="1" name="speed" min="1" max="10" style="float:left")
+
+            %hr(style="margin:5px 0px 10px 0px")
+            
+            %div.row
+              %div.col-md-4.text-middle(style="top:3px")
+                %p(style="font-size:12px")
+                  7.サブシステムは豊富か
+              %div.col-md-2
+                %input.form-control#txtSubsystemhohu(type="text", maxlength="2" onchange="fncNumOnlyMax10();" onblur="$(event.srcElement).val(Comma(value));" style="text-align:center")
+              %div.col-md-6(style="top:5px")
+                %input#sliderSubsystemhohu(type="range" step="1" name="speed" min="1" max="10" style="float:left")
+
+          %div.modal-footer#modalNanajikuHyokaFooter
+            %div.row
+              %div.col-md-8.text-left
+              %div.col-md-4
+                %a#btnNanajikuAnswer.btn.btn-primary.btn-sm(type="button")
+                  登録する
 
 
 {% endblock %}

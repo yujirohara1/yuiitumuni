@@ -1,38 +1,37 @@
 var DELIMIT = "@|@|@";
 
 $(document).ready(function() {
+    $('#btnNanajikuQuestion').attr("disabled","disabled");
     
-  
-  $.getJSON("/getVendorNmList", function(json) {
-    list = JSON.parse(json.data);
-    $.each(list, function(i, item) {
-        $('#selVendorNm .dropdown-menu').append('<li><a onclick=$("#txtVendorNm").val("' + item.vendor_nm + '");>'+item.vendor_nm);
-        
+    $.getJSON("/getVendorNmList", function(json) {
+        list = JSON.parse(json.data);
+        $.each(list, function(i, item) {
+            $('#selVendorNm .dropdown-menu').append('<li><a onclick=$("#txtVendorNm").val("' + item.vendor_nm + '");>'+item.vendor_nm);
+        });
     });
-  });
-  
-  $.getJSON("/getSystemNmList", function(json) {
-    list = JSON.parse(json.data);
-    $.each(list, function(i, item) {
-        $('#selSystemNm .dropdown-menu').append('<li><a onclick=$("#txtSystemNm").val("' + item.system_nm + '");>'+item.system_nm);
 
+    $.getJSON("/getSystemNmList", function(json) {
+        list = JSON.parse(json.data);
+        $.each(list, function(i, item) {
+            $('#selSystemNm .dropdown-menu').append('<li><a onclick=$("#txtSystemNm").val("' + item.system_nm + '");>'+item.system_nm);
+        });
     });
-  });
   
-  Chart.defaults.global.defaultFontColor = '#333';
-  Chart.defaults.global.defaultFontStyle = 'Bold';
-  Chart.defaults.global.elements.rectangle.borderWidth = 2;
-  var ctx = document.getElementById('myChart').getContext('2d');
-  var myChart = new Chart(ctx, {
-      type: 'radar',
-      data: {
-          labels: ['知名度の高さ', '機能の使いやすさ', '価格は適正か', 'サポートは十分か', '提案が魅力的か', '担当SEを信頼できるか', 'サブシステムは豊富か'],
-          datasets: [{
-              label: 'apples',
-              backgroundColor: "rgba(179,11,198,.2)",
-              borderColor: "rgba(179,11,198,1)",
-              data: [12, 19, 3, 17, 6, 3, 7],
-              borderWidth: 1
+    Chart.defaults.global.defaultFontColor = '#333';
+    Chart.defaults.global.defaultFontStyle = 'Bold';
+    Chart.defaults.global.defaultFontStyle = '600';
+    Chart.defaults.global.elements.rectangle.borderWidth = 2;
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: ['1.知名度の高さ', '2.機能の使いやすさ', '3.価格は適正か', '4.サポートは十分か', '5.提案は魅力的か', '6.担当SEを信頼できるか', '7.サブシステムは豊富か'],
+            datasets: [{
+                label: 'apples',
+                backgroundColor: "rgba(179,11,198,.2)",
+                borderColor: "rgba(179,11,198,1)",
+                data: [12, 19, 3, 17, 6, 3, 7],
+                borderWidth: 1
             }, {
                 label: 'oranges',
                 backgroundColor: "rgba(255,153,0,0.4)",
@@ -52,116 +51,8 @@ $(document).ready(function() {
             }
         }
     });
-  //$.getJSON("/getMstSetting_Main/GROUP_KB", function(json) {
-  //  list = JSON.parse(json.data);
-  //  $.each(list, function(i, item) {
-  //      var option = $('<option>').text(item.param_val1).val(item.param_no);
-  //      var option2 = $('<option>').text(item.param_val1).val(item.param_no);
-  //      var option3 = $('<option>').text(item.param_val1).val(item.param_no);
-  //      $('#selGroupKb').append(option);
-  //      $('#selCsvGroupKb').append(option2);
-  //      $('#selCustomerGroupKb').append(option3);
-  //  });
-  //});
-  //
-////   $.getJSON("/getMstSetting_Main/GROUP_KB", function(json) {
-////     list = JSON.parse(json.data);
-////     $.each(list, function(i, item) {
-////         var option = $('<option>').text(item.param_val1).val(item.param_no);
-////         $('#selCustomerGroupKb').append(option);
-////     });
-////   });
-  //
-  //
-  //$.getJSON("/getMstSetting_Main/SIHARAI_KB", function(json) {
-  //  list = JSON.parse(json.data);
-  //  $.each(list, function(i, item) {
-  //      var option = $('<option>').text(item.param_val1).val(item.param_no);
-  //      $('#selHaraiKb').append(option);
-  //  });
-  //});
-  //
-  //$.getJSON("/getMstSetting_Main/CUSTOMER_ZEI_KB", function(json) {
-  //  list = JSON.parse(json.data);
-  //  $.each(list, function(i, item) {
-  //      var option = $('<option>').text(item.param_val1).val(item.param_no);
-  //      $('#selCustomerZeiKb').append(option);
-  //  });
-  //});
-  //
-  //$.getJSON("/getMstSetting_Main/HONTEN_KB", function(json) {
-  //  list = JSON.parse(json.data);
-  //  $.each(list, function(i, item) {
-  //      var option = $('<option>').text(item.param_val1).val(item.param_no);
-  //      var option2 = $('<option>').text(item.param_val1).val(item.param_no);
-  //      $('#selTantoName').append(option);
-  //      $('#selCsvTanto').append(option2);
-  //  });
-  //});
-  //
-  //
-//
-  //$.getJSON("/getMstSetting_Main/ZEI_KB", function(json) {
-  //  list = JSON.parse(json.data);
-  //  $.each(list, function(i, item) {
-  //      var option = $('<option>').text(item.param_val2).val(item.param_no);
-  //      $('#selItemZeiKb').append(option);
-  //  });
-  //});
-  //
-//
-  ////
-  //
-  //$.getJSON("/getMstSetting_Main/START_YM", function(json) {
-  //  list = JSON.parse(json.data);
-  //  if(list.length == 1){
-  //    var y = list[0].param_val1.substring(0,4)*1;
-  //    var m = list[0].param_val1.substring(4,6)*1-1;
-  //    var dt = new Date(y, m, 15);
-  //    var today = new Date(); 
-  //    today.setMonth(today.getMonth() + 2);
-  //    
-  //    var ymFrom = dt.getFullYear() + "" + ("0"+dt.getMonth()).slice(-2);
-  //    var ymTo =  today.getFullYear() + "" + ("0"+today.getMonth()).slice(-2);
-  //    ymFrom = ymFrom * 1;
-  //    ymTo = ymTo * 1;
-  //    
-  //    while (ymFrom <= ymTo) {
-  //        var option = $('<option>').text(dt.getFullYear() + "年" + " " + (dt.getMonth()*1+1) + "月").val(dt.getFullYear() + "" + (("00"+(dt.getMonth()*1+1)).slice(-2)));
-  //        var option2 = $('<option>').text(dt.getFullYear() + "年" + " " + (dt.getMonth()*1+1) + "月").val(dt.getFullYear() + "" + (("00"+(dt.getMonth()*1+1)).slice(-2)));
-  //        $('#selNentuki').append(option);
-  //        $('#selCsvNentuki').append(option2);
-  //        
-  //        dt.setMonth(dt.getMonth() + 1);
-  //        ymFrom = dt.getFullYear() + "" + ("0"+dt.getMonth()).slice(-2);
-  //        ymFrom = ymFrom * 1;
-  //    }
-  //    var seldate = new Date();
-  //    $('#selNentuki').val(NowNenTuki());
-  //    $('#selCsvNentuki').val(NowNenTuki());
-  //    
-  //  }else{
-  //    alert("エラー：START_YMがありません");
-  //  }
-  //}).done(function(json) {
-  //  console.log("成功");
-  //}).fail(function(jqXHR, textStatus, errorThrown) {
-  //  console.log("エラー：" + textStatus);
-  //  console.log("テキスト：" + jqXHR.responseText);
-  //}).always(function() {
-  //  console.log("完了");
-  //  createCustomerTables_Main();
-  //  createDaichoTables_Main(0);
-  //  createSeikyuTables_Main(0,NowNenTuki());
-  //});
-
-  createTokoTables_Main();
-  
-
-  return;
-  //var domTableCustomer = $('#tableCustomer').DataTable();
-
-
+    createTokoTables_Main();
+    return;
 });
 
 
@@ -2926,7 +2817,7 @@ $('#btnAnswer').on('click', function() {
         type: "GET",
         url: "/insertToko/" + $('#txtVendorNm').val() + "/" + $('#txtSystemNm').val() + "/" + rdrank + "/" + $('#txtareaComment1').val()
     }).done(function(data) {
-        //alert(data);
+        alert("ご協力ありがとうございました。");
     }).fail(function(data) {
         alert("エラー：" + data.statusText);
     }).always(function(data) {
@@ -2935,6 +2826,7 @@ $('#btnAnswer').on('click', function() {
         createTokoTables_Main();
   });
 });
+
 
 
 $('#modalQuestion').on("shown.bs.modal", function (e) {
@@ -2950,15 +2842,6 @@ $('#modalQuestion').on("shown.bs.modal", function (e) {
         $("#txtareaComment1").css("width",commentAreaWdith + "px");
         $("#txtareaComment1").css("height","100px");
     }
-});
-
-
-$("#tableToko tbody").on('click',function(event) {
-    $("#tableToko").removeClass('row_selected tableToko');        
-    $("#tableToko tbody tr").removeClass('row_selected tableToko');        
-    $("#tableToko tbody td").removeClass('row_selected tableToko');        
-    $(event.target.parentNode).addClass('row_selected tableToko');
-    
 });
 
 /*
@@ -3014,3 +2897,142 @@ function createTokoTables_Main(){
       }
     });
   }
+
+  
+$('input[type="range"]').on('input', function() {
+    //
+    var txtid = this.id.replace("slider","txt");
+    $("#" + txtid + "").val($(this).val());
+});
+
+function fncNumOnlyMax10(){
+    var elem = event.srcElement;
+    var inp = $(elem).val();
+    inp = inp.replace("０","0");
+    inp = inp.replace("１","1");
+    inp = inp.replace("２","2");
+    inp = inp.replace("３","3");
+    inp = inp.replace("４","4");
+    inp = inp.replace("５","5");
+    inp = inp.replace("６","6");
+    inp = inp.replace("７","7");
+    inp = inp.replace("８","8");
+    inp = inp.replace("９","9");
+    var ret = inp.replace(/[‐－―ー]/g, '-').replace(/[^\-\d\.]/g, '').replace(/(?!^\-)[^\d\.]/g, '');
+    if(ret<=0){
+        ret = 1;
+    }else if(ret >= 10){
+        ret = 10;
+    }
+    $(elem).val(ret);
+    var sliderid = elem.id.replace("txt","slider");
+    $("#" + sliderid + "").val(ret);
+
+    // $(event.srcElement).val(ret.toLocaleString());
+}
+
+/*
+|| 
+*/
+$('#btnNanajikuAnswer').on('click', function() {
+
+    var val = toNumber($('#txtChimeido').val());
+    if(val < 1 || 10 < val){
+        alert("質問 1 の評価を入力してください。");
+        return;
+    }
+    val = toNumber($('#txtTukaiyasusa').val());
+    if(val < 1 || 10 < val){
+        alert("質問 2 の評価を入力してください。");
+        return;
+    }
+    val = toNumber($('#txtKakakutekisei').val());
+    if(val < 1 || 10 < val){
+        alert("質問 3 の評価を入力してください。");
+        return;
+    }
+    val = toNumber($('#txtSupportjubun').val());
+    if(val < 1 || 10 < val){
+        alert("質問 4 の評価を入力してください。");
+        return;
+    }
+    val = toNumber($('#txtTeianmiryoku').val());
+    if(val < 1 || 10 < val){
+        alert("質問 5 の評価を入力してください。");
+        return;
+    }
+    val = toNumber($('#txtSehenoSinrai').val());
+    if(val < 1 || 10 < val){
+        alert("質問 6 の評価を入力してください。");
+        return;
+    }
+    val = toNumber($('#txtSubsystemhohu').val());
+    if(val < 1 || 10 < val){
+        alert("質問 7 の評価を入力してください。");
+        return;
+    }
+
+    var vals = "";
+    vals = vals + $('#txtChimeido').val() + ",";
+    vals = vals + $('#txtTukaiyasusa').val() + "," ;
+    vals = vals + $('#txtKakakutekisei').val() + "," ;
+    vals = vals + $('#txtSupportjubun').val() + "," ;
+    vals = vals + $('#txtTeianmiryoku').val() + "," ;
+    vals = vals + $('#txtSehenoSinrai').val() + "," ;
+    vals = vals + $('#txtSubsystemhohu').val();
+    $.ajax({
+        type: "GET",
+        url: "/insertNanajikuHyoka/" + vals
+    }).done(function(data) {
+        alert("ご協力ありがとうございました。");
+    }).fail(function(data) {
+        alert("エラー：" + data.statusText);
+    }).always(function(data) {
+        //alert(data);
+        $('#modalNanajikuHyoka').modal("hide");
+        //createTokoTables_Main();
+  });
+});
+
+$('#btnNanajikuQuestion').on('click', function() {
+    if($('#btnNanajikuQuestion').attr("disabled")=="disabled"){
+        return false;
+    }
+});
+
+$('#modalNanajikuHyoka').on("shown.bs.modal", function (e) {
+    $('#spanNanajikuHyokaTitle').text(selectRowData.vendor_nm + "について教えてください。");
+    $('#txtChimeido').val("");
+    $('#txtTukaiyasusa').val("");
+    $('#txtKakakutekisei').val("");
+    $('#txtSupportjubun').val("");
+    $('#txtTeianmiryoku').val("");
+    $('#txtSehenoSinrai').val("");
+    $('#txtSubsystemhohu').val("");
+    $('#sliderChimeido').val("");
+    $('#sliderTukaiyasusa').val("");
+    $('#sliderKakakutekisei').val("");
+    $('#sliderSupportjubun').val("");
+    $('#sliderTeianmiryoku').val("");
+    $('#sliderSehenoSinrai').val("");
+    $('#sliderSubsystemhohu').val("");
+    return;
+});
+
+var selectRowData;
+
+$("#tableToko tbody").on('click','tr', function(event) {
+    selectRowData = $('#tableToko').DataTable().row(this).data();
+    $("#tableToko").removeClass('row_selected tableToko');        
+    $("#tableToko tbody tr").removeClass('row_selected tableToko');        
+    $("#tableToko tbody td").removeClass('row_selected tableToko');        
+    $(event.target.parentNode).addClass('row_selected tableToko');
+
+    $('#btnNanajikuQuestion').removeAttr("disabled");
+});
+//
+//ableToko tbody').on( 'click', 'tr', function () {
+///顧客テーブルから指定したレコード
+//ar rowData =   $('#tableSeikyuKanri').DataTable().row( this ).data();
+//
+//

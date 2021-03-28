@@ -22,6 +22,7 @@ from models.mstsetting import MstSetting, MstSettingSchema
 from models.daicho import Daicho, DaichoSchema, VDaichoA, VDaichoASchema
 from models.seikyu import Seikyu, SeikyuSchema, VSeikyuA, VSeikyuASchema, VSeikyuB, VSeikyuBSchema, VSeikyuC, VSeikyuCSchema
 from models.toko import Toko, TokoSchema, VTokoGroupbyVendor, VTokoGroupbyVendorSchema, VTokoGroupbySystem, VTokoGroupbySystemSchema
+from models.tokoradar import TokoRadar, TokoRadarSchema
 from sqlalchemy.sql import text
 from sqlalchemy import distinct
 import json
@@ -722,6 +723,22 @@ def insertToko(vendornm, systemnm, rank1, comment1):
   toko.comment1 = comment1
   toko.ymdt = datetime.datetime.now()
   db.session.add(toko)
+  db.session.commit()
+  return "1"
+
+@app.route('/insertNanajikuHyoka/<vals>')
+def insertNanajikuHyoka(vals):
+  vals = vals.split(",")
+  for idx in range(0, 7): #0,1,2,3,4,5,6
+    if vals[idx].isdecimal():
+      tokoradar = TokoRadar()
+      tokoradar.vendor_nm = "test"
+      tokoradar.system_nm = "test"
+      tokoradar.hyoka_shubetu = idx+1
+      tokoradar.hyoka_value = vals[idx]
+      tokoradar.ymdt = datetime.datetime.now()
+      db.session.add(tokoradar)
+  
   db.session.commit()
   return "1"
 
