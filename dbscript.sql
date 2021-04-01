@@ -1,4 +1,4 @@
-CREATE TABLE toko (
+CREATE TABLE toko ( 
     vendor_nm character varying(100) ,
     system_nm character varying(100) ,
     dantai_nm character varying(100) ,
