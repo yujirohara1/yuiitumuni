@@ -1,27 +1,35 @@
 var DELIMIT = "@|@|@";
 
-$(document).ready(function() {
-    $('#btnNanajikuQuestion').attr("disabled","disabled");
-    
-    $.getJSON("/getVendorNmList", function(json) {
-        list = JSON.parse(json.data);
-        $.each(list, function(i, item) {
-            $('#selVendorNm .dropdown-menu').append('<li><a onclick=$("#txtVendorNm").val("' + item.vendor_nm + '");>'+item.vendor_nm);
-        });
-    });
 
-    $.getJSON("/getSystemNmList", function(json) {
-        list = JSON.parse(json.data);
-        $.each(list, function(i, item) {
-            $('#selSystemNm .dropdown-menu').append('<li><a onclick=$("#txtSystemNm").val("' + item.system_nm + '");>'+item.system_nm);
+$(document).ready(function() {
+
+    try{
+        $('#btnNanajikuQuestion').attr("disabled","disabled");
+        
+        $.getJSON("/getVendorNmList", function(json) {
+            list = JSON.parse(json.data);
+            $.each(list, function(i, item) {
+                $('#selVendorNm .dropdown-menu').append('<li><a onclick=$("#txtVendorNm").val("' + item.vendor_nm + '");>'+item.vendor_nm);
+            });
         });
-    });
-  
-    createTokoTables_Main();
-    CreateRadarChart() //行選択していないが空白のレーダーチャートを作っておく。
-    createBunyaMap();
+    
+        $.getJSON("/getSystemNmList", function(json) {
+            list = JSON.parse(json.data);
+            $.each(list, function(i, item) {
+                $('#selSystemNm .dropdown-menu').append('<li><a onclick=$("#txtSystemNm").val("' + item.system_nm + '");>'+item.system_nm);
+            });
+        });
+      
+        createTokoTables_Main();
+        CreateRadarChart() //行選択していないが空白のレーダーチャートを作っておく。
+        createBunyaMap();
+
+    }catch(e){
+
+    }
     return;
 });
+
 
 
 
@@ -1312,7 +1320,7 @@ $('#btnDaichoAdd').on('click', function() {
         createDaichoTables_Main(customerid);
         //createItemTables_DaichoSub();
         createItemGroupTables_DaichoSub();
-        createItemTables_DaichoSub("すべて");
+        //createItemTables_DaichoSub("すべて");
     $('#btnDaichoAdd').removeAttr("disabled");
     }).fail(function(data) {
           alert("エラー：" + data.statusText);
@@ -1718,73 +1726,6 @@ $("#chkMuko").change(function(){
 /*
 || 台帳追加サブ画面のテーブル作成
 */
-function createItemTables_DaichoSub(itemname1, updateAfter=false){
-  $('#tableAddDaicho').DataTable({
-      bInfo: false,
-      bSort: true,
-      destroy: true,
-      "processing": true,
-      ajax: {
-          url: "/getItem_Daicho/" + itemname1,
-          dataType: "json",
-          dataSrc: function ( json ) {
-              return JSON.parse(json.data);
-          },
-          contentType:"application/json; charset=utf-8"
-      },  
-      "initComplete": function(settings, json) {
-        if(updateAfter){
-            $('#btnNewItem').click();
-        }
-      },
-      columns: [
-          { data: 'id'     ,width: '8%'},
-          { data: 'code'   ,width: '12%'},
-          { data: 'name1'  ,width: '33%'},
-          { data: 'tanka'  ,width: '10%' ,className: 'dt-body-right' ,render: function (data, type, row) { return (data*1).toLocaleString();} },
-          { data: null     ,width: '37%' ,render: 
-              function (data, type, row) { 
-                  //row.id が $('#tableDaicho').DataTable().rows().data() に含まれるかどうか検査
-                  var rows = $('#tableDaicho').DataTable().rows().data();
-                  for(var i=0; i<rows.length; i++){
-                      if(rows[i].item_id == row.id){
-                          var ret = ""
-                          if(rows[i].getu != 0){ ret = ret + "月" + rows[i].getu + "　" ;}
-                          if(rows[i].ka   != 0){ ret = ret + "火" + rows[i].ka   + "　" ;}
-                          if(rows[i].sui  != 0){ ret = ret + "水" + rows[i].sui  + "　" ;}
-                          if(rows[i].moku != 0){ ret = ret + "木" + rows[i].moku + "　" ;}
-                          if(rows[i].kin  != 0){ ret = ret + "金" + rows[i].kin  + "　" ;}
-                          if(rows[i].dou  != 0){ ret = ret + "土" + rows[i].dou  + "　" ;}
-                          if(rows[i].niti != 0){ ret = ret + "日" + rows[i].niti + "　" ;}
-                          return ret;
-                      }
-                  }
-                  return "";
-              }
-          }
-      ],
-      language: {
-         url: "../static/main/js/japanese.json"
-      },
-      "scrollY":$(window).height() * 40 / 100,
-      order: [[ 4, "desc" ],[ 3, "asc" ]],
-      "pageLength": 1000,
-      paging: false,
-      "lengthMenu": [100, 300, 500, 1000],
-      dom:"<'row'<'col-sm-6'l><'col-sm-6'f>>"+
-          "<'row'<'col-sm-12'tr>>" +
-          "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-      "fnRowCallback": function( nRow, row, iDisplayIndex, iDisplayIndexFull ) {
-          var rows = $('#tableDaicho').DataTable().rows().data();
-          for(var i=0; i<rows.length; i++){
-              if(rows[i].item_id == row.id){
-                  //$('td:eq(2)', nRow).html( '<b>1</b>' );
-                  nRow.style.backgroundColor = "#ffefe0";
-              }
-          }
-      }
-  });
-}
 
 $('#btnItemToroku').on('click', function() {
     if($('#txtItemName1').val()==""){
@@ -1833,7 +1774,7 @@ $('#btnItemToroku').on('click', function() {
         $('#itemTorokuMessageArea').text("更新しました。");
         setTimeout('$("#itemTorokuMessageArea").text("");', 3000);
         createItemGroupTables_DaichoSub();
-        createItemTables_DaichoSub($('#txtItemName1').val(), true);
+        //createItemTables_DaichoSub($('#txtItemName1').val(), true);
         //$('#btnNewItem').click();
 
     }).fail(function(data) {
@@ -1853,7 +1794,7 @@ $('#btnEditItem').on('click', function() {
     funcEditItemClick(itemid, scrY);
 });
 
-function funcEditItemClick(itemid, scrollYposition=0){
+function funcEditItemClick(itemid, scrollYposition){
     itemeditflg = 1;
     $('#tableAddDaicho')[0].parentNode.style.maxHeight  = "130px";
     $('#tableAddDaicho')[0].parentNode.style.height  = "130px";
@@ -2022,7 +1963,7 @@ $('#modalAddDaicho').on("shown.bs.modal", function (e) {
 
     //createItemTables_DaichoSub();
     createItemGroupTables_DaichoSub();
-    createItemTables_DaichoSub("すべて");
+    //createItemTables_DaichoSub("すべて");
 });
 
 
@@ -2217,7 +2158,7 @@ $('#tableAddDaichoGroup tbody').on( 'click', 'tr', function () {
     $('#itemInputDiv').hide();
     var row =   $('#tableAddDaichoGroup').DataTable().row( this ).data(); // 選択データ
     //alert(row.name1);aaaaaaaa
-    createItemTables_DaichoSub(row.name1);
+    //createItemTables_DaichoSub(row.name1);
 });
 
 

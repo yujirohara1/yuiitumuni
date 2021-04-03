@@ -5,6 +5,7 @@
   <head>
     {%- block head %}
     <title>{% block title %}{{title|default}}{% endblock title %}</title>
+
     <script src="../static/jQuery-3.3.1/jquery-3.3.1.min.js"></script>
     <script src="../static/datatables.min.js"></script>
     <script src="../static/DataTables-1.10.23/js/jquery.dataTables.min.js"></script>
@@ -54,6 +55,35 @@
       {%- endblock scripts %}
     {%- endblock body %}
   </body>
+  
+  <script>
+    var userAgent = window.navigator.userAgent.toLowerCase();
+    if(userAgent.indexOf('msie') != -1 || userAgent.indexOf('trident') != -1) {
+      var d1 = document.createElement("div");
+      d1.className="sorry-image";
+      var d2 = document.createElement("div");
+      d2.className="sorry-message";
+      d2.innerHTML="申し訳ありません。<br>インターネットエクスプローラでは動作しません。<br>グーグルクロームかマイクロソフトエッジを使って再度アクセスしてください。";
+      //d.style.width=(document.body.clientWidth) + "px";
+      //d.style.height=(document.body.clientHeight) + "px";
+      //d.style.backgroundColor="#ccc";
+      //d.style.backgroundImage = "url('../static/image/sorry.png')";
+      //d.style.position="absolute";
+      //d.style.left=(document.body.clientWidth/2) + "px";
+      //d.style.top=(document.body.clientWidth/2) + "px";
+      //d.innerText = "aaaa";
+      while( document.body.firstChild ){
+        document.body.removeChild( document.body.firstChild );
+      }
+      //document.body.style.backgroundImage = "url('../static/image/xxxxx.png')";
+      //document.body.innerHTML="a";
+      document.body.appendChild(d1);
+      document.body.appendChild(d2);
+      alert("インターネットエクスプローラでは動作しません。グーグルクロームかマイクロソフトエッジを使って再度アクセスしてください。");
+      //return false;
+    }
+  </script>
+
 {%- endblock html %}
 </html>
 {% endblock doc -%}

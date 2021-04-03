@@ -82,6 +82,12 @@
         %div.row
           %div.col-md-12
             %table#tableBunyaMap
+        %div.row
+          &nbsp;
+        %div.row
+          %div.col-md-12
+            %span.komidashi
+              アクティビティログ
 
     %hr(style="margin:10px 0px 10px 0px;border-top:0.5px solid #d3d3d3;")
 
@@ -249,7 +255,7 @@
                   公共事業のシステム調達において、ロクハブの評価点だけがもっとも信頼できる情報であり続けること。<br>
                   <br>
                   良質な製品が浮き上がってきて、粗悪品は沈んでいく。情報の非対称性を解消し、市場では自然と価格調整メカニズムが起きる。<br>
-                  私たちは、このサービスが社会問題の１つを解決し、公益に資するものであることを、ここに誓います。
+                  私たちは、このサービスが社会問題の１つを解決し、いかなるときも公益に資するものであることを、ここに誓います。
 
 
           %div.modal-footer#modalAboutUsFooter
@@ -365,6 +371,33 @@
               %div.col-md-4
                 %a#btnNanajikuAnswer.btn.btn-primary.btn-sm(type="button")
                   登録する
+
+    <!-- 得意分野分析 -->
+    %div.modal.fade#modalTokuibunyaHyoka(tabindex="-1")
+      %div.modal-dialog.modal-md
+        %div.modal-content
+          %div.modal-header
+            %button.close(type="button" data-dismiss="modal")
+              %span
+                ×
+            %h4.modal-title#subFtitle
+              %div.row
+                %div.col-md-12
+                  %span#spanTokuibunyaHyokaTitle
+                    次の７項目について、10段階評価をしてください。
+          %div.modal-body
+            %div.row
+              %div.col-md-6
+              %div.col-md-2
+                %input.form-control#txtSubsystemhohu(type="text", maxlength="2" onchange="fncNumOnlyMax10();" onblur="$(event.srcElement).val(Comma(value));" style="text-align:center")
+
+          %div.modal-footer#modalTokuibunyaHyokaFooter
+            %div.row
+              %div.col-md-8.text-left
+              %div.col-md-4
+                %a#btnTokuibunyaAnswer.btn.btn-primary.btn-sm(type="button")
+                  登録する
+
 
 
 {% endblock %}
