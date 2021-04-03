@@ -99,7 +99,6 @@ def send(from_addr, to_addrs, my_pwd, msg):
     smtpobj.close()
 
 
-
 @app.route('/AccountToroku',methods=["GET", "POST"])
 def SendMail_AccountToroku():
   vals = request.json["data"]
