@@ -14,7 +14,6 @@
 //         alert("エラー：" + data.statusText);
 //     }).always(function(data) {
 //         //setTimeout('$("#btnSendMail").text("利用登録");$("#btnSendMail").removeAttr("disabled");', 2000);
-        
 //    });
 // });
 $(function(){

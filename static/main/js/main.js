@@ -25,13 +25,10 @@ $(document).ready(function() {
         createBunyaMap();
 
     }catch(e){
-        
+
     }
     return;
 });
-
-
-
 
 
 function NowNenTuki(){

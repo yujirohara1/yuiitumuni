@@ -2,7 +2,7 @@
     background-image:url(../../../static/image/sorry.png); 
     background-repeat: no-repeat;
     width: 100px;
-    height: 300px;
+    height: 300px; 
     float: left;
 }
 .sorry-message{
