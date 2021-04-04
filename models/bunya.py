@@ -15,16 +15,3 @@ class BunyaSchema(ma.SQLAlchemyAutoSchema):
             model = Bunya
             load_instance = True
 
-
-class VBunyaMapGroupbyVendor(db.Model): 
-    __tablename__ = "v_bunyamap_groupby_vendor"
-    vendor_nm = db.Column(db.String(), primary_key=True) 
-    bunya_cd = db.Column(db.Integer, primary_key=True) 
-    bunya_nm = db.Column(db.String(), primary_key=True) 
-    ryaku_nm = db.Column(db.String(), primary_key=True) 
-    kensu = db.Column(db.Integer, primary_key=True) 
-
-class VBunyaMapGroupbyVendorSchema(ma.SQLAlchemyAutoSchema):
-      class Meta:
-            model = VBunyaMapGroupbyVendor
-            load_instance = True

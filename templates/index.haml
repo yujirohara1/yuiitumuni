@@ -73,10 +73,13 @@
 
       %div.col-md-5(style="border-right:0.5px solid #d3d3d3;")
         %div.row
-          %div.col-md-12
+          %div.col-md-7
             %span.komidashi
               得意分野マップ&nbsp;
               &nbsp;（ランク：D  <  C  <  B  <  A  <  S ）&nbsp;
+          %div.col-md-5
+            %a.btn.btn-warning.btn-sm#btnTokuiBunyaQuestion(type="button" data-toggle="modal" data-target="#modalTokuiBunya")
+              あなたの評価も下さい
         %div.row
           &nbsp;
         %div.row
@@ -371,7 +374,7 @@
                   登録する
 
     <!-- 得意分野分析 -->
-    %div.modal.fade#modalTokuibunyaHyoka(tabindex="-1")
+    %div.modal.fade#modalTokuiBunya(tabindex="-1")
       %div.modal-dialog.modal-md
         %div.modal-content
           %div.modal-header
@@ -381,19 +384,20 @@
             %h4.modal-title#subFtitle
               %div.row
                 %div.col-md-12
-                  %span#spanTokuibunyaHyokaTitle
-                    次の７項目について、10段階評価をしてください。
+                  %span#spanTokuiBunyaTitle(style="font-size:15px")
+                    &nbsp;
           %div.modal-body
             %div.row
               %div.col-md-6
-              %div.col-md-2
-                %input.form-control#txtSubsystemhohu(type="text", maxlength="2" onchange="fncNumOnlyMax10();" onblur="$(event.srcElement).val(Comma(value));" style="text-align:center")
+                %table#tableBunyaInput1
+              %div.col-md-6
+                %table#tableBunyaInput2
 
-          %div.modal-footer#modalTokuibunyaHyokaFooter
+          %div.modal-footer#modalTokuiBunyaFooter
             %div.row
               %div.col-md-8.text-left
               %div.col-md-4
-                %a#btnTokuibunyaAnswer.btn.btn-primary.btn-sm(type="button")
+                %a#btnTokuiBunyaAnswer.btn.btn-primary.btn-sm(type="button")
                   登録する
 
 

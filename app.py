@@ -21,9 +21,10 @@ from models.customer import Customer, CustomerSchema, CustomerNentuki, CustomerN
 from models.mstsetting import MstSetting, MstSettingSchema
 from models.daicho import Daicho, DaichoSchema, VDaichoA, VDaichoASchema
 from models.seikyu import Seikyu, SeikyuSchema, VSeikyuA, VSeikyuASchema, VSeikyuB, VSeikyuBSchema, VSeikyuC, VSeikyuCSchema
-from models.toko import Toko, TokoSchema, VTokoGroupbyVendor, VTokoGroupbyVendorSchema, VTokoGroupbySystem, VTokoGroupbySystemSchema
-from models.tokoradar import TokoRadar, TokoRadarSchema, VTokoRadarGroupByVendor, VTokoRadarGroupByVendorSchema
-from models.bunya import Bunya, BunyaSchema, VBunyaMapGroupbyVendor, VBunyaMapGroupbyVendorSchema
+# from models.toko import Toko, TokoSchema, 
+# from models.tokoradar import TokoRadar, TokoRadarSchema, VTokoRadarGroupByVendor, VTokoRadarGroupByVendorSchema
+# from models.bunya import Bunya, BunyaSchema
+from models.kaito import Kaito, KaitoSchema, VTokoGroupbyVendor, VTokoGroupbyVendorSchema, VTokoGroupbySystem, VTokoGroupbySystemSchema, VTokoRadarGroupByVendor, VTokoRadarGroupByVendorSchema, VBunyaMapGroupbyVendor, VBunyaMapGroupbyVendorSchema
 from sqlalchemy.sql import text
 from sqlalchemy import distinct
 from sqlalchemy import desc
@@ -732,13 +733,14 @@ def resJson_getBunyaMap(vendornm):
 
 @app.route('/insertToko/<vendornm>/<systemnm>/<rank1>/<comment1>')
 def insertToko(vendornm, systemnm, rank1, comment1):
-  toko = Toko()
-  toko.vendor_nm = vendornm
-  toko.system_nm = systemnm
-  toko.rank1 = rank1
-  toko.comment1 = comment1
-  toko.ymdt = datetime.datetime.now()
-  db.session.add(toko)
+  kaito = Kaito()
+  kaito.vendor_nm = vendornm
+  kaito.system_nm = systemnm
+  kaito.situmon_kb = 1
+  kaito.hyoka_value = rank1
+  kaito.hyoka_comment = comment1
+  kaito.ymdt = datetime.datetime.now()
+  db.session.add(kaito)
   db.session.commit()
   return "1"
 
@@ -747,12 +749,31 @@ def insertNanajikuHyoka(vendornm, vals):
   vals = vals.split(",")
   for idx in range(0, 7): #0,1,2,3,4,5,6
     if vals[idx].isdecimal():
-      tokoradar = TokoRadar()
-      tokoradar.vendor_nm = vendornm
-      tokoradar.hyoka_shubetu = idx+1
-      tokoradar.hyoka_value = vals[idx]
-      tokoradar.ymdt = datetime.datetime.now()
-      db.session.add(tokoradar)
+      kaito = Kaito()
+      kaito.vendor_nm = vendornm
+      kaito.situmon_kb = 2
+      kaito.hyoka_shubetu = idx+1
+      kaito.hyoka_value = vals[idx]
+      kaito.ymdt = datetime.datetime.now()
+      db.session.add(kaito)
+  
+  db.session.commit()
+  return "1"
+
+@app.route('/insertTokuiBunya/<vendornm>/<vals>')
+def insertTokuiBunya(vendornm, vals):
+  for chk_val in vals.split("|"):
+    if len(chk_val.split(",")) == 2:
+      cd = chk_val.split(",")[0]
+      val = chk_val.split(",")[1]
+
+      kaito = Kaito()
+      kaito.vendor_nm = vendornm
+      kaito.situmon_kb = 3
+      kaito.hyoka_shubetu = cd
+      kaito.hyoka_value = val
+      kaito.ymdt = datetime.datetime.now()
+      db.session.add(kaito)
   
   db.session.commit()
   return "1"

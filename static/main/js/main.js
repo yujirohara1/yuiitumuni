@@ -5,6 +5,7 @@ $(document).ready(function() {
 
     try{
         $('#btnNanajikuQuestion').attr("disabled","disabled");
+        $('#btnTokuiBunyaQuestion').attr("disabled","disabled");
         
         $.getJSON("/getVendorNmList", function(json) {
             list = JSON.parse(json.data);
@@ -2901,6 +2902,11 @@ $('#btnNanajikuAnswer').on('click', function() {
   });
 });
 
+
+
+
+
+
 $('#modalNanajikuHyoka').on("shown.bs.modal", function (e) {
     $('#spanNanajikuHyokaTitle').text(selectRowData.vendor_nm + "について教えてください。");
     $('#txtChimeido').val("");
@@ -2920,6 +2926,12 @@ $('#modalNanajikuHyoka').on("shown.bs.modal", function (e) {
     return;
 });
 
+
+$('#modalTokuiBunya').on("shown.bs.modal", function (e) {
+    $('#spanTokuiBunyaTitle').text(selectRowData.vendor_nm + "の製品で、使ったことのあるシステム種類にレ点を入れてください。");
+    return;
+});
+
 var selectRowData;
 
 $("#tableToko tbody").on('click','tr', function(event) {
@@ -2935,6 +2947,7 @@ $("#tableToko tbody").on('click','tr', function(event) {
     //レーダーチャート回答用のボタンからdisabledを削除して使えるようにする
     $('#btnNanajikuQuestion').removeAttr("disabled");
     $('#selVendorNmHikaku').removeAttr("disabled");
+    $('#btnTokuiBunyaQuestion').removeAttr("disabled");
 
     CreateRadarChart();
     createBunyaMap();
@@ -3082,6 +3095,13 @@ $('#btnNanajikuQuestion').on('click', function() {
 });
 
 
+$('#btnTokuiBunyaQuestion').on('click', function() {
+    if($(this).attr("disabled")=="disabled"){
+        return false;
+    }
+});
+
+
 
 function createBunyaMap(){
     //$.each(SystemBunya, function(i, bunya) {
@@ -3095,13 +3115,13 @@ function createBunyaMap(){
         url: "/getBunyaMap/" + selectVendor + ""
     }).done(function(json) {
         list = JSON.parse(json.data);
-        var trid;
+        var trBunyaMapid;
+        var trBunyaInputid;
         $('#tableBunyaMap').empty();
+        $('#tableBunyaInput1').empty();
+        $('#tableBunyaInput2').empty();
         $.each(list, function(i, item) {
-            if((item.bunya_cd%9)==1){
-                $("#tableBunyaMap").append('<tr id="trBunya_' + item.bunya_cd + '">');
-                trid = "trBunya_" + item.bunya_cd;
-            }
+
             var customstyle="";
             var disprank = ""
             if(item.kensu == 0){
@@ -3112,19 +3132,37 @@ function createBunyaMap(){
                 customstyle = 'style= "background:linear-gradient(to right, #ffec80 0%, white 30%)"';
                 disprank = "D";
             } else if(item.kensu <= 7){
-                customstyle = 'style= "background:linear-gradient(to right, gold 0%, white 70%)"';
+                customstyle = 'style= "background:linear-gradient(to right, #ffec80 0%, white 70%)"';
                 disprank = "C";
             } else if(item.kensu <= 10){
-                customstyle = 'style= "background:linear-gradient(to right, gold 0%, #ffa280 70%, white 80%)"';
+                customstyle = 'style= "background:linear-gradient(to right, #ffec80 0%, #ffa280 70%, white 80%)"';
                 disprank = "B";
             } else if(item.kensu <= 15){
-                customstyle = 'style= "background:linear-gradient(to right, gold 0%, #ff8f66 100%)"';
+                customstyle = 'style= "background:linear-gradient(to right, #ffec80 0%, #ff8f66 100%)"';
                 disprank = "A";
             } else {
-                customstyle = 'style= "background:linear-gradient(to right, gold 0%, red 120%); font-weight:bold"';
+                customstyle = 'style= "background:linear-gradient(to right, #ffec80 0%, red 120%); font-weight:bold"';
                 disprank = "S";
             }
-            $("#tableBunyaMap #" + trid).append('<td class="tdBunyaNm" ' + customstyle + ' aria-label="' + item.bunya_nm + "　構築実績：" + item.kensu + "件" + '" data-balloon-pos="left"  >' + item.ryaku_nm + "　" + disprank);
+            
+            if((item.bunya_cd%9)==1){
+                trBunyaMapid = "trBunyaMap_" + item.bunya_cd;
+                $("#tableBunyaMap").append('<tr id="' + trBunyaMapid + '">');
+            }
+            $("#tableBunyaMap #" + trBunyaMapid).append('<td class="tdBunyaMapNm" ' + customstyle + ' aria-label="' + item.bunya_nm + "　構築実績：" + item.kensu + "件" + '" data-balloon-pos="left"  >' + item.ryaku_nm + "　" + disprank);
+
+            if(item.bunya_cd<=15){
+                trBunyaInputid = "trBunyaInput1_" + item.bunya_cd;
+                $("#tableBunyaInput1").append('<tr id="' + trBunyaInputid + '">');
+                $("#tableBunyaInput1 #" + trBunyaInputid).append('<td nowrap class="tdBunyaInputNm" ' + customstyle + ' aria-label="' + item.bunya_nm + "　構築実績：" + item.kensu + "件" + '" data-balloon-pos="left"  >' + paddingright(item.bunya_nm,'　',12)+ disprank);
+                $("#tableBunyaInput1 #" + trBunyaInputid).append('<td nowrap class="tdBunyaInputNm"><input type="checkbox" id="chkBunyaInputCd_' + item.bunya_cd + '">');
+            } else {
+                trBunyaInputid = "trBunyaInput2_" + item.bunya_cd;
+                $("#tableBunyaInput2").append('<tr id="' + trBunyaInputid + '">');
+                $("#tableBunyaInput2 #" + trBunyaInputid).append('<td nowrap class="tdBunyaInputNm" ' + customstyle + ' aria-label="' + item.bunya_nm + "　構築実績：" + item.kensu + "件" + '" data-balloon-pos="left"  >' + paddingright(item.bunya_nm,'　',12)+ disprank);
+                $("#tableBunyaInput2 #" + trBunyaInputid).append('<td nowrap class="tdBunyaInputNm"><input type="checkbox" id="chkBunyaInputCd_' + item.bunya_cd + '">');
+            }
+
             
             
             //$('#selVendorNm .dropdown-menu').append('<li><a onclick=$("#txtVendorNm").val("' + item.vendor_nm + '");>'+item.vendor_nm);
@@ -3139,3 +3177,41 @@ function createBunyaMap(){
     //$("#tableBunyaMap tr")[$("#tableBunyaMap tr").length-1]
     //var b = "aaa";
 }
+
+function paddingright(val,char,n){
+    for(; val.length < n; val+=char);
+    return val;
+}
+
+
+
+
+/*
+|| 
+*/
+$('#btnTokuiBunyaAnswer').on('click', function() {
+    var vals = "";
+    $.each($("#tableBunyaInput1").find("input"), function(i, chk){
+        if(chk.type=="checkbox"){
+            vals = vals + chk.id.split("_")[1] + "," + chk.checked + "|"
+        }
+    });
+    $.each($("#tableBunyaInput2").find("input"), function(i, chk){
+        if(chk.type=="checkbox"){
+            vals = vals + chk.id.split("_")[1] + "," + chk.checked + "|"
+        }
+    });
+    $.ajax({
+        type: "GET",
+        url: "/insertTokuiBunya/" + selectRowData.vendor_nm + "/" + vals
+    }).done(function(data) {
+        alert("ご協力ありがとうございました。");
+    }).fail(function(data) {
+        alert("エラー：" + data.statusText);
+    }).always(function(data) {
+        $('#modalTokuiBunya').modal("hide");
+        createBunyaMap();
+  });
+});
+
+
