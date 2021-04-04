@@ -2789,6 +2789,7 @@ function createTokoTables_Main(){
         },
         searching: false,
         "pageLength": 1000,
+        "scrollY":$(window).height() * 30 / 100,
         paging:false,
         "order": [ 1, "desc" ],
         "lengthMenu": [100, 300, 500, 1000],

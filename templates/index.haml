@@ -52,19 +52,19 @@
 
       %div.col-md-4(style="border-right:0.5px solid #d3d3d3;")
         %div.row
-          %div.col-md-12
+          %div.col-md-6
             %span.komidashi
               評価レーダー
+          %div.col-md-6
+            %a.btn.btn-warning.btn-sm#btnNanajikuQuestion(type="button" data-toggle="modal" data-target="#modalNanajikuHyoka")
+              あなたの評価も下さい
         %div.row
           %div.col-md-12
             %canvas#myChart
         %div.row
           &nbsp;
         %div.row
-          %div.col-md-6.text-center
-            %a.btn.btn-warning.btn-sm#btnNanajikuQuestion(type="button" data-toggle="modal" data-target="#modalNanajikuHyoka")
-              あなたの評価も下さい
-          %div.col-md-6.text-center
+          %div.col-md-12.text-center
             %div.dropdown#selVendorNmHikaku
               %a.btn.btn-default(href="#" data-toggle="dropdown" role="button" aria-expanded="false")
                 他社と比較する
@@ -400,6 +400,41 @@
                 %a#btnTokuiBunyaAnswer.btn.btn-primary.btn-sm(type="button")
                   登録する
 
+
+    <!-- 削除依頼 -->
+    %div.modal.fade#modalSakujoIrai(tabindex="-1")
+      %div.modal-dialog.modal-md
+        %div.modal-content
+          %div.modal-header(style="background-color:black; color:white;")
+            %button.close(type="button" data-dismiss="modal")
+              %span#(style="color:white")
+                ×
+            %h4.modal-title#subGtitle(style="font-weight:bold")
+              御社にとって不利益となる情報がありましたか？
+          %div.modal-body(style="background-image:url('../static/image/logo_sakujoirai.png'); background-repeat:no-repeat")
+            %div.row
+              %div.col-md-12
+                %span(style="font-size:15px;font-weight:bold; color:#000000cc")
+                  運営管理が行き届いておらず、大変申し訳ありませんでした。<br>
+                  削除したい内容を、次のメールアドレスへ送信くださるようお願いいたします。<br>
+                  <br>
+                  <br>
+                  ロクハブ運営事務局<br>
+                  lochub.kanri@gmail.com<br>
+                  <br>
+                  <br>
+                  メールには、削除したい内容がわかるようスクリーンショット等を添えてください。<br>
+                  今後も情報品質の向上に努めてまいります。よろしくお願いいたします。<br>
+                  <br>
+
+          %div.modal-footer#modalSakujoIraiFooter
+            %div.row
+              %div.col-md-2
+              %div.col-md-2
+              %div.col-md-6
+              %div.col-md-2
+                %button.btn.btn-default(type="button" data-dismiss="modal")
+                  閉じる
 
 
 {% endblock %}
