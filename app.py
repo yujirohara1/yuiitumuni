@@ -731,16 +731,27 @@ def resJson_getBunyaMap(vendornm):
 
 
 
-@app.route('/insertToko/<vendornm>/<systemnm>/<rank1>/<comment1>')
-def insertToko(vendornm, systemnm, rank1, comment1):
+@app.route('/insertToko/<vendornm>/<systemnm>/<rank1>/<comment1>/<kibo>')
+def insertToko(vendornm, systemnm, rank1, comment1, kibo):
   kaito = Kaito()
   kaito.vendor_nm = vendornm
   kaito.system_nm = systemnm
   kaito.situmon_kb = 1
+  kaito.hyoka_shubetu = 1
   kaito.hyoka_value = rank1
   kaito.hyoka_comment = comment1
   kaito.ymdt = datetime.datetime.now()
   db.session.add(kaito)
+  
+  kaito = Kaito()
+  kaito.vendor_nm = vendornm
+  kaito.system_nm = systemnm
+  kaito.situmon_kb = 1
+  kaito.hyoka_shubetu = 2
+  kaito.hyoka_value = kibo
+  kaito.ymdt = datetime.datetime.now()
+  db.session.add(kaito)
+  
   db.session.commit()
   return "1"
 

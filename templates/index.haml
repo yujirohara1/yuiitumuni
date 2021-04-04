@@ -90,7 +90,14 @@
         %div.row
           %div.col-md-12
             %span.komidashi
-              アクティビティログ
+              団体種類別 構築回数
+        %div.row
+          &nbsp;
+        %div.row
+          %div.col-md-11
+            %canvas#barChartKibo(width="100px" height="20px")
+          %div.col-md-11
+            &nbsp;
 
     %hr(style="margin:10px 0px 10px 0px;border-top:0.5px solid #d3d3d3;")
 
@@ -152,8 +159,6 @@
                   &nbsp;
                 %div.row
                   &nbsp;
-                %div.row
-                  &nbsp;
 
                 %div.row
                   %div.col-md-12
@@ -168,8 +173,6 @@
                           %span.caret
                         %ul.dropdown-menu(role="menu")
 
-                %div.row
-                  &nbsp;
                 %div.row
                   &nbsp;
                 %div.row
@@ -207,8 +210,6 @@
                   &nbsp;
                 %div.row
                   &nbsp;
-                %div.row
-                  &nbsp;
 
                 %div.row
                   %div.col-md-12
@@ -216,6 +217,38 @@
                       %span.input-group-addon.custom_msize
                         具体的に<br>教えてください
                       %textarea#txtareaComment1.form-control.custom_msize (type="text" class="form-control" placeholder="・使いやすいシステムだと思う&#13;・保守サポートが悪い")
+              
+                %div.row
+                  &nbsp;
+                %div.row
+                  &nbsp;
+
+                %div.row
+                  %div.col-md-12
+                    %div.input-group
+                      %span.input-group-addon.custom_msize
+                        あなたの職場は？
+                      %select.form-control.custom_msize#selJititaiKibo
+                        %option(value=1)
+                          一部事務組合
+                        %option(value=2)
+                          村役場
+                        %option(value=3)
+                          町役場
+                        <option disabled style="color:#c0c0c0">--------------------------------------</option>
+                        %option(value=4 selected)
+                          市役所（職員数：500人以下）
+                        %option(value=5)
+                          市役所（職員数：1000人以下）
+                        %option(value=6)
+                          市役所（中核市）
+                        %option(value=7)
+                          市役所（政令指定都市・特別区）
+                        <option disabled style="color:#c0c0c0">--------------------------------------</option>
+                        %option(value=8)
+                          都道府県庁
+                        %option(value=9)
+                          その他の官公庁
               %div.col-md-2
 
           %div.modal-footer#modalQuestionFooter

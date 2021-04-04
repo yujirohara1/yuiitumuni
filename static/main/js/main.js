@@ -24,6 +24,7 @@ $(document).ready(function() {
         createTokoTables_Main();
         CreateRadarChart() //行選択していないが空白のレーダーチャートを作っておく。
         createBunyaMap();
+        createBarChartKibo();
 
     }catch(e){
 
@@ -2702,6 +2703,8 @@ function IsNyuryokuOk(selectorkey){
 || 
 */
 $('#btnAnswer').on('click', function() {
+
+    //alert($('#selJititaiKibo').val());
   
     if(IsNyuryokuOk("txtVendorNm")==false){
         return false;
@@ -2723,7 +2726,7 @@ $('#btnAnswer').on('click', function() {
 
     $.ajax({
         type: "GET",
-        url: "/insertToko/" + $('#txtVendorNm').val() + "/" + $('#txtSystemNm').val() + "/" + rdrank + "/" + comment
+        url: "/insertToko/" + $('#txtVendorNm').val() + "/" + $('#txtSystemNm').val() + "/" + rdrank + "/" + comment + "/" + $('#selJititaiKibo').val()
     }).done(function(data) {
         alert("ご協力ありがとうございました。");
     }).fail(function(data) {
@@ -2748,7 +2751,7 @@ $('#modalQuestion').on("shown.bs.modal", function (e) {
     var commentAreaWdith = toNumber($('#txtVendorNm')[0].clientWidth);
     if(commentAreaWdith!=0){
         $("#txtareaComment1").css("width",commentAreaWdith + "px");
-        $("#txtareaComment1").css("height","100px");
+        $("#txtareaComment1").css("height","70px");
     }
 });
 
@@ -2952,6 +2955,7 @@ $("#tableToko tbody").on('click','tr', function(event) {
 
     CreateRadarChart();
     createBunyaMap();
+    createBarChartKibo();
 });
 //
 //ableToko tbody').on( 'click', 'tr', function () {
@@ -2960,14 +2964,15 @@ $("#tableToko tbody").on('click','tr', function(event) {
 //
 //
 
+Chart.defaults.global.defaultFontColor = '#4d4d4d';
+Chart.defaults.global.defaultFontStyle = 'Bold';
+Chart.defaults.global.defaultFontStyle = '600';
+Chart.defaults.global.elements.rectangle.borderWidth = 2;
+Chart.defaults.global.elements.point.radius=2;
+
 function CreateRadarChart(){
     var dummy = "左の表から企業名を選択してください。"
     var selectVendor = (selectRowData == undefined ? dummy : selectRowData.vendor_nm);
-    Chart.defaults.global.defaultFontColor = '#333';
-    Chart.defaults.global.defaultFontStyle = 'Bold';
-    Chart.defaults.global.defaultFontStyle = '600';
-    Chart.defaults.global.elements.rectangle.borderWidth = 2;
-    Chart.defaults.global.elements.point.radius=2;
     //var ctx = document.getElementById('myChart').getContext('2d');
     var chartData = {
         type: 'radar',
@@ -3103,6 +3108,114 @@ $('#btnTokuiBunyaQuestion').on('click', function() {
 });
 
 
+function createBarChartKibo(){
+    var ctx = $("#barChartKibo").get(0).getContext("2d");
+    //if(idx==0){
+    //    nanajikuRadarChart = new Chart(ctx, chartData);
+    //}else{
+    //    nanajikuRadarChart.update();
+    //}
+    var myBar = new Chart(ctx, {
+        type: 'bar',                           //◆棒グラフ
+        data: {                                //◆データ
+            labels: ['組合','村','町','市①','市②','中核','政令','県', '他'],     //ラベル名
+            datasets: [{                       //データ設定
+                data: [5,20,11,2,30,5,20,11,2,30,5,20,11,2,30],          //データ内容
+                backgroundColor:[
+                    "rgba(75, 192, 192, 0.2)",
+                    "rgba(153, 102, 255, 0.2)",
+                    "rgba(75, 192, 192, 0.2)",
+                    "rgba(153, 102, 255, 0.2)",
+                    "rgba(75, 192, 192, 0.2)",
+                    "rgba(153, 102, 255, 0.2)",
+                    "rgba(75, 192, 192, 0.2)",
+                    "rgba(153, 102, 255, 0.2)",
+                    "rgba(75, 192, 192, 0.2)",
+                ],
+                borderWidth:[0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+                borderColor: [
+                    "rgb(75, 192, 192)",
+                    "rgb(153, 102, 255)",
+                    "rgb(75, 192, 192)",
+                    "rgb(153, 102, 255)",
+                    "rgb(75, 192, 192)",
+                    "rgb(153, 102, 255)",
+                    "rgb(75, 192, 192)",
+                    "rgb(153, 102, 255)",
+                    "rgb(75, 192, 192)",
+                ]
+            }]
+        },
+        options: {                             //◆オプション
+            responsive: true,                  //グラフ自動設定
+            legend: {                          //凡例設定
+                display: false                 //表示設定
+           },
+            title: {                           //タイトル設定
+                display: false,                 //表示設定
+                fontSize: 12,                  //フォントサイズ
+                text: 'タイトル'                //ラベル
+            },
+            scales: {                          //軸設定
+                yAxes: [{                      //y軸設定
+                    display: true,             //表示設定
+                    scaleLabel: {              //軸ラベル設定
+                       display: false,          //表示設定
+                       labelString: '構築回数',  //ラベル
+                       fontSize: 13               //フォントサイズ
+                    },
+                    ticks: {                      //最大値最小値設定
+                        min: 0,                   //最小値
+                        max: 20,                  //最大値
+                        fontSize: 11,             //フォントサイズ
+                        fontStyle: "bold",
+                        stepSize: 5               //軸間隔
+                    },
+                }],
+                xAxes: [{                         //x軸設定
+                    display: true,                //表示設定
+                    barPercentage: 0.8,           //棒グラフ幅
+                    categoryPercentage: 0.5,      //棒グラフ幅
+                    scaleLabel: {                 //軸ラベル設定
+                       display: false,             //表示設定
+                       labelString: '横軸ラベル',  //ラベル
+                       fontSize: 18               //フォントサイズ
+                    },
+                    ticks: {
+                        fontSize: 12,             //フォントサイズ
+                        fontStyle: "bold"
+                    },
+                }],
+            },
+            layout: {                             //レイアウト
+                padding: {                          //余白設定
+                    left: 10,
+                    right: 10,
+                    top: 0,
+                    bottom: 0
+                }
+            },
+            tooltips: {
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        var label = data.datasets[tooltipItem.datasetIndex].label || '';
+                        $.each($("#selJititaiKibo").find("option"), function(i, item){
+                            if((tooltipItem.index+1) == item.value){
+                                label = item.innerText;
+                            }
+                        });
+
+                        if (label) {
+                            label += ': ';
+                        }
+                        label += Math.round(tooltipItem.yLabel * 100) / 100;
+                        return label;
+                    }
+                }
+            }
+        }
+    });
+}
 
 function createBunyaMap(){
     //$.each(SystemBunya, function(i, bunya) {

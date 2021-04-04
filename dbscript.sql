@@ -62,7 +62,8 @@ select
 from
     kaito
 where
-    situmon_kb = 1
+    situmon_kb = 1 and
+    hyoka_shubetu = 1
 group by
     vendor_nm
 ;
@@ -85,7 +86,8 @@ select
 from
     kaito
 where
-    situmon_kb = 1
+    situmon_kb = 1 and
+    hyoka_shubetu = 1
 group by
     system_nm
 ;
