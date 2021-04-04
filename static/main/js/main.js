@@ -3222,7 +3222,7 @@ function createBunyaMap(){
     //    $("#tableBunyaMap").append("<tr><td>" + bunya);
     //});
 
-    var dummy = "左の表から企業名を選択してください。"
+    var dummy = "dummy"
     var selectVendor = (selectRowData == undefined ? dummy : selectRowData.vendor_nm);
     $.ajax({
         type: "GET",

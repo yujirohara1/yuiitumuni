@@ -249,6 +249,9 @@ left outer join
                        where
                            a.vendor_nm = b.vendor_nm
                        )
+        union all
+        select
+            'dummy'
         ) a
     left outer join (select  1  hyoka_shubetu union all
                      select  2  hyoka_shubetu union all
