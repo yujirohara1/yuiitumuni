@@ -52,24 +52,21 @@
 
       %div.col-md-4(style="border-right:0.5px solid #d3d3d3;")
         %div.row
-          %div.col-md-6
+          %div.col-md-4
             %span.komidashi
               評価レーダー
-          %div.col-md-6
-            %a.btn.btn-warning.btn-sm#btnNanajikuQuestion(type="button" data-toggle="modal" data-target="#modalNanajikuHyoka")
-              あなたの評価も下さい
-        %div.row
-          %div.col-md-12
-            %canvas#myChart
-        %div.row
-          &nbsp;
-        %div.row
-          %div.col-md-12.text-center
+          %div.col-md-4
             %div.dropdown#selVendorNmHikaku
               %a.btn.btn-default(href="#" data-toggle="dropdown" role="button" aria-expanded="false")
                 他社と比較する
                 %span.caret
               %ul.dropdown-menu(role="menu")
+          %div.col-md-4
+            %a.btn.btn-warning.btn-sm#btnNanajikuQuestion(type="button" data-toggle="modal" data-target="#modalNanajikuHyoka")
+              あなたの評価も下さい
+        %div.row
+          %div.col-md-12
+            %canvas#myChart(width="100px" height="60px")
 
       %div.col-md-5(style="border-right:0.5px solid #d3d3d3;")
         %div.row
