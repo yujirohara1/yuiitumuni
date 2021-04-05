@@ -66,6 +66,8 @@ $(document).ready(function() {
         $('#tblAreaMap #tblAreaMapTd_6_12').addClass("tohoku");
         $('#tblAreaMap #tblAreaMapTd_6_12').attr("colspan","2");
         $('#tblAreaMap #tblAreaMapTd_6_13').remove();
+
+        //
         
         $('#tblAreaMap #tblAreaMapTd_7_9').append('<a href="#">福');
         $('#tblAreaMap #tblAreaMapTd_7_9').addClass("chubu");
@@ -170,6 +172,10 @@ $(document).ready(function() {
         //1 <td class="hokkaido" colspan="2" rowspan="2"><a href="#">北</a></td>
         //3 <td class="tohoku" colspan="2"><a href="#">青</a></td>
 
+        $('#tblAreaMap #tblAreaMapTd_11_1').css("opacity","0.7"); //沖縄
+        $('#tblAreaMap #tblAreaMapTd_1_12').css("opacity","0.7"); //北海道
+        $('#tblAreaMap #tblAreaMapTd_6_11').css("opacity","0.7"); //新潟
+        $('#tblAreaMap #tblAreaMapTd_7_11').css("opacity","0.7"); //長野
     }catch(e){
 
     }
