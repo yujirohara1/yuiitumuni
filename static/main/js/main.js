@@ -26,6 +26,150 @@ $(document).ready(function() {
         createBunyaMap();
         createBarChartKibo();
 
+        for(var i = 1; i <= 12; i++){
+            var trid = "tblAreaMapTr_" + i;
+            $('#tblAreaMap tbody').append('<tr id="' + trid + '">');
+            for(var j = 1; j <= 13; j++){
+                var tdid = "tblAreaMapTd_" + i + "_" + j;
+                $('#tblAreaMap #' + trid).append('<td id="' + tdid + '">');
+            }
+        }
+        $('#tblAreaMap #tblAreaMapTd_1_12').append('<a href="#">北');
+        $('#tblAreaMap #tblAreaMapTd_1_12').addClass("hokkaido");
+        $('#tblAreaMap #tblAreaMapTd_1_12').attr("colspan","2");
+        $('#tblAreaMap #tblAreaMapTd_1_12').attr("rowspan","2");
+        $('#tblAreaMap #tblAreaMapTd_1_13').remove();
+        $('#tblAreaMap #tblAreaMapTd_2_12').remove();
+        $('#tblAreaMap #tblAreaMapTd_2_13').remove();
+        
+        $('#tblAreaMap #tblAreaMapTd_3_12').append('<a href="#">青');
+        $('#tblAreaMap #tblAreaMapTd_3_12').addClass("tohoku");
+        $('#tblAreaMap #tblAreaMapTd_3_12').attr("colspan","2");
+        $('#tblAreaMap #tblAreaMapTd_3_13').remove();
+        
+        $('#tblAreaMap #tblAreaMapTd_4_12').append('<a href="#">秋');
+        $('#tblAreaMap #tblAreaMapTd_4_12').addClass("tohoku");
+        $('#tblAreaMap #tblAreaMapTd_4_13').append('<a href="#">岩');
+        $('#tblAreaMap #tblAreaMapTd_4_13').addClass("tohoku");
+        $('#tblAreaMap #tblAreaMapTd_5_12').append('<a href="#">山');
+        $('#tblAreaMap #tblAreaMapTd_5_12').addClass("tohoku");
+        $('#tblAreaMap #tblAreaMapTd_5_13').append('<a href="#">宮');
+        $('#tblAreaMap #tblAreaMapTd_5_13').addClass("tohoku");
+        
+        $('#tblAreaMap #tblAreaMapTd_6_9').append('<a href="#">石');
+        $('#tblAreaMap #tblAreaMapTd_6_9').addClass("chubu");
+        $('#tblAreaMap #tblAreaMapTd_6_10').append('<a href="#">富');
+        $('#tblAreaMap #tblAreaMapTd_6_10').addClass("chubu");
+        $('#tblAreaMap #tblAreaMapTd_6_11').append('<a href="#">新');
+        $('#tblAreaMap #tblAreaMapTd_6_11').addClass("chubu");
+        $('#tblAreaMap #tblAreaMapTd_6_12').append('<a href="#">福');
+        $('#tblAreaMap #tblAreaMapTd_6_12').addClass("tohoku");
+        $('#tblAreaMap #tblAreaMapTd_6_12').attr("colspan","2");
+        $('#tblAreaMap #tblAreaMapTd_6_13').remove();
+        
+        $('#tblAreaMap #tblAreaMapTd_7_9').append('<a href="#">福');
+        $('#tblAreaMap #tblAreaMapTd_7_9').addClass("chubu");
+        $('#tblAreaMap #tblAreaMapTd_7_10').append('<a href="#">岐');
+        $('#tblAreaMap #tblAreaMapTd_7_10').addClass("chubu");
+        $('#tblAreaMap #tblAreaMapTd_7_10').attr("rowspan","2");
+        $('#tblAreaMap #tblAreaMapTd_8_10').remove();
+        $('#tblAreaMap #tblAreaMapTd_7_11').append('<a href="#">長');
+        $('#tblAreaMap #tblAreaMapTd_7_11').addClass("chubu");
+        $('#tblAreaMap #tblAreaMapTd_7_11').attr("rowspan","2");
+        $('#tblAreaMap #tblAreaMapTd_8_11').remove();
+        $('#tblAreaMap #tblAreaMapTd_7_12').append('<a href="#">群');
+        $('#tblAreaMap #tblAreaMapTd_7_12').addClass("kanto");
+        $('#tblAreaMap #tblAreaMapTd_7_13').append('<a href="#">栃');
+        $('#tblAreaMap #tblAreaMapTd_7_13').addClass("kanto");
+
+        
+        $('#tblAreaMap #tblAreaMapTd_8_1').append('<a href="#">佐');
+        $('#tblAreaMap #tblAreaMapTd_8_1').addClass("kyushu");
+        $('#tblAreaMap #tblAreaMapTd_8_2').append('<a href="#">福');
+        $('#tblAreaMap #tblAreaMapTd_8_2').addClass("kyushu");
+        $('#tblAreaMap #tblAreaMapTd_8_3').append('<a href="#">大');
+        $('#tblAreaMap #tblAreaMapTd_8_3').addClass("kyushu");
+        $('#tblAreaMap #tblAreaMapTd_8_4').append('<a href="#">山');
+        $('#tblAreaMap #tblAreaMapTd_8_4').addClass("chugoku");
+        $('#tblAreaMap #tblAreaMapTd_8_4').attr("rowspan","2");
+        $('#tblAreaMap #tblAreaMapTd_9_4').remove();
+        $('#tblAreaMap #tblAreaMapTd_8_5').append('<a href="#">島');
+        $('#tblAreaMap #tblAreaMapTd_8_5').addClass("chugoku");
+        $('#tblAreaMap #tblAreaMapTd_8_6').append('<a href="#">鳥');
+        $('#tblAreaMap #tblAreaMapTd_8_6').addClass("chugoku");
+        $('#tblAreaMap #tblAreaMapTd_8_7').append('<a href="#">兵');
+        $('#tblAreaMap #tblAreaMapTd_8_7').addClass("kinki");
+        $('#tblAreaMap #tblAreaMapTd_8_8').append('<a href="#">京');
+        $('#tblAreaMap #tblAreaMapTd_8_8').addClass("kinki");
+        $('#tblAreaMap #tblAreaMapTd_8_9').append('<a href="#">滋');
+        $('#tblAreaMap #tblAreaMapTd_8_9').addClass("kinki");
+        
+        $('#tblAreaMap #tblAreaMapTd_8_12').append('<a href="#">埼');
+        $('#tblAreaMap #tblAreaMapTd_8_12').addClass("kanto");
+        $('#tblAreaMap #tblAreaMapTd_8_13').append('<a href="#">茨');
+        $('#tblAreaMap #tblAreaMapTd_8_13').addClass("kanto");
+
+        
+        $('#tblAreaMap #tblAreaMapTd_9_1').append('<a href="#">長');
+        $('#tblAreaMap #tblAreaMapTd_9_1').addClass("kyushu");
+        $('#tblAreaMap #tblAreaMapTd_9_2').append('<a href="#">熊');
+        $('#tblAreaMap #tblAreaMapTd_9_2').addClass("kyushu");
+        $('#tblAreaMap #tblAreaMapTd_9_2').attr("rowspan","2");
+        $('#tblAreaMap #tblAreaMapTd_10_2').remove();
+        $('#tblAreaMap #tblAreaMapTd_9_3').append('<a href="#">宮');
+        $('#tblAreaMap #tblAreaMapTd_9_3').addClass("kyushu");
+        $('#tblAreaMap #tblAreaMapTd_9_3').attr("rowspan","2");
+        $('#tblAreaMap #tblAreaMapTd_10_3').remove();
+        $('#tblAreaMap #tblAreaMapTd_9_5').append('<a href="#">広');
+        $('#tblAreaMap #tblAreaMapTd_9_5').addClass("chugoku");
+        $('#tblAreaMap #tblAreaMapTd_9_6').append('<a href="#">岡');
+        $('#tblAreaMap #tblAreaMapTd_9_6').addClass("chugoku");
+        $('#tblAreaMap #tblAreaMapTd_9_7').append('<a href="#">大');
+        $('#tblAreaMap #tblAreaMapTd_9_7').addClass("kinki");
+        $('#tblAreaMap #tblAreaMapTd_9_8').append('<a href="#">奈');
+        $('#tblAreaMap #tblAreaMapTd_9_8').addClass("kinki");
+        $('#tblAreaMap #tblAreaMapTd_9_9').append('<a href="#">三');
+        $('#tblAreaMap #tblAreaMapTd_9_9').addClass("kinki");
+        
+        $('#tblAreaMap #tblAreaMapTd_9_10').append('<a href="#">愛');
+        $('#tblAreaMap #tblAreaMapTd_9_10').addClass("chubu");
+        $('#tblAreaMap #tblAreaMapTd_9_11').append('<a href="#">山');
+        $('#tblAreaMap #tblAreaMapTd_9_11').addClass("chubu");
+        
+        $('#tblAreaMap #tblAreaMapTd_9_12').append('<a href="#">東');
+        $('#tblAreaMap #tblAreaMapTd_9_12').addClass("kanto");
+        $('#tblAreaMap #tblAreaMapTd_9_13').append('<a href="#">千');
+        $('#tblAreaMap #tblAreaMapTd_9_13').addClass("kanto");
+        $('#tblAreaMap #tblAreaMapTd_9_13').attr("rowspan","2");
+        $('#tblAreaMap #tblAreaMapTd_10_13').remove();
+
+        $('#tblAreaMap #tblAreaMapTd_10_4').append('<a href="#">愛');
+        $('#tblAreaMap #tblAreaMapTd_10_4').addClass("shikoku");
+        $('#tblAreaMap #tblAreaMapTd_10_5').append('<a href="#">香');
+        $('#tblAreaMap #tblAreaMapTd_10_5').addClass("shikoku");
+        $('#tblAreaMap #tblAreaMapTd_10_7').append('<a href="#">和');
+        $('#tblAreaMap #tblAreaMapTd_10_7').addClass("kinki");
+        $('#tblAreaMap #tblAreaMapTd_10_7').attr("colspan","2");
+        $('#tblAreaMap #tblAreaMapTd_10_8').remove();
+        $('#tblAreaMap #tblAreaMapTd_10_11').append('<a href="#">静');
+        $('#tblAreaMap #tblAreaMapTd_10_11').addClass("chubu");
+        
+        $('#tblAreaMap #tblAreaMapTd_10_12').append('<a href="#">神');
+        $('#tblAreaMap #tblAreaMapTd_10_12').addClass("kanto");
+        
+        $('#tblAreaMap #tblAreaMapTd_11_1').append('<a href="#">沖');
+        $('#tblAreaMap #tblAreaMapTd_11_1').addClass("okinawa");
+        $('#tblAreaMap #tblAreaMapTd_11_2').append('<a href="#">鹿');
+        $('#tblAreaMap #tblAreaMapTd_11_2').addClass("kyushu");
+        $('#tblAreaMap #tblAreaMapTd_11_2').attr("colspan","2");
+        $('#tblAreaMap #tblAreaMapTd_11_3').remove();
+        $('#tblAreaMap #tblAreaMapTd_11_4').append('<a href="#">高');
+        $('#tblAreaMap #tblAreaMapTd_11_4').addClass("shikoku");
+        $('#tblAreaMap #tblAreaMapTd_11_5').append('<a href="#">徳');
+        $('#tblAreaMap #tblAreaMapTd_11_5').addClass("shikoku");
+        //1 <td class="hokkaido" colspan="2" rowspan="2"><a href="#">北</a></td>
+        //3 <td class="tohoku" colspan="2"><a href="#">青</a></td>
+
     }catch(e){
 
     }
