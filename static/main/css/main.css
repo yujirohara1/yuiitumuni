@@ -304,3 +304,17 @@ input[type="range"] {
     opacity: 0.20;
     border: #E91E63 1px solid;
 }
+
+
+.tdfk_flash{
+    animation: flash 3s linear infinite;
+  }
+  @keyframes flash {
+    0%,100% {
+      opacity: 1;
+    }
+  
+    50% {
+      opacity: 0;
+    }
+  }

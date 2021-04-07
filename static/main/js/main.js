@@ -172,10 +172,11 @@ $(document).ready(function() {
         //1 <td class="hokkaido" colspan="2" rowspan="2"><a href="#">北</a></td>
         //3 <td class="tohoku" colspan="2"><a href="#">青</a></td>
 
-        $('#tblAreaMap #tblAreaMapTd_11_1').css("opacity","0.7"); //沖縄
-        $('#tblAreaMap #tblAreaMapTd_1_12').css("opacity","0.7"); //北海道
-        $('#tblAreaMap #tblAreaMapTd_6_11').css("opacity","0.7"); //新潟
-        $('#tblAreaMap #tblAreaMapTd_7_11').css("opacity","0.7"); //長野
+        $('#tblAreaMap #tblAreaMapTd_11_1').addClass("tdfk_flash");
+        $('#tblAreaMap #tblAreaMapTd_1_12').addClass("tdfk_flash");
+        $('#tblAreaMap #tblAreaMapTd_6_11').addClass("tdfk_flash");
+        $('#tblAreaMap #tblAreaMapTd_7_11').addClass("tdfk_flash");
+
     }catch(e){
 
     }
