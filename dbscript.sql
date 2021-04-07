@@ -294,3 +294,34 @@ on
 select * from v_bunyamap_groupby_vendor;
 
 
+
+
+
+drop view v_todohuken_groupby_vendor cascade;
+CREATE VIEW v_todohuken_groupby_vendor AS
+select 
+    vendor_nm, 
+    hyoka_value, 
+    count(1) kensu 
+from 
+    kaito 
+where 
+    situmon_kb = 1 and 
+    hyoka_shubetu = 3 
+group by 
+    vendor_nm, 
+    hyoka_value
+;
+
+
+select * from v_todohuken_groupby_vendor;
+
+
+
+
+
+
+
+
+
+

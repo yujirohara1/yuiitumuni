@@ -24,7 +24,7 @@ from models.seikyu import Seikyu, SeikyuSchema, VSeikyuA, VSeikyuASchema, VSeiky
 # from models.toko import Toko, TokoSchema, 
 # from models.tokoradar import TokoRadar, TokoRadarSchema, VTokoRadarGroupByVendor, VTokoRadarGroupByVendorSchema
 # from models.bunya import Bunya, BunyaSchema
-from models.kaito import Kaito, KaitoSchema, VTokoGroupbyVendor, VTokoGroupbyVendorSchema, VTokoGroupbySystem, VTokoGroupbySystemSchema, VTokoRadarGroupByVendor, VTokoRadarGroupByVendorSchema, VBunyaMapGroupbyVendor, VBunyaMapGroupbyVendorSchema
+from models.kaito import Kaito, KaitoSchema, VTokoGroupbyVendor, VTokoGroupbyVendorSchema, VTokoGroupbySystem, VTokoGroupbySystemSchema, VTokoRadarGroupByVendor, VTokoRadarGroupByVendorSchema, VBunyaMapGroupbyVendor, VBunyaMapGroupbyVendorSchema, VTodohukenGroupbyVendor, VTodohukenGroupbyVendorSchema
 from sqlalchemy.sql import text
 from sqlalchemy import distinct
 from sqlalchemy import desc
@@ -730,9 +730,16 @@ def resJson_getBunyaMap(vendornm):
     return jsonify({'data': bunyamap_schema.dumps(bunyamap, ensure_ascii=False)})
 
 
+@app.route('/getTodohuken/<vendornm>')
+def resJson_getTodohuken(vendornm):
+    Todohuken = VTodohukenGroupbyVendor.query.filter(VTodohukenGroupbyVendor.vendor_nm==vendornm).all()
+    Todohuken_schema = VTodohukenGroupbyVendorSchema(many=True)
+    return jsonify({'data': Todohuken_schema.dumps(Todohuken, ensure_ascii=False)})
 
-@app.route('/insertToko/<vendornm>/<systemnm>/<rank1>/<comment1>/<kibo>')
-def insertToko(vendornm, systemnm, rank1, comment1, kibo):
+
+
+@app.route('/insertToko/<vendornm>/<systemnm>/<rank1>/<comment1>/<kibo>/<todohuken>')
+def insertToko(vendornm, systemnm, rank1, comment1, kibo, todohuken):
   kaito = Kaito()
   kaito.vendor_nm = vendornm
   kaito.system_nm = systemnm
@@ -749,6 +756,15 @@ def insertToko(vendornm, systemnm, rank1, comment1, kibo):
   kaito.situmon_kb = 1
   kaito.hyoka_shubetu = 2
   kaito.hyoka_value = kibo
+  kaito.ymdt = datetime.datetime.now()
+  db.session.add(kaito)
+  
+  kaito = Kaito()
+  kaito.vendor_nm = vendornm
+  kaito.system_nm = systemnm
+  kaito.situmon_kb = 1
+  kaito.hyoka_shubetu = 3
+  kaito.hyoka_value = todohuken
   kaito.ymdt = datetime.datetime.now()
   db.session.add(kaito)
   

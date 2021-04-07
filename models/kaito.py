@@ -73,3 +73,15 @@ class VBunyaMapGroupbyVendorSchema(ma.SQLAlchemyAutoSchema):
       class Meta:
             model = VBunyaMapGroupbyVendor
             load_instance = True
+
+
+class VTodohukenGroupbyVendor(db.Model): 
+    __tablename__ = "v_todohuken_groupby_vendor"
+    vendor_nm = db.Column(db.String(), primary_key=True) 
+    hyoka_value = db.Column(db.String(), primary_key=True) 
+    kensu = db.Column(db.Integer, primary_key=True) 
+
+class VTodohukenGroupbyVendorSchema(ma.SQLAlchemyAutoSchema):
+      class Meta:
+            model = VTodohukenGroupbyVendor
+            load_instance = True

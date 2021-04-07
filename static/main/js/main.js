@@ -1,5 +1,7 @@
 var DELIMIT = "@|@|@";
-
+var TODOHUKEN = [
+    "北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県","茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県","新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県","三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県","鳥取県","島根県","岡山県","広島県","山口県","徳島県","香川県","愛媛県","高知県","福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"
+];
 
 $(document).ready(function() {
 
@@ -20,11 +22,18 @@ $(document).ready(function() {
                 $('#selSystemNm .dropdown-menu').append('<li><a onclick=$("#txtSystemNm").val("' + item.system_nm + '");>'+item.system_nm);
             });
         });
+
+        $.each(TODOHUKEN, function(i, item) {
+            var option = $('<option>').text(item).val(item);
+            $('#selTodohuken').append(option);
+        });
+        
       
         createTokoTables_Main();
         CreateRadarChart() //行選択していないが空白のレーダーチャートを作っておく。
         createBunyaMap();
         createBarChartKibo();
+        createTodohuken();
 
         for(var i = 1; i <= 12; i++){
             var trid = "tblAreaMapTr_" + i;
@@ -2877,7 +2886,7 @@ $('#btnAnswer').on('click', function() {
 
     $.ajax({
         type: "GET",
-        url: "/insertToko/" + $('#txtVendorNm').val() + "/" + $('#txtSystemNm').val() + "/" + rdrank + "/" + comment + "/" + $('#selJititaiKibo').val()
+        url: "/insertToko/" + $('#txtVendorNm').val() + "/" + $('#txtSystemNm').val() + "/" + rdrank + "/" + comment + "/" + $('#selJititaiKibo').val() + "/" + $('#selTodohuken').val()     
     }).done(function(data) {
         alert("ご協力ありがとうございました。");
     }).fail(function(data) {
@@ -3107,6 +3116,8 @@ $("#tableToko tbody").on('click','tr', function(event) {
     CreateRadarChart();
     createBunyaMap();
     createBarChartKibo();
+    createTodohuken();
+    
 });
 //
 //ableToko tbody').on( 'click', 'tr', function () {
@@ -3441,6 +3452,22 @@ function createBunyaMap(){
     //$("#tableBunyaMap").append("<tr><td>c");
     //$("#tableBunyaMap tr")[$("#tableBunyaMap tr").length-1]
     //var b = "aaa";
+}
+
+
+function createTodohuken(){
+    var dummy = "dummy"
+    var selectVendor = (selectRowData == undefined ? dummy : selectRowData.vendor_nm);
+    $.ajax({
+        type: "GET",
+        url: "/getTodohuken/" + selectVendor + ""
+    }).done(function(json) {
+        //alert(json);
+    }).fail(function(data) {
+        alert("エラー：" + data.statusText);
+    }).always(function(data) {
+        //何もしない
+    });
 }
 
 function paddingright(val,char,n){

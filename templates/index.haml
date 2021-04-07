@@ -230,9 +230,9 @@
 
                 %div.row
                   %div.col-md-12
-                    %div.input-group
+                    %div.input-group(style="float:left")
                       %span.input-group-addon.custom_msize
-                        あなたの職場は？
+                        あなたの勤務先は？
                       %select.form-control.custom_msize#selJititaiKibo
                         %option(value=1)
                           一部事務組合
@@ -254,6 +254,11 @@
                           都道府県庁
                         %option(value=9)
                           その他の官公庁
+                    %div.input-group(style="float:left")
+                      %select.form-control.custom_msize#selTodohuken
+                        %option(value=0)
+                          無回答
+
               %div.col-md-2
 
           %div.modal-footer#modalQuestionFooter
