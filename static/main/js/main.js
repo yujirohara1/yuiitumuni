@@ -1,7 +1,4 @@
 var DELIMIT = "@|@|@";
-var TODOHUKEN = [
-    "北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県","茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県","新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県","三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県","鳥取県","島根県","岡山県","広島県","山口県","徳島県","香川県","愛媛県","高知県","福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"
-];
 
 $(document).ready(function() {
 
@@ -24,167 +21,15 @@ $(document).ready(function() {
         });
 
         $.each(TODOHUKEN, function(i, item) {
-            var option = $('<option>').text(item).val(item);
+            var option = $('<option>').text(item).val(i);
             $('#selTodohuken').append(option);
         });
-        
-      
+
         createTokoTables_Main();
         CreateRadarChart() //行選択していないが空白のレーダーチャートを作っておく。
         createBunyaMap();
         createBarChartKibo();
         createTodohuken();
-
-        for(var i = 1; i <= 12; i++){
-            var trid = "tblAreaMapTr_" + i;
-            $('#tblAreaMap tbody').append('<tr id="' + trid + '">');
-            for(var j = 1; j <= 13; j++){
-                var tdid = "tblAreaMapTd_" + i + "_" + j;
-                $('#tblAreaMap #' + trid).append('<td id="' + tdid + '">');
-            }
-        }
-        $('#tblAreaMap #tblAreaMapTd_1_12').append('<a href="#">北');
-        $('#tblAreaMap #tblAreaMapTd_1_12').addClass("hokkaido");
-        $('#tblAreaMap #tblAreaMapTd_1_12').attr("colspan","2");
-        $('#tblAreaMap #tblAreaMapTd_1_12').attr("rowspan","2");
-        $('#tblAreaMap #tblAreaMapTd_1_13').remove();
-        $('#tblAreaMap #tblAreaMapTd_2_12').remove();
-        $('#tblAreaMap #tblAreaMapTd_2_13').remove();
-        
-        $('#tblAreaMap #tblAreaMapTd_3_12').append('<a href="#">青');
-        $('#tblAreaMap #tblAreaMapTd_3_12').addClass("tohoku");
-        $('#tblAreaMap #tblAreaMapTd_3_12').attr("colspan","2");
-        $('#tblAreaMap #tblAreaMapTd_3_13').remove();
-        
-        $('#tblAreaMap #tblAreaMapTd_4_12').append('<a href="#">秋');
-        $('#tblAreaMap #tblAreaMapTd_4_12').addClass("tohoku");
-        $('#tblAreaMap #tblAreaMapTd_4_13').append('<a href="#">岩');
-        $('#tblAreaMap #tblAreaMapTd_4_13').addClass("tohoku");
-        $('#tblAreaMap #tblAreaMapTd_5_12').append('<a href="#">山');
-        $('#tblAreaMap #tblAreaMapTd_5_12').addClass("tohoku");
-        $('#tblAreaMap #tblAreaMapTd_5_13').append('<a href="#">宮');
-        $('#tblAreaMap #tblAreaMapTd_5_13').addClass("tohoku");
-        
-        $('#tblAreaMap #tblAreaMapTd_6_9').append('<a href="#">石');
-        $('#tblAreaMap #tblAreaMapTd_6_9').addClass("chubu");
-        $('#tblAreaMap #tblAreaMapTd_6_10').append('<a href="#">富');
-        $('#tblAreaMap #tblAreaMapTd_6_10').addClass("chubu");
-        $('#tblAreaMap #tblAreaMapTd_6_11').append('<a href="#">新');
-        $('#tblAreaMap #tblAreaMapTd_6_11').addClass("chubu");
-        $('#tblAreaMap #tblAreaMapTd_6_12').append('<a href="#">福');
-        $('#tblAreaMap #tblAreaMapTd_6_12').addClass("tohoku");
-        $('#tblAreaMap #tblAreaMapTd_6_12').attr("colspan","2");
-        $('#tblAreaMap #tblAreaMapTd_6_13').remove();
-
-        //
-        
-        $('#tblAreaMap #tblAreaMapTd_7_9').append('<a href="#">福');
-        $('#tblAreaMap #tblAreaMapTd_7_9').addClass("chubu");
-        $('#tblAreaMap #tblAreaMapTd_7_10').append('<a href="#">岐');
-        $('#tblAreaMap #tblAreaMapTd_7_10').addClass("chubu");
-        $('#tblAreaMap #tblAreaMapTd_7_10').attr("rowspan","2");
-        $('#tblAreaMap #tblAreaMapTd_8_10').remove();
-        $('#tblAreaMap #tblAreaMapTd_7_11').append('<a href="#">長');
-        $('#tblAreaMap #tblAreaMapTd_7_11').addClass("chubu");
-        $('#tblAreaMap #tblAreaMapTd_7_11').attr("rowspan","2");
-        $('#tblAreaMap #tblAreaMapTd_8_11').remove();
-        $('#tblAreaMap #tblAreaMapTd_7_12').append('<a href="#">群');
-        $('#tblAreaMap #tblAreaMapTd_7_12').addClass("kanto");
-        $('#tblAreaMap #tblAreaMapTd_7_13').append('<a href="#">栃');
-        $('#tblAreaMap #tblAreaMapTd_7_13').addClass("kanto");
-
-        
-        $('#tblAreaMap #tblAreaMapTd_8_1').append('<a href="#">佐');
-        $('#tblAreaMap #tblAreaMapTd_8_1').addClass("kyushu");
-        $('#tblAreaMap #tblAreaMapTd_8_2').append('<a href="#">福');
-        $('#tblAreaMap #tblAreaMapTd_8_2').addClass("kyushu");
-        $('#tblAreaMap #tblAreaMapTd_8_3').append('<a href="#">大');
-        $('#tblAreaMap #tblAreaMapTd_8_3').addClass("kyushu");
-        $('#tblAreaMap #tblAreaMapTd_8_4').append('<a href="#">山');
-        $('#tblAreaMap #tblAreaMapTd_8_4').addClass("chugoku");
-        $('#tblAreaMap #tblAreaMapTd_8_4').attr("rowspan","2");
-        $('#tblAreaMap #tblAreaMapTd_9_4').remove();
-        $('#tblAreaMap #tblAreaMapTd_8_5').append('<a href="#">島');
-        $('#tblAreaMap #tblAreaMapTd_8_5').addClass("chugoku");
-        $('#tblAreaMap #tblAreaMapTd_8_6').append('<a href="#">鳥');
-        $('#tblAreaMap #tblAreaMapTd_8_6').addClass("chugoku");
-        $('#tblAreaMap #tblAreaMapTd_8_7').append('<a href="#">兵');
-        $('#tblAreaMap #tblAreaMapTd_8_7').addClass("kinki");
-        $('#tblAreaMap #tblAreaMapTd_8_8').append('<a href="#">京');
-        $('#tblAreaMap #tblAreaMapTd_8_8').addClass("kinki");
-        $('#tblAreaMap #tblAreaMapTd_8_9').append('<a href="#">滋');
-        $('#tblAreaMap #tblAreaMapTd_8_9').addClass("kinki");
-        
-        $('#tblAreaMap #tblAreaMapTd_8_12').append('<a href="#">埼');
-        $('#tblAreaMap #tblAreaMapTd_8_12').addClass("kanto");
-        $('#tblAreaMap #tblAreaMapTd_8_13').append('<a href="#">茨');
-        $('#tblAreaMap #tblAreaMapTd_8_13').addClass("kanto");
-
-        
-        $('#tblAreaMap #tblAreaMapTd_9_1').append('<a href="#">長');
-        $('#tblAreaMap #tblAreaMapTd_9_1').addClass("kyushu");
-        $('#tblAreaMap #tblAreaMapTd_9_2').append('<a href="#">熊');
-        $('#tblAreaMap #tblAreaMapTd_9_2').addClass("kyushu");
-        $('#tblAreaMap #tblAreaMapTd_9_2').attr("rowspan","2");
-        $('#tblAreaMap #tblAreaMapTd_10_2').remove();
-        $('#tblAreaMap #tblAreaMapTd_9_3').append('<a href="#">宮');
-        $('#tblAreaMap #tblAreaMapTd_9_3').addClass("kyushu");
-        $('#tblAreaMap #tblAreaMapTd_9_3').attr("rowspan","2");
-        $('#tblAreaMap #tblAreaMapTd_10_3').remove();
-        $('#tblAreaMap #tblAreaMapTd_9_5').append('<a href="#">広');
-        $('#tblAreaMap #tblAreaMapTd_9_5').addClass("chugoku");
-        $('#tblAreaMap #tblAreaMapTd_9_6').append('<a href="#">岡');
-        $('#tblAreaMap #tblAreaMapTd_9_6').addClass("chugoku");
-        $('#tblAreaMap #tblAreaMapTd_9_7').append('<a href="#">大');
-        $('#tblAreaMap #tblAreaMapTd_9_7').addClass("kinki");
-        $('#tblAreaMap #tblAreaMapTd_9_8').append('<a href="#">奈');
-        $('#tblAreaMap #tblAreaMapTd_9_8').addClass("kinki");
-        $('#tblAreaMap #tblAreaMapTd_9_9').append('<a href="#">三');
-        $('#tblAreaMap #tblAreaMapTd_9_9').addClass("kinki");
-        
-        $('#tblAreaMap #tblAreaMapTd_9_10').append('<a href="#">愛');
-        $('#tblAreaMap #tblAreaMapTd_9_10').addClass("chubu");
-        $('#tblAreaMap #tblAreaMapTd_9_11').append('<a href="#">山');
-        $('#tblAreaMap #tblAreaMapTd_9_11').addClass("chubu");
-        
-        $('#tblAreaMap #tblAreaMapTd_9_12').append('<a href="#">東');
-        $('#tblAreaMap #tblAreaMapTd_9_12').addClass("kanto");
-        $('#tblAreaMap #tblAreaMapTd_9_13').append('<a href="#">千');
-        $('#tblAreaMap #tblAreaMapTd_9_13').addClass("kanto");
-        $('#tblAreaMap #tblAreaMapTd_9_13').attr("rowspan","2");
-        $('#tblAreaMap #tblAreaMapTd_10_13').remove();
-
-        $('#tblAreaMap #tblAreaMapTd_10_4').append('<a href="#">愛');
-        $('#tblAreaMap #tblAreaMapTd_10_4').addClass("shikoku");
-        $('#tblAreaMap #tblAreaMapTd_10_5').append('<a href="#">香');
-        $('#tblAreaMap #tblAreaMapTd_10_5').addClass("shikoku");
-        $('#tblAreaMap #tblAreaMapTd_10_7').append('<a href="#">和');
-        $('#tblAreaMap #tblAreaMapTd_10_7').addClass("kinki");
-        $('#tblAreaMap #tblAreaMapTd_10_7').attr("colspan","2");
-        $('#tblAreaMap #tblAreaMapTd_10_8').remove();
-        $('#tblAreaMap #tblAreaMapTd_10_11').append('<a href="#">静');
-        $('#tblAreaMap #tblAreaMapTd_10_11').addClass("chubu");
-        
-        $('#tblAreaMap #tblAreaMapTd_10_12').append('<a href="#">神');
-        $('#tblAreaMap #tblAreaMapTd_10_12').addClass("kanto");
-        
-        $('#tblAreaMap #tblAreaMapTd_11_1').append('<a href="#">沖');
-        $('#tblAreaMap #tblAreaMapTd_11_1').addClass("okinawa");
-        $('#tblAreaMap #tblAreaMapTd_11_2').append('<a href="#">鹿');
-        $('#tblAreaMap #tblAreaMapTd_11_2').addClass("kyushu");
-        $('#tblAreaMap #tblAreaMapTd_11_2').attr("colspan","2");
-        $('#tblAreaMap #tblAreaMapTd_11_3').remove();
-        $('#tblAreaMap #tblAreaMapTd_11_4').append('<a href="#">高');
-        $('#tblAreaMap #tblAreaMapTd_11_4').addClass("shikoku");
-        $('#tblAreaMap #tblAreaMapTd_11_5').append('<a href="#">徳');
-        $('#tblAreaMap #tblAreaMapTd_11_5').addClass("shikoku");
-        //1 <td class="hokkaido" colspan="2" rowspan="2"><a href="#">北</a></td>
-        //3 <td class="tohoku" colspan="2"><a href="#">青</a></td>
-
-        $('#tblAreaMap #tblAreaMapTd_11_1').addClass("tdfk_flash");
-        $('#tblAreaMap #tblAreaMapTd_1_12').addClass("tdfk_flash");
-        $('#tblAreaMap #tblAreaMapTd_6_11').addClass("tdfk_flash");
-        $('#tblAreaMap #tblAreaMapTd_7_11').addClass("tdfk_flash");
 
     }catch(e){
 
@@ -192,275 +37,94 @@ $(document).ready(function() {
     return;
 });
 
-
-function NowNenTuki(){
-    var seldate = new Date();
-    return seldate.getFullYear() + "" + ("0"+(seldate.getMonth()+1)).slice(-2);
-}
-
-
-
-
-
-
-// async function mergeAllPDFs(urls) {
-    
-//     const pdfDoc = await PDFLib.PDFDocument.create();
-//     const numDocs = urls.length;
-//     try{
-//         for(var i = 0; i < numDocs; i++) {
-//             const donorPdfBytes = await fetch(urls[i]).then(res => res.arrayBuffer());
-//             const donorPdfDoc = await PDFLib.PDFDocument.load(donorPdfBytes);
-//             const docLength = donorPdfDoc.getPageCount();
-//             for(var k = 0; k < docLength; k++) {
-//                 const [donorPage] = await pdfDoc.copyPages(donorPdfDoc, [k]);
-//                 //console.log("Doc " + i+ ", page " + k);
-//                 pdfDoc.addPage(donorPage);
-//             }
-//         }
-    
-//         const pdfDataUri = await pdfDoc.saveAsBase64({ dataUri: true });
-//         //console.log(pdfDataUri);
-      
-//         // strip off the first part to the first comma "data:image/png;base64,iVBORw0K..."
-//         var data_pdf = pdfDataUri.substring(pdfDataUri.indexOf(',')+1);
-
-//         var blob2 = new Blob([data_pdf], {type: "application/pdf"});//
-//         var link2 = document.createElement('a');
-//         link2.href = window.URL.createObjectURL(blob2);
-//         link2.download = "" + Math.random().toString(32).substring(2) + ".pdf";
-//         link2.click();
-
-//     }catch(e){
-//         consoler.log(e.message);
-//     }
-// }
-
-
-// /*
-// || 請求書印刷
-// */
-// //var files = new Array();
-// var files = [];
-// var index = 0;
-// var blReady = false;
-// $('#btnSeikyuPrint').on('click', function() {
-//     var randnum = Math.floor(Math.random()*10101010101)
-//     var customerid = $(".row_selected.customer").find("td:eq(0)").text();
-//     var nentuki = $('#selNentuki').val();
-//     var hoge_func = function (dummyId) {
-//         $.ajax({
-//             type: "GET",
-//             url: "/printSeikyu/" + dummyId + "/" + nentuki + "/" + randnum + "",
-//         }).done(function(data) {
-//             if(data=="-1"){
-
-//             }else{
-//                 files.push(data);
-//             }
-//             if(dummyId==999){
-//                 blReady = true;
-//             }
-//         }).fail(function(data) {
-//             alert("エラー：" + data.statusText);
-//         }).always(function(data) {
-//         });
-//     }
-
-//      for(var i=1; i<1000; i++){
-//          hoge_func(i);
-//      }
-
-//     sample_func();
-// //}
+//
+//
+///*
+//|| 請求データ作成　個別
+//*/
+//$('#btnSeikyuCreateKobetu').on('click', function() {
+//    var customerid = toNumber($(".row_selected.customer").find("td:eq(0)").text());
+//    if(customerid==0){
+//        $("#mainSeikyuKobetuCreateMessageArea").html("顧客を選択してください。");
+//        setTimeout('$("#mainSeikyuKobetuCreateMessageArea")[0].innerText="";', 3000);
+//        return;
+//    }
+//    var customername = $(".row_selected.customer").find("td:eq(2)").text();
+//    var nentuki = $('#selNentuki').val();
+//    if (confirm(customername + "のみ、"+$('#selNentuki option:selected').text() + "分の請求データを作成します。よろしいですか？")) {
+//        CreateSeikyuData(customerid, nentuki, false);
+//    } else {
+//    }
 // });
-
-// function sample_func() {
-//     if ( !blReady ) {
-//         setTimeout( sample_func, 2000 ); // wait 100ms and execute sample_func() again
-//         return;
-//     }
-
-//     //1000人分のPDFファイル名をクライアントから伝えて、マージPDFをもらう
-//     $.ajax({
-//         type: "POST",
-//         data: JSON.stringify({"data":files}),
-//         url: "/pdfMergeSeikyusho",
-//         contentType:'application/json'
-//     }).done(function(data) {
-//         var blob=new Blob([data], {type: "application/pdf"});//
-//         var link = document.createElement('a');
-//         link.href = window.URL.createObjectURL(blob);
-//         link.download = "" + Math.random().toString(32).substring(2) + ".pdf";
-//         link.click();
-//     }).fail(function(data) {
-//         alert("エラー：" + data.statusText);
-//     }).always(function(data) {
-//         $('#btnUpdList').removeAttr("disabled");
-//    });
-
-// }
-
-
-// /*
-// || 請求書印刷
-// */
-// var Analysts = new Array();
-// var index = 0;
-// $('#btnSeikyuPrint').on('click', function() {
-//     var randnum = Math.floor(Math.random()*10101010101)
-//     var customerid = $(".row_selected.customer").find("td:eq(0)").text();
-//     var nentuki = $('#selNentuki').val();
-//     var hoge_func = function (dummyId) {
-//         $.ajax({
-//             type: "GET",
-//             url: "/printSeikyu/" + dummyId + "/" + nentuki + "/" + randnum + "",
-//         }).done(function(data) {
-//             if(data=="-1"){
-
-//             }else{
-//                 var blob=new Blob([data], {type: "application/pdf"});//
-//                 //var Stream = new Uint8Array(blob);
-//                 //var Stream = new Uint8Array([data], {type: "application/pdf"});
-//                 //var Stream = new Uint8Array(data);
-//                 // var Stream = new Uint8Array([data]);
-//                 var link = document.createElement('a');
-//                 link.href = window.URL.createObjectURL(blob);
-//                 link.download = "" + Math.random().toString(32).substring(2) + ".pdf";
-//                 // link.click();
-//                 // var pdfDataArray = new Array();
-//                 // pdfDataArray.push[link.href];
-//                 // pdfDataArray.push[link.href];
-//                 var pdfDataArray = [link.href, link.href];
-//                 // var pdfDataArray = [link.download, link.download];
-//                 mergeAllPDFs(pdfDataArray);
-
-                
-//                 // Analysts[index] = new TPDFAnalyst();
-        
-//                 // try {
-                  
-//                 //     //Analysts[index].LoadFromStream(blob);
-//                 //     Analysts[index].LoadFromStream(Stream);
-                    
-//                 //     if (Analysts[index].Encrypt) {
-//                 //         document.getElementById("p"+(index+1)).innerHTML =
-//                 //            (index+1) + 'つ目のファイル - 未対応';
-//                 //         document.getElementById("errmsg").innerHTML = 
-//                 //            '暗号化されているファイルには対応していません。';
-//                 //     } else {
-//                 //         document.getElementById("p"+(index+1)).innerHTML = 
-//                 //            (index+1) + 'つ目のファイル - [' + Analysts[index].PageCount +
-//                 //             'ページ / PDF' + Analysts[index].Version + ']';
-//                 //     }
-//                 // } catch (e) {
-//                 //     Analysts[index] = null;
-//                 //     document.getElementById("p"+(index+1)).innerHTML =
-//                 //            (index+1) + 'つ目のファイル - 未対応';        
-//                 //     document.getElementById("errmsg").innerHTML =
-//                 //        (index+1) +'つ目のファイルは未対応です。';
-//                 // }
-                
-//             }
-//         }).fail(function(data) {
-//             alert("エラー：" + data.statusText);
-//         }).always(function(data) {
-//         });
-//     }
-//     for(var i=1; i<10; i++){
-//         hoge_func(i);
-//     }
-//     hoge_func();
-//   //}
+//
+///*
+//|| 請求データ印刷　個別
+//*/
+//$('#btnSeikyuPrintKobetu').on('click', function() {
+//    var customerid = toNumber($(".row_selected.customer").find("td:eq(0)").text());
+//    if(customerid==0){
+//        $("#mainSeikyuKobetuPrintMessageArea").html("顧客を選択してください。");
+//        setTimeout('$("#mainSeikyuKobetuPrintMessageArea")[0].innerText="";', 3000);
+//        return;
+//    }
+//    var nentuki = $('#selNentuki').val();
+//    var nen = (nentuki+"").substr(0,4);
+//    var tuki = (nentuki+"").substr(4,2);
+//    funcSeikyuIkkatuPrint(customerid, nen, tuki);
+//
 // });
-
-
-/*
-|| 請求データ作成　個別
-*/
-$('#btnSeikyuCreateKobetu').on('click', function() {
-    var customerid = toNumber($(".row_selected.customer").find("td:eq(0)").text());
-    if(customerid==0){
-        $("#mainSeikyuKobetuCreateMessageArea").html("顧客を選択してください。");
-        setTimeout('$("#mainSeikyuKobetuCreateMessageArea")[0].innerText="";', 3000);
-        return;
-    }
-    var customername = $(".row_selected.customer").find("td:eq(2)").text();
-    var nentuki = $('#selNentuki').val();
-    if (confirm(customername + "のみ、"+$('#selNentuki option:selected').text() + "分の請求データを作成します。よろしいですか？")) {
-        CreateSeikyuData(customerid, nentuki, false);
-    } else {
-    }
- });
-
-/*
-|| 請求データ印刷　個別
-*/
-$('#btnSeikyuPrintKobetu').on('click', function() {
-    var customerid = toNumber($(".row_selected.customer").find("td:eq(0)").text());
-    if(customerid==0){
-        $("#mainSeikyuKobetuPrintMessageArea").html("顧客を選択してください。");
-        setTimeout('$("#mainSeikyuKobetuPrintMessageArea")[0].innerText="";', 3000);
-        return;
-    }
-    var nentuki = $('#selNentuki').val();
-    var nen = (nentuki+"").substr(0,4);
-    var tuki = (nentuki+"").substr(4,2);
-    funcSeikyuIkkatuPrint(customerid, nen, tuki);
-
- });
-
-/*
-|| 請求データ削除　個別
-*/
-$('#btnSeikyuDeleteKobetu').on('click', function() {
-    var customerid = toNumber($(".row_selected.customer").find("td:eq(0)").text());
-    if(customerid==0){
-        $("#mainSeikyuKobetuDeleteMessageArea").html("顧客を選択してください。");
-        setTimeout('$("#mainSeikyuKobetuDeleteMessageArea")[0].innerText="";', 3000);
-        return;
-    }
-    var customername = $(".row_selected.customer").find("td:eq(2)").text();
-    var nentuki = $('#selNentuki').val();
-    if (confirm(customername + "のみ、"+$('#selNentuki option:selected').text() + "分の請求データを削除します。よろしいですか？")) {
-        CreateSeikyuData(customerid, nentuki, true);
-    } else {
-    }
- });
-
-  /*
-  || 顧客情報　新規登録
-  */
-$('#aaaaaa').on('click', function() {
-    $('.nav-tabs a[href="#tab1primary"]').tab('show')
-
-    //行選択を解除
-    $("#mainUpdCustomerMessageArea").html("");
-    $("#mainUpdCustomerMessageArea").append("<p style='color:red'>上の各項目を入力して、更新ボタンで登録してください。</p>");
-    setTimeout('$("#mainUpdCustomerMessageArea")[0].innerText="";', 3000);
-
-    $("#tableCustomer").removeClass('row_selected customer');
-    $("#tableCustomer tbody tr").removeClass('row_selected customer');
-    $("#tableCustomer tbody td").removeClass('row_selected customer');
-
-    $("#txtCustomerName").css("background-color","#ffeff7");
-    setTimeout('$("#txtCustomerName").css("background-color","");', 2000);
-
-    $('#txtCustomerName').attr("placeholder","必須入力")
-    $('#txtCustomerName').val("");
-    $('#txtCustomerKana').val("");
-    $('#txtAddress1').val("");
-    $('#txtTel1').val("");
-    $('#selHaraiKb').val();
-    $('#selCustomerGroupKb').val();
-    $('#selCustomerZeiKb').val();
-    $('#selTantoName').val("");
-    $('#txtList').val("");
-
-    $('#txtCustomerName').focus();
-
-});
-
+//
+///*
+//|| 請求データ削除　個別
+//*/
+//$('#btnSeikyuDeleteKobetu').on('click', function() {
+//    var customerid = toNumber($(".row_selected.customer").find("td:eq(0)").text());
+//    if(customerid==0){
+//        $("#mainSeikyuKobetuDeleteMessageArea").html("顧客を選択してください。");
+//        setTimeout('$("#mainSeikyuKobetuDeleteMessageArea")[0].innerText="";', 3000);
+//        return;
+//    }
+//    var customername = $(".row_selected.customer").find("td:eq(2)").text();
+//    var nentuki = $('#selNentuki').val();
+//    if (confirm(customername + "のみ、"+$('#selNentuki option:selected').text() + "分の請求データを削除します。よろしいですか？")) {
+//        CreateSeikyuData(customerid, nentuki, true);
+//    } else {
+//    }
+// });
+//
+//  /*
+//  || 顧客情報　新規登録
+//  */
+//$('#aaaaaa').on('click', function() {
+//    $('.nav-tabs a[href="#tab1primary"]').tab('show')
+//
+//    //行選択を解除
+//    $("#mainUpdCustomerMessageArea").html("");
+//    $("#mainUpdCustomerMessageArea").append("<p style='color:red'>上の各項目を入力して、更新ボタンで登録してください。</p>");
+//    setTimeout('$("#mainUpdCustomerMessageArea")[0].innerText="";', 3000);
+//
+//    $("#tableCustomer").removeClass('row_selected customer');
+//    $("#tableCustomer tbody tr").removeClass('row_selected customer');
+//    $("#tableCustomer tbody td").removeClass('row_selected customer');
+//
+//    $("#txtCustomerName").css("background-color","#ffeff7");
+//    setTimeout('$("#txtCustomerName").css("background-color","");', 2000);
+//
+//    $('#txtCustomerName').attr("placeholder","必須入力")
+//    $('#txtCustomerName').val("");
+//    $('#txtCustomerKana').val("");
+//    $('#txtAddress1').val("");
+//    $('#txtTel1').val("");
+//    $('#selHaraiKb').val();
+//    $('#selCustomerGroupKb').val();
+//    $('#selCustomerZeiKb').val();
+//    $('#selTantoName').val("");
+//    $('#txtList').val("");
+//
+//    $('#txtCustomerName').focus();
+//
+//});
+//
 // $.ajax({
 //     type: "GET",
 //     url: "/createSeikyu/" + customerid + "/" + nentuki + "/" + sakujonomi + ""
@@ -3456,13 +3120,23 @@ function createBunyaMap(){
 
 
 function createTodohuken(){
+    createAreaMap();
+
     var dummy = "dummy"
     var selectVendor = (selectRowData == undefined ? dummy : selectRowData.vendor_nm);
     $.ajax({
         type: "GET",
         url: "/getTodohuken/" + selectVendor + ""
     }).done(function(json) {
-        //alert(json);
+        var list = JSON.parse(json.data);
+        //var a;
+        $.each(list, function(i, item) {
+            //a = item;
+            $('#tblAreaMap .' + item.hyoka_value + '').addClass("tdfk_flash");
+            $('#tblAreaMap .' + item.hyoka_value + '').attr("aria-label",item.kensu + "件");
+            $('#tblAreaMap .' + item.hyoka_value + '').attr("data-balloon-pos","left");
+        });
+        //var b = a;
     }).fail(function(data) {
         alert("エラー：" + data.statusText);
     }).always(function(data) {

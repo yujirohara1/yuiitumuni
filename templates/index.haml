@@ -256,7 +256,7 @@
                           その他の官公庁
                     %div.input-group(style="float:left")
                       %select.form-control.custom_msize#selTodohuken
-                        %option(value=0)
+                        %option(value="mukaito")
                           無回答
 
               %div.col-md-2
@@ -483,6 +483,7 @@
 {% endblock %}
 
 {% block scripts %}
+    <script src="../static/main/js/areamap.js"></script>
     <script src="../static/main/js/main.js"></script>
 {% endblock  %}
 

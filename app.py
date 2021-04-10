@@ -736,8 +736,6 @@ def resJson_getTodohuken(vendornm):
     Todohuken_schema = VTodohukenGroupbyVendorSchema(many=True)
     return jsonify({'data': Todohuken_schema.dumps(Todohuken, ensure_ascii=False)})
 
-
-
 @app.route('/insertToko/<vendornm>/<systemnm>/<rank1>/<comment1>/<kibo>/<todohuken>')
 def insertToko(vendornm, systemnm, rank1, comment1, kibo, todohuken):
   kaito = Kaito()
