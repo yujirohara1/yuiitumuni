@@ -715,6 +715,12 @@ def resJson_getTokoList():
     tokolist_schema = VTokoGroupbyVendorSchema(many=True)
     return jsonify({'data': tokolist_schema.dumps(tokolist, ensure_ascii=False)})
 
+@app.route('/getKoeList')
+def resJson_getKoeList():
+    koelist = Kaito.query.filter(Kaito.hyoka_comment!=None).all()
+    koelist_schema = KaitoSchema(many=True)
+    return jsonify({'data': koelist_schema.dumps(koelist, ensure_ascii=False)})
+
 
 @app.route('/getNanajikuAverage/<vendornm>')
 def resJson_getNanajikuAverage(vendornm):

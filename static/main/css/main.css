@@ -49,6 +49,10 @@ table.dataTable thead tr {
     padding: 7.5px 12px;
     font-size: 18px;
 }
+.koecell{
+    font-size:10.5px;
+    border:0px;
+}
 
 .komidashi{
     min-height: 20px;
@@ -344,3 +348,4 @@ input[type="range"] {
     80% { border-color: #CCB8B7; }
     100% { border-color: #D3D3D3; }
 }
+

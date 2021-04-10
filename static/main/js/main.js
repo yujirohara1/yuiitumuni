@@ -26,6 +26,7 @@ $(document).ready(function() {
         });
 
         createTokoTables_Main();
+        createKoeTables_Main();
         CreateRadarChart() //行選択していないが空白のレーダーチャートを作っておく。
         createBunyaMap();
         createBarChartKibo();
@@ -2559,6 +2560,7 @@ $('#btnAnswer').on('click', function() {
         //alert(data);
         $('#modalQuestion').modal("hide");
         createTokoTables_Main();
+        createKoeTables_Main();
   });
 });
 
@@ -2789,6 +2791,15 @@ $("#tableToko tbody").on('click','tr', function(event) {
 //ar rowData =   $('#tableSeikyuKanri').DataTable().row( this ).data();
 //
 //
+
+$("#tableKoe tbody").on('click','tr', function(event) {
+    //選択した行を青くする。
+    $("#tableKoe").removeClass('row_selected tableKoe');        
+    $("#tableKoe tbody tr").removeClass('row_selected tableKoe');        
+    $("#tableKoe tbody td").removeClass('row_selected tableKoe');        
+    $(event.target.parentNode).addClass('row_selected tableKoe');
+    
+});
 
 Chart.defaults.global.defaultFontColor = '#4d4d4d';
 Chart.defaults.global.defaultFontStyle = 'Bold';
@@ -3181,3 +3192,62 @@ $('#btnTokuiBunyaAnswer').on('click', function() {
 });
 
 
+
+function createKoeTables_Main(){
+    
+    $('#tableKoe').DataTable({
+        bInfo: false,
+        bSort: true,
+        destroy: true,
+        "processing": true,
+        ajax: {
+            url: "/getKoeList",
+            dataType: "json",
+            dataSrc: function ( json ) {
+                return JSON.parse(json.data);
+            },
+            contentType:"application/json; charset=utf-8",
+            complete: function () {
+                return; 
+            }
+        },
+        columns: [
+            { data: 'ymdt'     ,width: '15%' ,style: 'color:red',  className: 'dt-body-center koecell', render: 
+                function (data, type, row) { 
+                    return data.substring(2,10);
+                }
+            },
+            { data: 'hyoka_comment',width: '85%' ,  className: 'dt-body-left koecell', render: 
+                function (data, type, row) { 
+                    return data;
+                }
+            }
+        ],
+        aoColumnDefs: [
+            { 'bSortable': false, 'aTargets': [ 0 ] }
+         ],
+        language: {
+           url: "../static/main/js/japanese.json"
+        },
+        searching: false,
+        "pageLength": 1000,
+        "scrollY":$(window).height() * 30 / 100,
+        paging:false,
+        "order": [ 0, "desc" ],
+        "lengthMenu": [100, 300, 500, 1000],
+        dom:"<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-6'l><'col-sm-6'f>>"+
+            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+      "preDrawCallback": function (settings) {
+        return;
+      },
+      "drawCallback": function (settings) {
+          //$('div.dataTables_scrollBody').scrollTop(pageScrollPos);
+          //$('#tableKoe')[0].parentElement.scrollTop = pageScrollPos;
+          //$('#tableKoeHeader').css("display","none");// (style='display:none;')
+            $("#tableKoe tbody tr").css("border","0px");
+            $("#tableKoe tbody td").css("border","0px");
+          return;
+      }
+    });
+  }
