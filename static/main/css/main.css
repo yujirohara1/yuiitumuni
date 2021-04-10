@@ -318,3 +318,29 @@ input[type="range"] {
       opacity: 0;
     }
   }
+
+  
+
+.richline{
+    border-color: #d3d3d3;
+    animation: border-color 10s infinite;
+    -webkit-animation: border-color 10s infinite;
+}
+
+@-webkit-keyframes border-color {
+    0% { border-color: #D3D3D3; }
+    20% { border-color: #DDBEBE; }
+    40% { border-color: #C4C2C2; }
+    60% { border-color: #C6C6C6; }
+    80% { border-color: #CCB8B7; }
+    100% { border-color: #D3D3D3; }
+}
+
+@keyframes border-color {
+    0% { border-color: #D3D3D3; }
+    20% { border-color: #DDBEBE; }
+    40% { border-color: #C4C2C2; }
+    60% { border-color: #C6C6C6; }
+    80% { border-color: #CCB8B7; }
+    100% { border-color: #D3D3D3; }
+}

@@ -3,15 +3,40 @@
 {% block title %}LocHub ロクハブ{% endblock %}
 
 {% block content %}
-  %div.container-fluid(style="background-image:url('../static/image/xxxxx.png'); background-size:cover; background-repeat:no-repeat")
+  %div.container-fluid(style="")
 
     %div.row
       %div.col-md-12
         %img.img-responsive(src="../static/image/logo_small.png" style="float:left")
         %div(style="float:left")
           &nbsp;&nbsp;&nbsp;&nbsp;
-        %h5(style="padding:10px 0px 0px 0px; margin:0px 0px 0px 0px;")
-          行政システムに革命を。 &nbsp;&nbsp;© HaYu, 2021
+        %p(style="padding:10px 0px 0px 0px; margin:0px 0px 0px 0px;")
+          %span(style="padding:10px 0px 0px 0px; margin:0px 0px 0px 0px;")
+            行政システムに革命を。 &nbsp;&nbsp;© HaYu, 2021
+          %span
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          %span
+            &#124;
+          %span
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          %a(data-toggle="modal" data-target="#modalAboutUs" href="")
+            LocHubって何？
+          %span
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          %span
+            &#124;
+          %span
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          %a(data-toggle="modal" data-target="#modalSakujoIrai" href="")
+            ポートフォリオ作成
+          %span
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          %span
+            &#124;
+          %span
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          %a(data-toggle="modal" data-target="#modalSakujoIrai" href="")
+            削除依頼
         %div(style="float:left")
           &nbsp;&nbsp;&nbsp;&nbsp;
         %h1(style="padding:0px 0px 0px 0px; margin:0px 0px 0px 0px; font-size:62px; font-weight:bold;float:left; top:-50px")
@@ -26,13 +51,12 @@
           アンケートに回答する
         %div(style="float:left")
           &nbsp;&nbsp;&nbsp;&nbsp;
-        %a(data-toggle="modal" data-target="#modalAboutUs" href="")
-          LocHubって何？
+        
 
-    %hr(style="margin:10px 0px 10px 0px;border-top:0.5px solid #d3d3d3;")
+    %hr.richline(style="margin:10px 0px 10px 0px; border-top:0.5px solid")
 
     %div.row
-      %div.col-md-3(style="border-right:0.5px solid #d3d3d3;")
+      %div.col-md-3.richline(style="border-right:0.5px solid;")
         %div.row
           %div.col-md-12
             %span.komidashi
@@ -50,7 +74,7 @@
                     満足度<br>(5段階)
               %tbody
 
-      %div.col-md-4(style="border-right:0.5px solid #d3d3d3;")
+      %div.col-md-4.richline(style="border-right:0.5px solid")
         %div.row
           %div.col-md-4
             %span.komidashi
@@ -68,7 +92,7 @@
           %div.col-md-12
             %canvas#myChart(width="100px" height="60px")
 
-      %div.col-md-5(style="border-right:0.5px solid #d3d3d3;")
+      %div.col-md-5.richline(style="border-right:0.5px solid;")
         %div.row
           %div.col-md-7
             %span.komidashi
@@ -96,10 +120,10 @@
           %div.col-md-11
             &nbsp;
 
-    %hr(style="margin:10px 0px 10px 0px;border-top:0.5px solid #d3d3d3;")
+    %hr.richline(style="margin:10px 0px 10px 0px; border-top:0.5px solid")
 
     %div.row
-      %div.col-md-4(style="border-right:0.5px solid #d3d3d3;")
+      %div.col-md-4.richline(style="border-right:0.5px solid;")
         %div.row
           %div.col-md-12
             %span.komidashi
@@ -109,11 +133,11 @@
             %table.jp-map#tblAreaMap
               %tbody
 
-      %div.col-md-4(style="border-right:0.5px solid #d3d3d3;")
+      %div.col-md-4.richline(style="border-right:0.5px solid;")
         %div.row
           %div.col-md-12
             aaa
-      %div.col-md-4(style="border-right:0.5px solid #d3d3d3;")
+      %div.col-md-4.richline(style="border-right:0.5px solid;")
         %div.row
           %div.col-md-12
             bvb
@@ -129,8 +153,7 @@
     %div.row
       %div.col-md-10
       %div.col-md-2.text-right
-        %a(data-toggle="modal" data-target="#modalSakujoIrai" href="")
-          削除依頼はこちら
+
 
       
     <!-- 基本アンケート -->
@@ -343,7 +366,7 @@
               %div.col-md-6(style="top:5px")
                 %input#sliderChimeido(type="range" step="1" name="speed" min="1" max="10" style="float:left")
 
-            %hr(style="margin:5px 0px 10px 0px")
+            %hr.richline(style="margin:10px 0px 10px 0px; border-top:0.5px solid")
 
             %div.row
               %div.col-md-4.text-middle(style="top:3px")
@@ -354,7 +377,7 @@
               %div.col-md-6(style="top:5px")
                 %input#sliderTukaiyasusa(type="range" step="1" name="speed" min="1" max="10" style="float:left")
 
-            %hr(style="margin:5px 0px 10px 0px")
+            %hr.richline(style="margin:10px 0px 10px 0px; border-top:0.5px solid")
 
             %div.row
               %div.col-md-4.text-middle(style="top:3px")
@@ -365,7 +388,7 @@
               %div.col-md-6(style="top:5px")
                 %input#sliderKakakutekisei(type="range" step="1" name="speed" min="1" max="10" style="float:left")
 
-            %hr(style="margin:5px 0px 10px 0px")
+            %hr.richline(style="margin:10px 0px 10px 0px; border-top:0.5px solid")
 
             %div.row
               %div.col-md-4.text-middle(style="top:3px")
@@ -376,7 +399,7 @@
               %div.col-md-6(style="top:5px")
                 %input#sliderSupportjubun(type="range" step="1" name="speed" min="1" max="10" style="float:left")
 
-            %hr(style="margin:5px 0px 10px 0px")
+            %hr.richline(style="margin:10px 0px 10px 0px; border-top:0.5px solid")
             
             %div.row
               %div.col-md-4.text-middle(style="top:3px")
@@ -387,7 +410,7 @@
               %div.col-md-6(style="top:5px")
                 %input#sliderTeianmiryoku(type="range" step="1" name="speed" min="1" max="10" style="float:left")
 
-            %hr(style="margin:5px 0px 10px 0px")
+            %hr.richline(style="margin:10px 0px 10px 0px; border-top:0.5px solid")
             
             %div.row
               %div.col-md-4.text-middle(style="top:3px")
@@ -398,7 +421,7 @@
               %div.col-md-6(style="top:5px")
                 %input#sliderSehenoSinrai(type="range" step="1" name="speed" min="1" max="10" style="float:left")
 
-            %hr(style="margin:5px 0px 10px 0px")
+            %hr.richline(style="margin:10px 0px 10px 0px; border-top:0.5px solid")
             
             %div.row
               %div.col-md-4.text-middle(style="top:3px")
