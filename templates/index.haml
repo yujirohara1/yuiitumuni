@@ -27,8 +27,8 @@
             &#124;
           %span
             &nbsp;&nbsp;&nbsp;&nbsp;
-          %a(data-toggle="modal" data-target="#modalSakujoIrai" href="")
-            ポートフォリオ作成
+          %a(data-toggle="modal" data-target="#modalPortfolio" href="")
+            メーカー企業さんへ
           %span
             &nbsp;&nbsp;&nbsp;&nbsp;
           %span
@@ -502,6 +502,52 @@
                 %button.btn.btn-default(type="button" data-dismiss="modal")
                   閉じる
 
+
+    <!-- ロクハブの理念 -->
+    %div.modal.fade#modalPortfolio(tabindex="-1")
+      %div.modal-dialog.modal-lg
+        %div.modal-content
+          %div.modal-header(style="background-color:black; color:white;")
+            %button.close(type="button" data-dismiss="modal")
+              %span#(style="color:white")
+                ×
+            %h4.modal-title#subGtitle(style="font-weight:bold; font-size:14px")
+              貴社のポートフォリオを作ります。
+          %div.modal-body(style="background-image:url('../static/image/logo_rinenxxxxx.png'); background-size:cover; background-repeat:no-repeat")
+            %div.row
+              %div.col-md-5
+                %span(style="font-size:15px;color:#000000cc")
+                  貴社の <span style="font-weight:bold">ポートフォリオ</span> を作成するサービスも行っております。<br>
+                  ポートフォリオは、<span style="font-weight:bold">ロクハブに登録する初期データ</span> です。<br><br>
+                  あなたの企業が開発するシステムの、<br>
+                  ・主たる構築実績<br>
+                  ・得意とする業務分野<br>
+                  ・顧客の感謝の声<br>
+                  ・現在の市場シェア<br>
+                  ・システムの魅力<br>
+                  ・企業の将来性<br>
+                  等をインタビューさせていただき、初期表示データを作成いたします。<br><br>
+                  次のメールアドレスへご相談くださるようお願いいたします。<br><br>
+                  <span style="font-weight:bold; font-size:14px">
+                    ロクハブ運営事務局<br>
+                    lochub.kanri@gmail.com
+                  </span>
+              %div.col-md-7
+                %div
+                  （登録データの表示例）
+                %div(style="background-image:url('../static/image/logo_portfolio.png'); background-repeat:no-repeat; height:450px")
+                
+
+
+
+          %div.modal-footer#modalPortfolioFooter
+            %div.row
+              %div.col-md-2
+              %div.col-md-2
+              %div.col-md-7
+              %div.col-md-1
+                %button.btn.btn-default(type="button" data-dismiss="modal")
+                  閉じる
 
 {% endblock %}
 
