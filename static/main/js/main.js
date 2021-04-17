@@ -3148,9 +3148,11 @@ function createTodohuken(){
             $('#tblAreaMap .' + item.hyoka_value + '').attr("data-balloon-pos","left");
 
             if(i<=4){
-                $('#tblAreaMap #tblAreaMapTd_' + (i+2) + '_1').text("　" + TODOHUKEN[item.hyoka_value] + "　" + item.kensu + "件");
-                $('#tblAreaMap #tblAreaMapTd_' + (i+2) + '_1').css("padding","1px");
-                $('#tblAreaMap #tblAreaMapTd_' + (i+2) + '_1').css("text-align","left");
+                if(TODOHUKEN[item.hyoka_value] != undefined){
+                    $('#tblAreaMap #tblAreaMapTd_' + (i+2) + '_1').text("　" + TODOHUKEN[item.hyoka_value] + "　" + item.kensu + "件");
+                    $('#tblAreaMap #tblAreaMapTd_' + (i+2) + '_1').css("padding","1px");
+                    $('#tblAreaMap #tblAreaMapTd_' + (i+2) + '_1').css("text-align","left");
+                }
             }
         });
         //var b = a;
