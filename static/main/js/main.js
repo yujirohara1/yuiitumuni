@@ -2783,6 +2783,7 @@ $("#tableToko tbody").on('click','tr', function(event) {
     createBunyaMap();
     createBarChartKibo();
     createTodohuken();
+    createKoeTables_Main();
     
 });
 //
@@ -3203,13 +3204,14 @@ $('#btnTokuiBunyaAnswer').on('click', function() {
 
 function createKoeTables_Main(){
     
+    var selectVendor = (selectRowData == undefined ? "dummy" : selectRowData.vendor_nm);
     $('#tableKoe').DataTable({
         bInfo: false,
         bSort: true,
         destroy: true,
         "processing": true,
         ajax: {
-            url: "/getKoeList",
+            url: "/getKoeList/" + selectVendor,
             dataType: "json",
             dataSrc: function ( json ) {
                 return JSON.parse(json.data);
@@ -3264,6 +3266,7 @@ function createKoeTables_Main(){
           
           $("#tableKoe td").css("border-radius","10px");
           
+          $("#tableKoe_wrapper .dataTables_scrollHead").css("height","0px");
           //border-collapse:separate;
           //return;
       }

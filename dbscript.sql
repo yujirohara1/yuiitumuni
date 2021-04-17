@@ -307,7 +307,8 @@ from
     kaito 
 where 
     situmon_kb = 1 and 
-    hyoka_shubetu = 3 
+    hyoka_shubetu = 3 and
+    hyoka_value <> 'mukaito'
 group by 
     vendor_nm, 
     hyoka_value
