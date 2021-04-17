@@ -123,7 +123,7 @@
     %hr.richline(style="margin:10px 0px 10px 0px; border-top:0.5px solid")
 
     %div.row
-      %div.col-md-4.richline(style="border-right:0.5px solid;")
+      %div.col-md-3.richline(style="border-right:0.5px solid;")
         %div.row
           %div.col-md-12
             %span.komidashi
@@ -139,15 +139,14 @@
             %span.komidashi
               利用者の声
           %div.col-md-12
-            %table.table-bordered.row.hover#tableKoe(style="border:0px")
-              %thead#tableKoeHeader(style="margin: 0; padding: 0; border: 0 none; height: 0px;")
-                %tr(style="margin: 0; padding: 0; border: 0 none; height: 0px;")
-                  %th(style="margin: 0; padding: 0; border: 0 none; height: 0px;")
-                  %th(style="margin: 0; padding: 0; border: 0 none; height: 0px;")
-              %tbody(style="border:0px")
+            %table.row.hover#tableKoe(style="border:0px; ")
+              %thead#tableKoeHeader(style="display:none")
+                %tr
+                  %th
+              %tbody
 
 
-      %div.col-md-4.richline(style="border-right:0.5px solid;")
+      %div.col-md-5.richline(style="border-right:0.5px solid;")
         %div.row
           %div.col-md-12
             bvb

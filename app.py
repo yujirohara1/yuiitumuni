@@ -738,7 +738,7 @@ def resJson_getBunyaMap(vendornm):
 
 @app.route('/getTodohuken/<vendornm>')
 def resJson_getTodohuken(vendornm):
-    Todohuken = VTodohukenGroupbyVendor.query.filter(VTodohukenGroupbyVendor.vendor_nm==vendornm).all()
+    Todohuken = VTodohukenGroupbyVendor.query.filter(VTodohukenGroupbyVendor.vendor_nm==vendornm).order_by(desc(VTodohukenGroupbyVendor.kensu)).all()
     Todohuken_schema = VTodohukenGroupbyVendorSchema(many=True)
     return jsonify({'data': Todohuken_schema.dumps(Todohuken, ensure_ascii=False)})
 

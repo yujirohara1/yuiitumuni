@@ -213,4 +213,11 @@ function createAreaMap(){
     //$('#tblAreaMap #tblAreaMapTd_6_11').addClass("tdfk_flash");
     //$('#tblAreaMap #tblAreaMapTd_7_11').addClass("tdfk_flash");
 
+    for(var i=2; i<=6; i++){
+        $('#tblAreaMap #tblAreaMapTd_' + i + '_1').attr("colspan","7");
+        for(var j=2; j<=7; j++){
+            $('#tblAreaMap #tblAreaMapTd_' + i + '_' + j).remove();
+        }
+    }
+
 }

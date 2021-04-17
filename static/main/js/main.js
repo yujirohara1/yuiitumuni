@@ -2792,14 +2792,14 @@ $("#tableToko tbody").on('click','tr', function(event) {
 //
 //
 
-$("#tableKoe tbody").on('click','tr', function(event) {
-    //選択した行を青くする。
-    $("#tableKoe").removeClass('row_selected tableKoe');        
-    $("#tableKoe tbody tr").removeClass('row_selected tableKoe');        
-    $("#tableKoe tbody td").removeClass('row_selected tableKoe');        
-    $(event.target.parentNode).addClass('row_selected tableKoe');
-    
-});
+//$("#tableKoe tbody").on('click','tr', function(event) {
+//    //選択した行を青くする。
+//    $("#tableKoe").removeClass('row_selected tableKoe');        
+//    $("#tableKoe tbody tr").removeClass('row_selected tableKoe');        
+//    $("#tableKoe tbody td").removeClass('row_selected tableKoe');        
+//    $(event.target.parentNode).addClass('row_selected tableKoe');
+//    
+//});
 
 Chart.defaults.global.defaultFontColor = '#4d4d4d';
 Chart.defaults.global.defaultFontStyle = 'Bold';
@@ -3146,6 +3146,12 @@ function createTodohuken(){
             $('#tblAreaMap .' + item.hyoka_value + '').addClass("tdfk_flash");
             $('#tblAreaMap .' + item.hyoka_value + '').attr("aria-label",item.kensu + "件");
             $('#tblAreaMap .' + item.hyoka_value + '').attr("data-balloon-pos","left");
+
+            if(i<=4){
+                $('#tblAreaMap #tblAreaMapTd_' + (i+2) + '_1').text("　" + TODOHUKEN[item.hyoka_value] + "　" + item.kensu + "件");
+                $('#tblAreaMap #tblAreaMapTd_' + (i+2) + '_1').css("padding","1px");
+                $('#tblAreaMap #tblAreaMapTd_' + (i+2) + '_1').css("text-align","left");
+            }
         });
         //var b = a;
     }).fail(function(data) {
@@ -3212,14 +3218,9 @@ function createKoeTables_Main(){
             }
         },
         columns: [
-            { data: 'ymdt'     ,width: '15%' ,style: 'color:red',  className: 'dt-body-center koecell', render: 
-                function (data, type, row) { 
-                    return data.substring(2,10);
-                }
-            },
             { data: 'hyoka_comment',width: '85%' ,  className: 'dt-body-left koecell', render: 
                 function (data, type, row) { 
-                    return data;
+                    return row.ymdt.substring(0,10) + "　　　" + createHoshiMoji(row.hyoka_value) + "<br>" + data;
                 }
             }
         ],
@@ -3244,10 +3245,42 @@ function createKoeTables_Main(){
       "drawCallback": function (settings) {
           //$('div.dataTables_scrollBody').scrollTop(pageScrollPos);
           //$('#tableKoe')[0].parentElement.scrollTop = pageScrollPos;
-          //$('#tableKoeHeader').css("display","none");// (style='display:none;')
-            $("#tableKoe tbody tr").css("border","0px");
-            $("#tableKoe tbody td").css("border","0px");
-          return;
+          $('#tableKoeHeader').css("display","none");// (style='display:none;')
+          //$('#tableKoeHeader td').css("border","0px");// (style='display:none;')
+          //$('#tableKoeHeader tr').css("border","0px");// (style='display:none;')
+          //$("#tableKoeHeader tbody").css("border","0px");// (style='display:none;')
+          //$("#tableKoeHeader tbody tr").css("border","0px");// (style='display:none;')
+          //$("#tableKoeHeader tbody tr td").css("border","0px");// (style='display:none;')
+          //$("#tableKoeHeader tbody tr td").addClass("koecell");
+          //$("#tableKoeHeader tbody tr").addClass("koecell");
+          //$("#tableKoeHeader tbody").addClass("koecell");
+          //$("#tableKoeHeader").addClass("koecell");
+          $("#tableKoe").css("border-collapse","separate");
+          $("#tableKoe").css("border-spacing","5px");
+          $("#tableKoe .even td").css("background-color","rgb(173 255 47 / 57%)");
+          $("#tableKoe .odd td").css("background-color","rgb(52 222 255 / 27%)");
+          
+          $("#tableKoe td").css("border-radius","10px");
+          
+          //border-collapse:separate;
+          //return;
       }
     });
   }
+
+
+  function createHoshiMoji(val){
+      var ret = "";
+      if(val==1){
+          ret = "★☆☆☆☆";
+        } else if(val==2){
+            ret = "★★☆☆☆";
+        } else if(val==3){
+            ret = "★★★☆☆";
+        } else if(val==4){
+            ret = "★★★★☆";
+        } else if(val==5){
+            ret = "★★★★★";
+        }
+        return ret;
+    }
