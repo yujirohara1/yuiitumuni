@@ -38,7 +38,8 @@ import smtplib
 from email.mime.text import MIMEText
 from email.utils import formatdate
 import csv
-
+import requests
+from bs4 import BeautifulSoup
 
 DELIMIT = "@|@|@"
 
@@ -808,6 +809,58 @@ def insertTokuiBunya(vendornm, vals):
   
   db.session.commit()
   return "1"
+
+@app.route('/scrapeByVendorNm/<vendornm>')
+def scrapeByVendorNm(vendornm):
+  # スクレイピング対象の URL にリクエストを送り HTML を取得する
+  res = requests.get('https://www.njss.info/bidders/view/' + vendornm + '/')
+  # レスポンスの HTML から BeautifulSoup オブジェクトを作る
+  soup = BeautifulSoup(res.text, 'html.parser')
+  # title タグの文字列を取得する
+  title_text = soup.find('title').get_text()
+  author_names = [n.get_text() for n in soup.select('div.search_result__list__title search_result__list__title__wmax')]
+  # for n in soup.select('div.search_result__list__title search_result__list__title__wmax'):
+
+
+  # print(author_names)
+  # print(title_text)
+  # > Quotes to Scrape
+  # ページに含まれるリンクを全て取得する
+  # links = [url.get('href') for url in soup.find_all('a')]
+  dictJuchu = {}
+  dictJuchu['aaData']=[]     
+  wrappers = soup.find_all(class_="smt_box_wrapper")
+  for w in wrappers:
+    anken = w.find_all(class_="search_result__list__title search_result__list__title__wmax") # soup.find_all("a", href="sample.pdf")
+    if len(anken)==1:
+      infos =  w.find_all(class_="search_result__list__information search_result__list__information__wmax")
+      dates =  w.find_all(class_="search_result__list__date search_result__list__date__wmax")
+      
+      for i in infos:
+        if len(i.find_all(class_="category"))==3 and len(i.find_all("a"))==3 :
+          cates = i.find_all(class_="category")
+          vals = i.find_all("a")
+          
+          d_cate = ""
+          d_val = ""
+          if len(dates)==1:
+            d_cate = dates[0].find_all(class_="category")[0].get_text()
+            d_val = dates[0].find_all(class_="category")[0].next_sibling.strip(" ")
+          
+          dictJuchu["aaData"].append( \
+            {"anken":anken[0].get_text().replace("\n",""), \
+              "todofuken": vals[0].get_text(), \
+              "kikan": vals[1].get_text(), \
+                "keisiki": vals[2].get_text(), \
+                  "rakusatubi": d_val} 
+          )
+
+  # print(links)
+  # > ['/', '/login', '/author/Albert-Einstein', '/tag/change/page/1/', '/tag/deep-thoughts/page/1/', '/tag/thinking/page/1/', '/tag/world/page/1/', '/author/J-K-Rowling', '/tag/abilities/page/1/', '/tag/choices/page/1/', '/author/Albert-Einstein', '/tag/inspirational/page/1/', '/tag/life/page/1/', '/tag/live/page/1/', '/tag/miracle/page/1/', '/tag/miracles/page/1/', '/author/Jane-Austen', '/tag/aliteracy/page/1/', '/tag/books/page/1/', '/tag/classic/page/1/', '/tag/humor/page/1/', '/author/Marilyn-Monroe', '/tag/be-yourself/page/1/', '/tag/inspirational/page/1/', '/author/Albert-Einstein', '/tag/adulthood/page/1/', '/tag/success/page/1/', '/tag/value/page/1/', '/author/Andre-Gide', '/tag/life/page/1/', '/tag/love/page/1/', '/author/Thomas-A-Edison', '/tag/edison/page/1/', '/tag/failure/page/1/', '/tag/inspirational/page/1/', '/tag/paraphrased/page/1/', '/author/Eleanor-Roosevelt', '/tag/misattributed-eleanor-roosevelt/page/1/', '/author/Steve-Martin', '/tag/humor/page/1/', '/tag/obvious/page/1/', '/tag/simile/page/1/', '/page/2/', '/tag/love/', '/tag/inspirational/', '/tag/life/', '/tag/humor/', '/tag/books/', '/tag/reading/', '/tag/friendship/', '/tag/friends/', '/tag/truth/', '/tag/simile/', 'https://www.goodreads.com/quotes', 'https://scrapinghub.com']
+  # class が quote の div 要素を全て取得する
+  # quote_elms = soup.find_all('div', {'class': 'quote'})
+  return json.dumps(dictJuchu, skipkeys=True, ensure_ascii=False)
+
 
 
 # ログインしないと表示されないパス

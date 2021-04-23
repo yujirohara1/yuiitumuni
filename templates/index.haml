@@ -148,10 +148,24 @@
 
       %div.col-md-5.richline(style="border-right:0.5px solid;")
         %div.row
-          %div.col-md-12
+          %div.col-md-6
             %span.komidashi
               直近の受注実績
-
+          %div.col-md-6
+            %a.btn.btn-warning.btn-sm#btnRefleshJisseki(type="button")
+              再収集
+        %div.row
+          %div.col-md-12
+            %table.table-bordered.row.hover#tableJisseki
+              %thead
+                %tr
+                  %th
+                    案件
+                  %th
+                    機関
+                  %th
+                    落札日
+              %tbody
     %div.row
       &nbsp;
     %div.row
